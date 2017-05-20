@@ -66,11 +66,52 @@ define(['angular', 'angular-ui-router'], function(angular) {
                 templateUrl: 'modules/orders/views/orders.html',
                 controller: 'OrderCtrl'
             })
-            .state('ordersDetails', {
+            .state('ordersDetailsA', {
+                url: '/orderDetails/Accepted/:id',
+                templateUrl: 'modules/orders/views/order-details-Accepted.html',
+                controller: 'OrderDetailsCtrl'
+            })
+            .state('ordersDetailsR', {
                 parent: 'secure',
-                url: '/orderDetails/:id',
+                url: '/orderDetails/Rejected/:id',
+                templateUrl: 'modules/orders/views/order-details-Rejected.html',
+                controller: 'OrderDetailsCtrl'
+            })
+            .state('ordersDetailsG', {
+                parent: 'secure',
+                url: '/orderDetails/Generated/:id',
                 templateUrl: 'modules/orders/views/order-details-Generated.html',
                 controller: 'OrderDetailsCtrl'
+            })
+            .state('ordersDetailsCR', {
+                parent: 'secure',
+                url: '/orderDetails/CR/:id',
+                templateUrl: 'modules/orders/views/order-details-CR.html',
+                controller: 'OrderDetailsCtrl'
+            })
+            .state('changeRequest', {
+                parent: 'secure',
+                url: '/changeRequest',
+                templateUrl: 'modules/changeRequest/views/changeRequest.html',
+                controller: 'CRCtrl'
+            })
+            .state('changeRequestDetailsA', {
+                parent: 'secure',
+                url: '/changeRequest/Accepted/:id',
+                templateUrl: 'modules/changeRequest/views/CRdetailsAccepted.html',
+                controller: 'CRDetailsCtrl'
+            })
+            .state('changeRequestDetailsR', {
+                parent: 'secure',
+                url: '/changeRequest/Rejected/:id',
+                templateUrl: 'modules/changeRequest/views/CRdetailsRejected.html',
+                controller: 'CRDetailsCtrl'
+            })
+            .state('changeRequestDetailsP', {
+                parent: 'secure',
+                url: '/changeRequest/Pending/:id',
+                templateUrl: 'modules/changeRequest/views/CRdetailsPending.html',
+                controller: 'CRDetailsCtrl'
             });
 
 

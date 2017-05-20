@@ -23,6 +23,7 @@ define([
         'home',
         'quotes',
         'orders',
+        'changeRequest',
         'app.routes',
         'app.constants',
         'app.interceptors',
@@ -46,7 +47,7 @@ define([
                 {icon: 'fa-home fa-2x', state: 'dashboards', label: 'Home'},
                 {icon: 'fa-file-text-o fa-2x', state: 'quotes', label: 'Quotes'},
                 {icon: 'fa-truck fa-2x', state: 'orders', label: 'Orders'},
-                {icon: 'fa-pencil-square-o fa-2x', state: '', label: 'Change Request'},
+                {icon: 'fa-pencil-square-o fa-2x', state: 'changeRequest', label: 'Change Request'},
                 {icon: 'fa-gavel fa-2x', state: '', label: 'Disputes'}
             ]
         };

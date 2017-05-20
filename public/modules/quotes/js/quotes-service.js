@@ -32,19 +32,13 @@ define(['angular', './module', 'constants'], function(angular, module) {
                  }
                });
             },
-            acceptQuote1: function (data) {
-              return $http.put(urls.base_url + urls.accept_quote + '?customerId=' +$window.sessionStorage.getItem('customerId'),  JSON.stringify(data) , {
-                 headers: {
-                   'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
-                   'x-access-token': $window.sessionStorage.getItem('userToken')
-                 }
-               });
-            },
             rejectQuote: function (data) {
-              return $http.put(urls.base_url + urls.reject_quote + '?customerId=' +$window.sessionStorage.getItem('customerId'), JSON.stringify(data) , {
+              return $http.post(urls.base_url + urls.reject_quote + '?customerId=' +$window.sessionStorage.getItem('customerId'), data , {
                  headers: {
                    'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
-                   'x-access-token': $window.sessionStorage.getItem('userToken')
+                   'x-access-token': $window.sessionStorage.getItem('userToken'),
+                   'transformRequest': angular.identity,
+                   'Content-Type': undefined
                  }
                });
             },
@@ -57,6 +51,14 @@ define(['angular', './module', 'constants'], function(angular, module) {
                    'Content-Type': undefined
                  }
                });
+            },
+            viewDocument: function (fileName) {
+              return $http.get(urls.base_url + urls.file_view + '?fileName=' + fileName, {
+                 headers: {
+                   'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                   'x-access-token': $window.sessionStorage.getItem('userToken'),
+                 }
+               },{responseType : 'arraybuffer'});
             }
         };
     }]);

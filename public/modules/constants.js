@@ -15,7 +15,12 @@ define(['angular'], function(angular) {
                     ,accept_quote: '/tcaapigateway/acceptQuote'
                     ,reject_quote: '/tcaapigateway/rejectQuote'
                     ,file_upload: '/tcaapigateway/blob/upload'
+                    ,file_view: '/tcaapigateway/blob/download'
                     ,get_orders_list:'/tcaapigateway/getOrders'
                     ,get_order_details:'/tcaapigateway/getOrderDetails'
+                    ,get_DL_for_CR:'/tcaapigateway/getcrdl'
+                    ,initiate_cr:'/tcaapigateway/initiateCR'
+                    ,get_Cr_details:'/tcaapigateway/getCrDetail'
+                    ,get_Cr_List:'/tcaapigateway/getAllCR'
                   });
 });

@@ -1,4 +1,4 @@
-<px-card header-text="List of Quotes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="quotesList">
+<px-card header-text="List of Quotes&nbsp;&nbsp;&nbsp;({{Length}}) &nbsp;&nbsp;&nbsp;" class="quotesList">
   <!--<div class="layout" id="FilterDiv">
 		<div class="layout__item u-1/2" id="Firstdiv">
       <div class="layout">
@@ -26,4 +26,22 @@
 		<px-data-table-column name="status" label="Status" sortable></px-data-table-column>
 		<px-data-table-column name="action" label="Action" type="html"></px-data-table-column>
 	</px-data-table>
+  <div class="layout_item legend_tbl">
+    <table class="table_det">
+      <tbody>
+        <tr>
+          <td><i class="fa fa-caret-right" style="padding-right:10px" aria-hidden="true"></i><strong>Confirmed</strong></td>
+          <td>Quote is available for you review and ready to ordered</td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-caret-right" style="padding-right:10px"aria-hidden="true"></i><strong>Accepted</strong></td>
+          <td>Quote is accepted by you & order is placed</td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-caret-right" style="padding-right:10px" aria-hidden="true"></i><strong>Rejected</strong></td>
+          <td>Quote is rejected by you</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </px-card>

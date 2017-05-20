@@ -22,16 +22,34 @@ define(['angular', './module', 'constants'], function(angular, module) {
                    }
                  });
              },
-            uploadDocument: function (data) {
-              return $http.post(urls.base_url + urls.file_upload, data , {
+             getDLforCR : function(){
+               return $http.get(urls.base_url + urls.get_DL_for_CR,{
                  headers: {
                    'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
-                   'x-access-token': $window.sessionStorage.getItem('userToken'),
-                   'transformRequest': angular.identity,
-                   'Content-Type': undefined
+                   'x-access-token': $window.sessionStorage.getItem('userToken')
                  }
-               });
-            }
+               })
+              },
+              initiateCR : function (oNum, data) {
+                return $http.post(urls.base_url + urls.initiate_cr + '/' + $window.sessionStorage.getItem('customerId') + '/' + oNum, data, {
+                  headers: {
+                    'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                    'x-access-token': $window.sessionStorage.getItem('userToken'),
+                    'transformRequest': angular.identity,
+                    'Content-Type': undefined
+                  }
+                })
+              },
+              uploadDocument: function (data) {
+                return $http.post(urls.base_url + urls.file_upload, data , {
+                   headers: {
+                     'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                     'x-access-token': $window.sessionStorage.getItem('userToken'),
+                     'transformRequest': angular.identity,
+                     'Content-Type': undefined
+                   }
+                 });
+              }
         };
     }]);
 });
