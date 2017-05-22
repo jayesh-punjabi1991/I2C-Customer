@@ -45,6 +45,12 @@
         <h3>Request for Change in Order {{orderNumber}}</h3>
         <div class="send_form">
             <div class="mailTo">
+                <label for="soId">If Sub-Order, Please select :</label>
+                <select ng-model="sub_order_id">
+                  <option ng-repeat="soid in subOrders">{{soid}}</option>
+                </select>
+            </div>
+            <div class="mailTo">
                 <label for="mailTo">To:</label>
                 <input type="text" name="mailTo" class="form-field--inline text-input" ng-model="to" />
             </div>

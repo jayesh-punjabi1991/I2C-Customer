@@ -33,7 +33,7 @@ define(['angular', './module'], function (angular, controllers) {
         $scope.CustomerAccountNumber = response.data.customer_acc_number;
         $scope.POAmount = response.data.purchase_order_amount;
         $scope.paymentTerms = response.data.payment_terms;
-        $scope.currency = response.data.currency;
+        $scope.currency1 = response.data.currency;
         $scope.partNumber = response.data.quoteLines[0].partNumber;
         $scope.partDesc = response.data.quoteLines[0].lineItemDescription;
         $scope.sellingPrice = response.data.quoteLines[0].sellingPrice;
@@ -106,9 +106,9 @@ define(['angular', './module'], function (angular, controllers) {
         //acceptData.bill_to = $scope.BillTo;
         acceptData.po_number = $scope.PONumber;
         fd.append('quoteInputVO', JSON.stringify(acceptData));
-        for (var pair of fd.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
-        };
+        // for (var pair of fd.entries()) {
+        //     console.log(pair[0]+ ', ' + pair[1]);
+        // };
         //console.log(fd);
         QuotesService.acceptQuote(fd).success(function (response) {
           alert("Quote #" + $scope.QuoteNumber + " is accepted successfully.");
@@ -157,9 +157,9 @@ define(['angular', './module'], function (angular, controllers) {
         angular.forEach($scope.files, function(file){
            rd.append('file', file);
         });
-        for (var pair of rd.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
-        };
+        // for (var pair of rd.entries()) {
+        //     console.log(pair[0]+ ', ' + pair[1]);
+        // };
         QuotesService.rejectQuote(rd).success(function (response) {
            $scope.rejectDetails=false;
            alert("You have rejected Quote #" + $scope.QuoteNumber);

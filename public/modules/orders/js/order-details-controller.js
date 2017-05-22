@@ -46,14 +46,17 @@ define(['angular', './module'], function(angular, controllers) {
                 $scope.docFlag = false;
             }
             $scope.subject = "Request for change on Order " + $scope.orderNumber;
+            $scope.subOrders = [];
             //For Sub-Order Table
             angular.forEach(response.data.sub_orders, function(value, key) {
+                $scope.subOrders[key] = value.sub_order_id;
                 $scope.OrderList[count] = value;
                 $scope.OrderList[count].SrNo = count + 1;
-                $scope.OrderList[count].billToaddress = value.bill_to.address1 ? value.bill_to.address1 : '' + " " + value.bill_to.address2 ? value.bill_to.address2 : '' + " " + value.bill_to.city ? value.bill_to.city : '' + " " + value.bill_to.country ? value.bill_to.country : '' + " " + value.bill_to.state ? value.bill_to.state : '' + " " + value.bill_to.province ? value.bill_to.province : '' + " " + value.bill_to.postalcode ? value.bill_to.postalcode : '';
+                $scope.OrderList[count].billToaddress = value.bill_to.address1 ? value.bill_to.address1 : '' + value.bill_to.address2 ? value.bill_to.address2 : '' + value.bill_to.city ? value.bill_to.city : '' + value.bill_to.country ? value.bill_to.country : '' + value.bill_to.state ? value.bill_to.state : '' + value.bill_to.province ? value.bill_to.province : '' + value.bill_to.postalcode ? value.bill_to.postalcode : '';
                 $scope.OrderList[count].link = "<a id='Detail" + value.sub_order_id + "' class=" + value.sub_order_id + " href='javascript:void(0)'>Details</a>";
                 count++;
             })
+            console.log($scope.subOrders);
             $scope.LengthOfOrders=$scope.OrderList.length;
             //For Shipment Table
             $timeout(function() {
@@ -143,17 +146,21 @@ define(['angular', './module'], function(angular, controllers) {
             'from' : $window.sessionStorage.getItem('userEmail')
             ,'to' : $scope.to
             ,'cc' : $scope.cc
-            //,'subject' : $scope.subject
+            ,'subject' : $scope.subject
             ,'description' : $scope.description
+            ,'ge_order_number' :   $scope.orderNumber
+            ,'cust_po_number' : $scope.POnumber
+            ,'sub_order_id' : $scope.sub_order_id
           }
+          console.log(mail);
           var fd = new FormData();
           fd.append('crbody', JSON.stringify(mail));
           angular.forEach($scope.files, function(file){
              fd.append('file', file);
           });
-          for (var pair of fd.entries()) {
-              console.log(pair[0]+ ', ' + pair[1]);
-          };
+          // for (var pair in fd.entries()) {
+          //     console.log(pair[0]+ ', ' + pair[1]);
+          // };
           OrdersService.initiateCR($scope.orderNumber, fd).success(function (response) {
             alert('Change Request #'+response.change_req_id+' has been created');
             $state.reload();

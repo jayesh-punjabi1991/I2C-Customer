@@ -27,7 +27,7 @@
                 <table class="summaryTable" style="line-height:0.5;height:142px">
                     <tr>
                         <th style="background-color:#b6c3cc">Date</th>
-                        <th style="font-weight:normal">{{orderdate}}</th>
+                        <th style="font-weight:normal">{{orderdate | date : "mediumDate"}}</th>
                     </tr>
                     <tr>
                         <td style="background-color:#b6c3cc;font-weight:bold">GE Reference Number/Order Number</td>
@@ -48,7 +48,7 @@
             		<h4>Change Request Email text</h4>
             		<div class="send_form">
             			<div>
-            				The items I requested and the items that are mentioned are different. Please change the item Monitor B450 to Monitor B950.
+                    {{description}}
             			</div>
             		</div>
             	</div>
@@ -59,17 +59,19 @@
         <div class="layout__item desk-50 small-100 cust_det clearfix" style="border-right:1px solid #8f9ca4;">
             <div class="lt">
                 <h4>Ship To</h4>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{shipTo_1}}</p>
+                <p>{{shipTo_2}}</p>
+                <p>{{shipTo_3}}</p>
+                <p>{{shipTo_4}}</p>
             </div>
         </div>
         <div class="layout__item desk-50 small-100 cust_det clearfix">
             <div class="lt">
                 <h4>Bill To</h4>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{{billTo_1}}</p>
+                <p>{{billTo_2}}</p>
+                <p>{{billTo_3}}</p>
+                <p>{{billTo_4}}</p>
             </div>
         </div>
     </div>
@@ -113,15 +115,14 @@
                         <td>
                             <h4>Customer account number:</h4>
                         </td>
-                        <td>{{customerNumber}}</td>
+                        <td>{{crData.customer_number}}</td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="layout__item desk-50 small-100 cust_det clearfix">
             <div class="rt tooltip" style="margin-top:14%;margin-right:25%">
-                <p style="color:#e53837;font-size:1.5em">Value:<span style="color:#e53837;font-size:1.5em">$439,923.32</span></p>
-                <span class="tooltiptext"><b>Old value:</b> $439,903.32, <b>CR.no:</b> 2234</span>
+                <p style="color:#e53837;font-size:1.5em">Value:<span style="color:#e53837;font-size:1.5em">{{}}</span></p>
             </div>
         </div>
     </div>
