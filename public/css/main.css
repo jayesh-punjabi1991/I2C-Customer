@@ -17,7 +17,7 @@ html{
 }
 main:not([style-scope]):not(.style-scope){
 	min-height: calc(100vh - 4rem) !important;
-	background-color: #fff !important;
+	background-color: #e7e7e7 !important;
 }
 body:not([style-scope]):not(.style-scope){
 	margin-bottom: 0 !important;

@@ -5,7 +5,7 @@
 </px-card>
 <px-card style="height:75vh;padding-top:10px !important;padding-bottom:10px !important">
   <h3 style="color:#086e87;" style="width:30%">My Pending Actions <span style="color: red">({{notifCount}})</span></h3>
-  <div style="height:70vh;border-top:2px solid #2c3f4d;border-bottom:2px solid #2c3f4d;overflow-y:auto;margin-top:2%">
+  <div style="height:65vh;border-top:2px solid #2c3f4d;border-bottom:2px solid #2c3f4d;overflow-y:auto;margin-top:2%">
     <div>
       <table id="PendingActions" style="width:100%">
         <th style="width:20%;">Type</th>
@@ -16,7 +16,7 @@
           <tr class="alert" ng-repeat="(key, value) in pendingActions">
             <td><span ng-if="value.eventType == 'quote.import'" style="display:inline-block; background-color:orange; color:white; padding: 5px;">{{value.eventType}}</span><span ng-if="value.eventType == 'quote.accept'" style="display:inline-block; background-color:green; color:white; padding: 5px;">{{value.eventType}}</span><span ng-if="value.eventType == 'quote.reject'" style="display:inline-block; background-color:red; color:white; padding: 5px;">{{value.eventType}}</span><span ng-if="!(value.eventType == 'quote.import' || value.eventType == 'quote.accept' || value.eventType == 'quote.reject')" style="display:inline-block; background-color:blue; color:white; padding: 5px;">{{value.eventType}}</span></td>
             <td>{{value.message}}</td>
-            <td><a ng-if="value.eventType == 'quote.import'" href="{{'/quoteDetails/'+ value.quote_id}}">Accept Quote</a><a ng-if="value.eventType == 'quote.accept' || value.eventType == 'quote.reject'" href="{{'/quoteDetails/AR/'+ value.quote_id}}">View</a><a ng-if="!(value.eventType == 'quote.accept' || value.eventType == 'quote.import' || value.eventType == 'quote.reject')" href="">View</a></td>
+            <td><a ng-if="value.eventType == 'quote.import' || value.eventType == 'quote.accept' || value.eventType == 'quote.reject'" href="{{'/quoteDetails/AR/'+ value.quote_id}}">Review Quote</a><a ng-if="!(value.eventType == 'quote.accept' || value.eventType == 'quote.import' || value.eventType == 'quote.reject')" href="">View</a></td>
             <!-- <td><a href="#" id="times" class="close">&times;</a></td> -->
           </tr>
         </tbody>

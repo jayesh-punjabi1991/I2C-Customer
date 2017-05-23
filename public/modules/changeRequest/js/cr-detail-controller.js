@@ -14,11 +14,15 @@ define(['angular', './module'], function (angular, controllers) {
         $scope.response=response;
         $scope.crData = response.data;
         $scope.orderNumber=response.data.ge_order_number;
-        $scope.orderdate=response.data.cr_date*1000;
+        $scope.crdate=response.data.cr_date*1000;
         $scope.POnumber=response.data.order.cust_po_number;
         $scope.CRStatus=response.data.status;
+        $scope.orderStatus = response.data.order.order_process_status;
         $scope.taxableStatus=response.data.order.taxable_status;
+        $scope.deliveryTerms = response.data.order.delivery_terms;
         $scope.description = response.data.description;
+        $scope.billingTimeline = response.data.order.sub_orders[0].billing_terms;
+        $scope.billingTerms = response.data.order.sub_orders[0].payment_terms;
         $scope.liquidatedDamageTerms=response.data.order.liquidated_damage_terms;
         $scope.shipTo_1 = ($scope.response.data.order.sub_orders[0].shipments[0].ship_to.address1 ? $scope.response.data.order.sub_orders[0].shipments[0].ship_to.address1 : '');
         $scope.shipTo_2 = ($scope.response.data.order.sub_orders[0].shipments[0].ship_to.address2 ? $scope.response.data.order.sub_orders[0].shipments[0].ship_to.address2 : '');
@@ -39,7 +43,6 @@ define(['angular', './module'], function (angular, controllers) {
 
         //For Shipment Table
         $timeout(function () {
-          debugger
           for(var i=0;i<$scope.response.data.order.sub_orders.length;i++){
           document.getElementById('Detail'+$scope.response.data.order.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
             var count1=0;
