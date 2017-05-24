@@ -49,7 +49,7 @@
 	vertical-align: middle;
 }
 .status_reject{
-	background-color: red
+	background-color: red;
 	border: 3px solid #7c7c84;
 	height: 15px;
 	width: 15px;

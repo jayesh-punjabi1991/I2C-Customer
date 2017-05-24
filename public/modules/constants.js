@@ -22,5 +22,8 @@ define(['angular'], function(angular) {
                     ,initiate_cr:'/tcaapigateway/initiateCR'
                     ,get_Cr_details:'/tcaapigateway/getCrDetail'
                     ,get_Cr_List:'/tcaapigateway/getAllCR'
+                    ,accept_CR:'/tcaapigateway/acceptCR'
+                    ,reject_CR:'/tcaapigateway/rejectCR'
+                    ,approve_order:'/tcaapigateway/approve'
                   });
 });

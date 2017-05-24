@@ -138,7 +138,7 @@ define(['angular', './module'], function(angular, controllers) {
         });
 
         OrdersService.getDLforCR().then(function success(response) {
-          $scope.to=response.data.email;
+          $scope.to=response.data.to;
         });
 
         $scope.sendCRMail = function () {

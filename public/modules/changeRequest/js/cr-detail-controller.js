@@ -70,18 +70,80 @@ define(['angular', './module'], function (angular, controllers) {
       }
     }, 5000);
       })
-      $scope.AcceptClicked=function(){
-        var d = document.getElementById("AcceptButton");
-        var d1 = document.getElementById("RejectButton");
-        d.className += " disabled";
-        d1.className += " disabled";
+      $scope.acceptClicked=function(){
+        // var d = document.getElementById("AcceptButton");
+        // var d1 = document.getElementById("RejectButton");
+        // d.className += " disabled";
+        // d1.className += " disabled";
+
+        var crdata = {
+          'from' : $scope.crData.from
+          ,'to' : $scope.crData.to
+          ,'cc' : $scope.crData.cc
+          ,'subject' : $scope.crData.subject
+          ,'description' : $scope.crData.description
+          ,'ge_order_number' :   $scope.crData.ge_order_number
+          ,'cust_po_number' : $scope.crData.cust_po_number
+          ,'sub_order_id' : $scope.crData.sub_order_id
+          ,'contract_amount': $scope.crData.contract_amount
+          ,'change_req_id': $scope.crData.change_req_id
+          ,'cr_date': $scope.crData.cr_date
+          ,'dispute_ref': $scope.crData.dispute_ref
+          ,'order_date': $scope.crData.order_date
+          ,'parentCustId': $scope.crData.parentCustId
+          ,'status': $scope.crData.status
+          ,'supporting_documents': $scope.crData.supporting_documents
+        };
+
+        CrService.acceptCR($scope.crData.change_req_id, crdata).success(function (response) {
+          alert('success!');
+        })
+
+        //console.log($scope.data);
       }
 
-      $scope.RejectClicked=function(){
-        var d = document.getElementById("AcceptButton");
-        var d1 = document.getElementById("RejectButton");
-        d.className += " disabled";
-        d1.className += " disabled";
+      $scope.rejectClicked=function(){
+        // var d = document.getElementById("AcceptButton");
+        // var d1 = document.getElementById("RejectButton");
+        // d.className += " disabled";
+        // d1.className += " disabled";
+
+        var crdata = {
+          'from' : $scope.crData.from
+          ,'to' : $scope.crData.to
+          ,'cc' : $scope.crData.cc
+          ,'subject' : $scope.crData.subject
+          ,'description' : $scope.crData.description
+          ,'ge_order_number' :   $scope.crData.ge_order_number
+          ,'cust_po_number' : $scope.crData.cust_po_number
+          ,'sub_order_id' : $scope.crData.sub_order_id
+          ,'contract_amount': $scope.crData.contract_amount
+          ,'change_req_id': $scope.crData.change_req_id
+          ,'cr_date': $scope.crData.cr_date
+          ,'dispute_ref': $scope.crData.dispute_ref
+          ,'order_date': $scope.crData.order_date
+          ,'parentCustId': $scope.crData.parentCustId
+          ,'status': $scope.crData.status
+          ,'supporting_documents': $scope.crData.supporting_documents
+        };
+
+        // var crd = new FormData();
+        // crd.append('file', '');
+        // crd.append('crbody', JSON.stringify(crdata));
+        CrService.rejectCR($scope.crData.change_req_id, crdata).success(function (response) {
+          alert('success!');
+        });
+      }
+      $scope.approveClicked=function(){
+        var orderData = $scope.crData.order;
+
+        // var crd = new FormData();
+        // crd.append('file', '');
+        // crd.append('crbody', JSON.stringify(crdata));
+        console.log(orderData);
+        CrService.approveOrder($scope.orderNumber, orderData).success(function (response) {
+          alert('success!');
+        });
       }
 
     }]);

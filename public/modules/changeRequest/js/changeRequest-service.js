@@ -23,6 +23,30 @@ define(['angular', './module', 'constants'], function(angular, module) {
                     'x-access-token': $window.sessionStorage.getItem('userToken')
                   }
                 });
+              },
+              acceptCR: function(crNo, data) {
+                return $http.post(urls.base_url + urls.accept_CR+'/'+ crNo +'?custId='+$window.sessionStorage.getItem('customerId'), JSON.stringify(data), {
+                   headers: {
+                     'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                     'x-access-token': $window.sessionStorage.getItem('userToken')
+                   }
+                 });
+              },
+              rejectCR: function(crNo, data) {
+                return $http.post(urls.base_url + urls.reject_CR+'/'+ crNo +'?custId='+$window.sessionStorage.getItem('customerId'), JSON.stringify(data), {
+                   headers: {
+                     'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                     'x-access-token': $window.sessionStorage.getItem('userToken')
+                   }
+                 });
+              },
+              approveOrder: function(oNo, data) {
+                return $http.put(urls.base_url + urls.approve_order+'/'+ oNo +'?custId='+$window.sessionStorage.getItem('customerId'), JSON.stringify(data), {
+                   headers: {
+                     'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                     'x-access-token': $window.sessionStorage.getItem('userToken')
+                   }
+                 });
               }
         };
     }]);
