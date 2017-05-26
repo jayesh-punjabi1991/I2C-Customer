@@ -29,7 +29,7 @@ define(['angular', './module', 'constants'], function(angular, module) {
                    'x-access-token': $window.sessionStorage.getItem('userToken')
                  }
                })
-              },
+             }, 
               initiateCR : function (oNum, data) {
                 return $http.post(urls.base_url + urls.initiate_cr + '/' + $window.sessionStorage.getItem('customerId') + '/' + oNum, data, {
                   headers: {

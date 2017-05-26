@@ -24,6 +24,15 @@ define(['angular', './module', 'constants'], function(angular, module) {
                   }
                 });
               },
+              getCrDiffDetails: function(val){
+                //return $http.get('modules/changeRequest/json/ChangeRequestList.json')
+                return $http.get(urls.base_url + urls.get_Cr_diff_details+'/'+ val +'?custId='+$window.sessionStorage.getItem('customerId'), {
+                   headers: {
+                     'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                     'x-access-token': $window.sessionStorage.getItem('userToken')
+                   }
+                 });
+               },
               acceptCR: function(crNo, data) {
                 return $http.post(urls.base_url + urls.accept_CR+'/'+ crNo +'?custId='+$window.sessionStorage.getItem('customerId'), JSON.stringify(data), {
                    headers: {

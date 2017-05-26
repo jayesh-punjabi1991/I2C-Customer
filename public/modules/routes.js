@@ -104,7 +104,7 @@ define(['angular', 'angular-ui-router'], function(angular) {
             .state('changeRequestDetailsR', {
                 parent: 'secure',
                 url: '/changeRequest/Rejected/:id',
-                templateUrl: 'modules/changeRequest/views/CRdetailsRejected.html',
+                templateUrl: 'modules/changeRequest/views/change-request-details.html',
                 controller: 'CRDetailsCtrl'
             })
             .state('changeRequestDetailsP', {

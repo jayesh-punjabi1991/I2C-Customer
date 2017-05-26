@@ -17,6 +17,7 @@ define(['angular', './module'], function(angular, controllers) {
         OrdersService.getOrderDetails($stateParams.id).then(function success(response) {
             console.log(response);
             $scope.response = response;
+            $scope.orderData = response.data;
             $scope.orderNumber = $stateParams.id;
             $scope.orderdate = parseInt(response.data.order_date * 1000);
             $scope.POnumber = response.data.cust_po_number;
@@ -162,7 +163,7 @@ define(['angular', './module'], function(angular, controllers) {
           //     console.log(pair[0]+ ', ' + pair[1]);
           // };
           OrdersService.initiateCR($scope.orderNumber, fd).success(function (response) {
-            alert('Change Request #'+response.change_req_id+' has been created');
+            alert('Change Request has been created');
             $state.reload();
           })
         }
