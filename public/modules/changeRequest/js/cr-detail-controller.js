@@ -33,6 +33,7 @@ define(['angular', './module'], function (angular, controllers) {
         $scope.billingTimeline = response.data.order.sub_orders[0].billing_terms;
         $scope.billingTerms = response.data.order.sub_orders[0].payment_terms;
         $scope.liquidatedDamageTerms=response.data.order.liquidated_damage_terms;
+        $scope.customerName = response.data.order.customer_name;
         $scope.shipTo_1 = ($scope.response.data.order.sub_orders[0].shipments[0].ship_to.address1 ? $scope.response.data.order.sub_orders[0].shipments[0].ship_to.address1 : '');
         $scope.shipTo_2 = ($scope.response.data.order.sub_orders[0].shipments[0].ship_to.address2 ? $scope.response.data.order.sub_orders[0].shipments[0].ship_to.address2 : '');
         $scope.shipTo_3 = ($scope.response.data.order.sub_orders[0].shipments[0].ship_to.city ? $scope.response.data.order.sub_orders[0].shipments[0].ship_to.city : '')  + " " + ($scope.response.data.order.sub_orders[0].shipments[0].ship_to.country ? $scope.response.data.order.sub_orders[0].shipments[0].ship_to.country : '');
@@ -285,12 +286,14 @@ define(['angular', './module'], function (angular, controllers) {
                                         'sub_order_id': value.sub_order_id,
                                         'shipment_id': value.shipment_id,
                                         'list_price': value.list_price,
-                                        'discount_perc': value.discount_perc
+                                        'selling_price': $filter('currency')(value.price, 'USD ', 2),
+                                        'discount_perc': value.discount_perc,
+                                        'model_type': value.model_type
                                     });
                                     $scope.ShipmentList[count2] = $scope.dummy1[count2];
                                     $scope.ShipmentList[count2].SrNo = count2 + 1;
                                     $scope.ShipmentList[count2].sellingPrice = $filter('currency')($scope.ShipmentList[count2].list_price - ($scope.ShipmentList[count2].list_price * ($scope.ShipmentList[count2].discount_perc / 100)), $scope.currency, 2);
-                                    $scope.ShipmentList[count2].list_price = $filter('currency')($scope.ShipmentList[count2].list_price, $scope.currency, 2);
+                                    $scope.ShipmentList[count2].list_price = $filter('currency')($scope.ShipmentList[count2].list_price, 'USD ', 2);
                                     $scope.ShipmentList[count2].discount_perc = $filter('number')($scope.ShipmentList[count2].discount_perc, 0);
                                     count2++;
                                 }

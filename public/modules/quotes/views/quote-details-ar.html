@@ -65,7 +65,7 @@
 				</div>
 				<div class="rt">
 					<p style="border-bottom:2px red solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Quote Net Selling Price: &nbsp;&nbsp;&nbsp;&nbsp;
-						<strong style="font-size:2rem">{{totalSP | currency : currency1 : 2}}</strong>
+						<strong style="font-size:2rem">{{totalSP | currency : currency1+'&nbsp;' : 2}}</strong>
 					</p>
 				</div>
 			</div>
@@ -102,7 +102,7 @@
         <table>
           <tr>
             <td><h4>Governing Agreement</h4></td>
-            <td><b>:</b>&nbsp;&nbsp;{{}}</td>
+            <td><b>:</b>&nbsp;&nbsp;{{custName}}</td>
           </tr>
           <tr>
             <td><h4>Terms of Delivery</h4></td>
@@ -150,19 +150,19 @@
         </tr>
         <tr>
           <td><p>1. &nbsp;&nbsp;<strong>Total Contract List Price</strong></p></td>
-          <td><b>:</b>&nbsp;&nbsp;{{totalLP  | currency : currency1 : 2}}</td>
+          <td><b>:</b>&nbsp;&nbsp;{{totalLP  | currency : currency1+'&nbsp;' : 2}}</td>
         </tr>
         <tr>
           <td><p>2. &nbsp;&nbsp;<strong>Total Quote Discount </strong></p></td>
-          <td><b>:</b>&nbsp;&nbsp;{{totalDisc | currency : currency1 : 2}}</td>
+          <td><b>:</b>&nbsp;&nbsp;{{totalDisc | currency : currency1+'&nbsp;' : 2}}</td>
         </tr>
         <tr>
           <td><p>3. &nbsp;&nbsp;<strong>Total Extended Selling Price</strong></p></td>
-          <td><b>:</b>&nbsp;&nbsp;{{totalSP | currency : currency1 : 2}}</td>
+          <td><b>:</b>&nbsp;&nbsp;{{totalSP | currency : currency1+'&nbsp;' : 2}}</td>
         </tr>
         <tr>
           <td><p>4. &nbsp;&nbsp;<strong>Total Quote Net Selling Price</strong></p></td>
-          <td><b>:</b>&nbsp;&nbsp;{{totalSP | currency : currency1 : 2}}</td>
+          <td><b>:</b>&nbsp;&nbsp;{{totalSP | currency : currency1+'&nbsp;' : 2}}</td>
         </tr>
       </table>
     </div>

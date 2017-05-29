@@ -62,18 +62,18 @@ define(['angular', './module'], function (angular, controllers) {
           $scope.partsList.push({
             'srno': key + 1,
             'qty': value.quantity,
-            'desc': value.lineItemDescription,
-            'cPrice': $filter('currency')(value.list_price, $scope.currency1, 2),
+            'desc': value.line_item_description,
+            'cPrice': $filter('currency')(value.list_price, $scope.currency1 + ' ', 2),
             'disc': $filter('number')(value.discount_perc, 2),
-            'sPrice': $filter('currency')(value.selling_price, $scope.currency1, 2)
+            'sPrice': $filter('currency')(value.selling_price, $scope.currency1 + ' ', 2)
           });
           $scope.itemDetails.push({
             'srno': key + 1,
             'qty': value.quantity,
-            'desc': value.lineItemDescription,
-            'cPrice': $filter('currency')(value.list_price, $scope.currency1, 2),
+            'desc': value.line_item_description,
+            'cPrice': $filter('currency')(value.list_price, $scope.currency1  + ' ', 2),
             'disc': $filter('number')(value.discount_perc, 0),
-            'sPrice': $filter('currency')(value.selling_price, $scope.currency1, 2),
+            'sPrice': $filter('currency')(value.selling_price, $scope.currency1  + ' ', 2),
             'itemNo': value.part_number
           });
         });

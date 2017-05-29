@@ -13,8 +13,8 @@ define(['angular', './module'], function(angular, controllers) {
                             "quote#": value.status != 'confirmed' ? "<a id='quote' href='/quoteDetails/AR/" + value.quote_number + "'>" + value.quote_number + "</a>" : "<a href='/quoteDetails/" + value.quote_number + "'>" + value.quote_number + "</a>",
                             "quoteVer": value.quote_version,
                             "createdDate": value.quote_date ? $filter('date')(new Date(parseInt(value.quote_date) * 1000), 'MMM dd, yyyy') : '',
-                            "status": value.status === "accepted" ? "<div id='circle'></div><p class='status_text'>" + value.status +"</p>" : value.status === "rejected" ? "<div id='circle1'></div><p class='status_text'>" + value.status + "</p>": "<div id='circle2'></div><p class='status_text'>" + value.status + "</p>",
-                            "action": value.status == 'confirmed' ? "<a title='Accept Quote' style='color:Green !important' href='/quoteDetails/" + value.quote_number + "'><i class='fa fa-thumbs-up' aria-hidden='true'></i></a>" : ""
+                            "status": value.status === "accepted" ? "<div class='status_accept'></div>" + value.status : value.status === "rejected" ? "<div class='status_reject'></div>" + value.status: "<div class='status_pending'></div>" + value.status,
+                            "action": value.status == 'confirmed' ? "<a title='Accept Quote' style='color:Green !important' href='/quoteDetails/" + value.quote_number + "'><i class='fa fa-check' aria-hidden='true'></i></a>" : ""
                         });
                     });
                     $scope.Length = $scope.QuotesList.length;

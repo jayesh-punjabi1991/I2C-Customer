@@ -49,12 +49,14 @@ define([
                 {icon: 'fa-home fa-2x', state: 'dashboards', label: 'Home'},
                 {icon: 'fa-file-text-o fa-2x', state: 'quotes', label: 'Quotes'},
                 {icon: 'fa-truck fa-2x', state: 'orders', label: 'Orders'},
-                {icon: 'fa-pencil-square-o fa-2x', state: 'changeRequest', label: 'Change Request'},
-                {icon: 'fa-gavel fa-2x', state: '', label: 'Disputes'}
+                {icon: 'fa-pencil-square-o fa-2x', state: 'changeRequest', label: 'Change Request'}
+                // {icon: 'fa-gavel fa-2x', state: '', label: 'Disputes'}
             ]
         };
 
         $rootScope.userName = $window.sessionStorage.getItem('userName');
+        $rootScope.userRole = $window.sessionStorage.getItem('roleName');
+        $rootScope.custName = $window.sessionStorage.getItem('customerId');
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, error) {
             //console.log('on state change');
@@ -77,9 +79,11 @@ define([
                         };
                         predixUserService.getUserDetails(data).success(function (response){
                           $window.sessionStorage.setItem('customerId',response.customerID);
-                          //$window.sessionStorage.setItem('customerId',1);
-                          $window.sessionStorage.setItem('userRole', response.userRole);
+                          $window.sessionStorage.setItem('roleName', response.userRole.userRoleName);
+                          $window.sessionStorage.setItem('roleID', response.userRole.userRoleID);
                           $window.sessionStorage.setItem('userPermission', response.userPermission);
+                          $rootScope.userRole = response.userRole.userRoleName;
+                          $rootScope.custName = response.customerID;
                           $window.location.reload();
                         });
                     }else{
