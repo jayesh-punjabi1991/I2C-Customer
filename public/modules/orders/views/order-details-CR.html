@@ -39,49 +39,31 @@
                     </tr>
                 </table>
             </div>
-        </div>
-    </div>
-    <div id="changeRequestDiv" ng-show="changeRequest">
-        <h3>Request for Change in Order {{orderNumber}}</h3>
-        <div class="send_form">
-            <div class="mailTo">
-                <label for="soId">If Sub-Order, Please select :</label>
-                <select ng-model="sub_order_id">
-                  <option ng-repeat="soid in subOrders">{{soid}}</option>
-                </select>
-            </div>
-            <div class="mailTo">
-                <label for="mailTo">To:</label>
-                <input type="text" name="mailTo" class="form-field--inline text-input" ng-model="to" />
-            </div>
-            <div class="mailCc">
-                <label for="mailCc">Cc:</label>
-                <input type="text" name="mailCc" class="form-field--inline text-input" ng-model="cc" />
-            </div>
-            <div class="mailSub">
-                <label for="mailSub">Subject:</label>
-                <input type="text" name="mailSub" class="form-field--inline text-input" ng-model="subject"/>
-            </div>
-            <div>
-                <label for="mailBody"></label>
-                <textarea ng-model="description"></textarea>
-            </div>
-            <div>
-                <input type="file" name="" file-input="files"/>
-            </div>
-            <div class="clearfix">
-                <a title="Send" class="btn btn-primary rt" ng-click="sendCRMail()">Send</a>
+            <div class="rt" style="width:40%;">
+              <div id="disputeTextDiv" style="float:right">
+            		<h4>Change Request Email text</h4>
+            		<div class="send_form">
+            			<div>
+            				The items I requested and the items that are mentioned are different. Please change the item Monitor B450 to Monitor B950.
+            			</div>
+            		</div>
+            	</div>
             </div>
         </div>
     </div>
+
     <div class="layout" style="border-top:1px solid #8f9ca4;border-bottom:1px solid #8f9ca4">
         <div class="layout__item desk-50 small-100 cust_det clearfix" style="border-right:1px solid #8f9ca4;">
             <div class="lt">
-                <h4>Ship To</h4>
-                <p>{{shipTo_1}}</p>
-                <p>{{shipTo_2}}</p>
-                <p>{{shipTo_3}}</p>
-                <p>{{shipTo_4}}</p>
+              <h4>Ship To</h4>
+              <p>{{shipTo_1}}</p>
+              <p>{{shipTo_2}}</p>
+              <p>{{shipTo_3}}</p>
+              <p>{{shipTo_4}}</p>
+              <p>{{shipTo_5}}</p>
+              <p>{{shipTo_6}}</p>
+              <p>{{shipTo_7}}</p>
+              <p>{{shipTo_8}}</p>
             </div>
         </div>
         <div class="layout__item desk-50 small-100 cust_det clearfix">
@@ -91,6 +73,10 @@
                 <p>{{billTo_2}}</p>
                 <p>{{billTo_3}}</p>
                 <p>{{billTo_4}}</p>
+                <p>{{billTo_5}}</p>
+                <p>{{billTo_6}}</p>
+                <p>{{billTo_7}}</p>
+                <p>{{billTo_8}}</p>
             </div>
         </div>
     </div>
@@ -100,6 +86,12 @@
             <div class="lt">
                 <h4>Terms</h4>
                 <table>
+                  <tr>
+                      <td>
+                          <h4>Fulfillment State:</h4>
+                      </td>
+                      <td>{{order_ff_state}}</td>
+                  </tr>
                     <tr>
                         <td>
                             <h4>Taxable Status:</h4>
@@ -158,6 +150,9 @@
         <px-data-table-column name="shipToaddress" label="Ship To"></px-data-table-column>
         <px-data-table-column name="sch_os_date" label="SOSD"></px-data-table-column>
         <px-data-table-column name="ros_date" label="ROSD"></px-data-table-column>
+        <px-data-table-column name="ship_date" label="ASDD"></px-data-table-column>
+        <px-data-table-column name="delivery_date" label="AOSD"></px-data-table-column>
+        <px-data-table-column name="sub_order_ff_state" label="Fulfillment State"></px-data-table-column>
         <px-data-table-column name="billing_amount" label="Billing Amount"></px-data-table-column>
         <px-data-table-column name="link" label=" " type="html"></px-data-table-column>
     </px-data-table>
@@ -166,9 +161,10 @@
         <px-data-table table-data='{{SubOrderList}}' language="en" striped="true" table-rows="true" include-all-columns="true" hide-pagination-control="true">
             <px-data-table-column name="SrNo" Label="#"></px-data-table-column>
             <px-data-table-column name="ship_to" label="Ship To"></px-data-table-column>
-            <px-data-table-column name="ship_date" label="SOSD"></px-data-table-column>
-            <px-data-table-column name="delivery_date" label="ROSD"></px-data-table-column>
-            <px-data-table-column name="ship_amt" label="Shipment Amount"></px-data-table-column>
+            <px-data-table-column name="ship_date" label="ASDD"></px-data-table-column>
+            <px-data-table-column name="delivery_date" label="AOSD"></px-data-table-column>
+            <px-data-table-column name="shipment_ff_state" label="Fulfillment State"></px-data-table-column>
+            <px-data-table-column name="ship_amt" label="Shipment Amount(USD)"></px-data-table-column>
             <px-data-table-column name="pod" label="POD"></px-data-table-column>
             <px-data-table-column name="link" label=" " type="html"></px-data-table-column>
         </px-data-table>

@@ -35,25 +35,38 @@ define(['angular', './module'], function(angular, controllers) {
             $scope.liquidatedDamageTerms = response.data.order.liquidated_damage_terms;
             $scope.shipTo_1 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address1 ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address1 : '');
             $scope.shipTo_2 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address2 ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address2 : '');
-            $scope.shipTo_3 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.city ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.city : '') + " " + ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.country ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.country : '');
-            $scope.shipTo_4 = $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.state ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.state : '' + " " + $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.province ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.province : '' + " " + $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.postalcode ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.postalcode : '';
-            $scope.billTo_1 = $scope.response_o.data.order.sub_orders[0].bill_to.address1 ? $scope.response_o.data.order.sub_orders[0].bill_to.address1 : '';
-            $scope.billTo_2 = $scope.response_o.data.order.sub_orders[0].bill_to.address2 ? $scope.response_o.data.order.sub_orders[0].bill_to.address2 : '';
-            $scope.billTo_3 = ($scope.response_o.data.order.sub_orders[0].bill_to.city) ? $scope.response_o.data.order.sub_orders[0].bill_to.city : '' + " " + ($scope.response_o.data.order.sub_orders[0].bill_to.country) ? $scope.response_o.data.order.sub_orders[0].bill_to.country : '';
-            $scope.billTo_4 = ($scope.response_o.data.order.sub_orders[0].bill_to.state) ? $scope.response_o.data.order.sub_orders[0].bill_to.state : '' + " " + ($scope.response_o.data.order.sub_orders[0].bill_to.province) ? $scope.response_o.data.order.sub_orders[0].bill_to.province : '' + " " + ($scope.response_o.data.order.sub_orders[0].postalcode) ? $scope.response_o.data.order.sub_orders[0].postalcode : '';
-            if(response.data.supporting_documents != null && response.data.supporting_documents.length != 0){
-                $scope.docFlag = true;
-                $scope.supporting_documents = response.data.supporting_documents;
-            }else{
-                $scope.docFlag = false;
-            }
+            $scope.shipTo_3 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address3 ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address3 : '');
+            $scope.shipTo_4 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.city ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.city : '');
+            $scope.shipTo_5 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.country ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.country : '');
+            $scope.shipTo_6 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.postalcode ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.postalcode : '');
+            $scope.shipTo_7 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.province ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.province : '');
+            $scope.shipTo_8 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.state ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.state : '');
+            $scope.billTo_1 = $scope.response_o.data.order.sub_orders[0].bill_to.address1 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address1 : '';
+            $scope.billTo_2 = $scope.response_o.data.order.sub_orders[0].bill_to.address2 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address2 : '';
+            $scope.billTo_3 = $scope.response_o.data.order.sub_orders[0].bill_to.address3 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address3 : '';
+            $scope.billTo_4 = ($scope.response_o.data.order.sub_orders[0].bill_to.city) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.city : '';
+            $scope.billTo_5 = ($scope.response_o.data.order.sub_orders[0].bill_to.country) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.country : '';
+            $scope.billTo_6 = ($scope.response_o.data.order.sub_orders[0].bill_to.postalcode) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.postalcode : '';
+            $scope.billTo_7 = ($scope.response_o.data.order.sub_orders[0].bill_to.province) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.province : '';
+            $scope.billTo_8 = ($scope.response_o.data.order.sub_orders[0].bill_to.state) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.state : '';
+            $scope.bill_to = $scope.billTo_1 + $scope.billTo_2 + $scope.billTo_3 + $scope.billTo_4 + $scope.billTo_5 + $scope.billTo_6 + $scope.billTo_7 + $scope.billTo_8;
+            $scope.order_ff_state = response.data.order.order_ff_state;
 
             //For Sub-Order Table
             $scope.OrderList = [];
             angular.forEach(response.data.order.sub_orders, function(value, key) {
                 $scope.OrderList[count] = value;
                 $scope.OrderList[count].SrNo = count + 1;
-                $scope.OrderList[count].billToaddress = value.bill_to.address1 ? value.bill_to.address1 : '' + " " + value.bill_to.address2 ? value.bill_to.address2 : '' + " " + value.bill_to.city ? value.bill_to.city : '' + " " + value.bill_to.country ? value.bill_to.country : '' + " " + value.bill_to.state ? value.bill_to.state : '' + " " + value.bill_to.province ? value.bill_to.province : '' + " " + value.bill_to.postalcode ? value.bill_to.postalcode : '';
+                $scope.billTo_9 = $scope.response_o.data.order.sub_orders[0].bill_to.address1 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address1 : '';
+                $scope.billTo_10 = $scope.response_o.data.order.sub_orders[0].bill_to.address2 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address2 : '';
+                $scope.billTo_11 = $scope.response_o.data.order.sub_orders[0].bill_to.address3 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address3 : '';
+                $scope.billTo_12 = ($scope.response_o.data.order.sub_orders[0].bill_to.city) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.city : '';
+                $scope.billTo_13 = ($scope.response_o.data.order.sub_orders[0].bill_to.country) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.country : '';
+                $scope.billTo_14 = ($scope.response_o.data.order.sub_orders[0].bill_to.postalcode) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.postalcode : '';
+                $scope.billTo_15 = ($scope.response_o.data.order.sub_orders[0].bill_to.province) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.province : '';
+                $scope.billTo_16 = ($scope.response_o.data.order.sub_orders[0].bill_to.state) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.state : '';
+                $scope.bill_to = $scope.billTo_9 + $scope.billTo_10 + $scope.billTo_11 + $scope.billTo_12 + $scope.billTo_13 + $scope.billTo_14 + $scope.billTo_15 + $scope.billTo_16;
+                $scope.OrderList[count].billToaddress = $scope.bill_to;
                 count++;
             })
             $scope.lengthofSubOrders = $scope.OrderList.length;
@@ -61,8 +74,8 @@ define(['angular', './module'], function(angular, controllers) {
             $timeout(function() {
                 // console.log($scope.response.data);
                 for (var i = 0; i < $scope.response_o.data.order.sub_orders.length; i++) {
-                    debugger
-                    console.log($scope.response_o.data.order.sub_orders[i].sub_order_id);
+                    //debugger
+                    //console.log($scope.response_o.data.order.sub_orders[i].sub_order_id);
                     document.getElementById('Detail' + $scope.response_o.data.order.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
 
                         var count1 = 0;
@@ -70,6 +83,7 @@ define(['angular', './module'], function(angular, controllers) {
                         $scope.SubOrderList = [];
                         $scope.ShipmentList = [];
                         $scope.Shipment = false;
+                        $scope.tempShip = '';
                         $scope.$apply();
                         for (var i = 0; i < $scope.response_o.data.order.sub_orders.length; i++) {
                             angular.forEach($scope.response_o.data.order.sub_orders[i].shipments, function(value, key) {
@@ -84,8 +98,11 @@ define(['angular', './module'], function(angular, controllers) {
                                     $scope.dummy.push({
                                         'ge_order_number': value.ge_order_number,
                                         'ship_to': $scope.tempShip,
-                                        'shipment_id':$scope.shipment_id,
-                                        'sub_order_id': value.sub_order_id
+                                        'shipment_id': value.shipment_id,
+                                        'sub_order_id': value.sub_order_id,
+                                        'ship_date': $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy'),
+                                        'delivery_date': $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy'),
+                                        'shipment_ff_state': value.shipment_ff_state
                                     });
                                     $scope.tempShip = '';
                                     $scope.SubOrderList[count1] = $scope.dummy[count1];
@@ -143,7 +160,7 @@ define(['angular', './module'], function(angular, controllers) {
                         //$scope.selectedShipment = event.target.className;
                         var count2 = 0;
                         $scope.ShipmentList = [];
-                        debugger
+                        //debugger
                         angular.forEach($scope.response_o.data.order.order_lines, function(value, key) {
                             if (value.shipment_id == $scope.selectedShipment) {
                                 $scope.dummy1.push({
@@ -194,14 +211,24 @@ define(['angular', './module'], function(angular, controllers) {
                 } else {
                     $scope.response = response.data[2];
                 }
-                $scope.shipTo_1 = ($scope.response.sub_orders[0].shipments[0].ship_to.address1 ? $scope.response.sub_orders[0].shipments[0].ship_to.address1 : '');
-                $scope.shipTo_2 = ($scope.response.sub_orders[0].shipments[0].ship_to.address2 ? $scope.response.sub_orders[0].shipments[0].ship_to.address2 : '');
-                $scope.shipTo_3 = ($scope.response.sub_orders[0].shipments[0].ship_to.city ? $scope.response.sub_orders[0].shipments[0].ship_to.city : '') + " " + ($scope.response.sub_orders[0].shipments[0].ship_to.country ? $scope.response.sub_orders[0].shipments[0].ship_to.country : '');
-                $scope.shipTo_4 = $scope.response.sub_orders[0].shipments[0].ship_to.state ? $scope.response.sub_orders[0].shipments[0].ship_to.state : '' + " " + $scope.response.sub_orders[0].shipments[0].ship_to.province ? $scope.response.sub_orders[0].shipments[0].ship_to.province : '' + " " + $scope.response.sub_orders[0].shipments[0].ship_to.postalcode ? $scope.response.sub_orders[0].shipments[0].ship_to.postalcode : '';
-                $scope.billTo_1 = $scope.response.sub_orders[0].bill_to.address1 ? $scope.response.sub_orders[0].bill_to.address1 : '';
-                $scope.billTo_2 = $scope.response.sub_orders[0].bill_to.address2 ? $scope.response.sub_orders[0].bill_to.address2 : '';
-                $scope.billTo_3 = ($scope.response.sub_orders[0].bill_to.city) ? $scope.response.sub_orders[0].bill_to.city : '' + " " + ($scope.response.sub_orders[0].bill_to.country) ? $scope.response.sub_orders[0].bill_to.country : '';
-                $scope.billTo_4 = ($scope.response.sub_orders[0].bill_to.state) ? $scope.response.sub_orders[0].bill_to.state : '' + " " + ($scope.response.sub_orders[0].bill_to.province) ? $scope.response.sub_orders[0].bill_to.province : '' + " " + ($scope.response.sub_orders[0].postalcode) ? $scope.response.sub_orders[0].postalcode : '';
+                $scope.shipTo_1 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address1 ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address1 : '');
+                $scope.shipTo_2 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address2 ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address2 : '');
+                $scope.shipTo_3 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address3 ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.address3 : '');
+                $scope.shipTo_4 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.city ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.city : '');
+                $scope.shipTo_5 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.country ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.country : '');
+                $scope.shipTo_6 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.postalcode ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.postalcode : '');
+                $scope.shipTo_7 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.province ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.province : '');
+                $scope.shipTo_8 = ($scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.state ? $scope.response_o.data.order.sub_orders[0].shipments[0].ship_to.state : '');
+                $scope.billTo_1 = $scope.response_o.data.order.sub_orders[0].bill_to.address1 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address1 : '';
+                $scope.billTo_2 = $scope.response_o.data.order.sub_orders[0].bill_to.address2 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address2 : '';
+                $scope.billTo_3 = $scope.response_o.data.order.sub_orders[0].bill_to.address3 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address3 : '';
+                $scope.billTo_4 = ($scope.response_o.data.order.sub_orders[0].bill_to.city) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.city : '';
+                $scope.billTo_5 = ($scope.response_o.data.order.sub_orders[0].bill_to.country) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.country : '';
+                $scope.billTo_6 = ($scope.response_o.data.order.sub_orders[0].bill_to.postalcode) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.postalcode : '';
+                $scope.billTo_7 = ($scope.response_o.data.order.sub_orders[0].bill_to.province) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.province : '';
+                $scope.billTo_8 = ($scope.response_o.data.order.sub_orders[0].bill_to.state) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.state : '';
+                $scope.bill_to = $scope.billTo_1 + $scope.billTo_2 + $scope.billTo_3 + $scope.billTo_4 + $scope.billTo_5 + $scope.billTo_6 + $scope.billTo_7 + $scope.billTo_8;
+                $scope.order_ff_state = $scope.response.order_ff_state;
 
 
                 //For highlighting changed values of Order Headers
@@ -228,6 +255,16 @@ define(['angular', './module'], function(angular, controllers) {
                 angular.forEach($scope.response.sub_orders, function(value, key) {
                     $scope.OrderList[count] = value;
                     $scope.OrderList[count].SrNo = count + 1;
+                    $scope.billTo_9 = $scope.response_o.data.order.sub_orders[0].bill_to.address1 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address1 : '';
+                    $scope.billTo_10 = $scope.response_o.data.order.sub_orders[0].bill_to.address2 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address2 : '';
+                    $scope.billTo_11 = $scope.response_o.data.order.sub_orders[0].bill_to.address3 ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.address3 : '';
+                    $scope.billTo_12 = ($scope.response_o.data.order.sub_orders[0].bill_to.city) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.city : '';
+                    $scope.billTo_13 = ($scope.response_o.data.order.sub_orders[0].bill_to.country) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.country : '';
+                    $scope.billTo_14 = ($scope.response_o.data.order.sub_orders[0].bill_to.postalcode) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.postalcode : '';
+                    $scope.billTo_15 = ($scope.response_o.data.order.sub_orders[0].bill_to.province) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.province : '';
+                    $scope.billTo_16 = ($scope.response_o.data.order.sub_orders[0].bill_to.state) ? " " + $scope.response_o.data.order.sub_orders[0].bill_to.state : '';
+                    $scope.bill_to = $scope.billTo_9 + $scope.billTo_10 + $scope.billTo_11 + $scope.billTo_12 + $scope.billTo_13 + $scope.billTo_14 + $scope.billTo_15 + $scope.billTo_16;
+                    $scope.OrderList[count].billToaddress = $scope.bill_to;
                     //$scope.OrderList[count].link = "<a id='Detail" + value.sub_order_id + "' class=" + value.sub_order_id + " href='javascript:void(0)'>Details</a>";
                     count++;
                 })
@@ -274,6 +311,7 @@ define(['angular', './module'], function(angular, controllers) {
                             $scope.SubOrderList = [];
                             $scope.ShipmentList = [];
                             $scope.Shipment = false;
+                            $scope.tempShip = '';
                             for (var i = 0; i < $scope.response.sub_orders.length; i++) {
                                 angular.forEach($scope.response.sub_orders[i].shipments, function(value, key) {
                                     if (value.sub_order_id == $scope.selectedSubOrder) {
@@ -287,13 +325,16 @@ define(['angular', './module'], function(angular, controllers) {
                                             'ge_order_number': value.ge_order_number,
                                             'ship_to': $scope.tempShip,
                                             'shipment_id': value.shipment_id,
-                                            'sub_order_id': value.sub_order_id
+                                            'sub_order_id': value.sub_order_id,
+                                            'shipment_ff_state': value.shipment_ff_state,
+                                            'ship_date': $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy'),
+                                            'delivery_date': $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy')
                                         });
                                         $scope.tempShip = '';
                                         $scope.SubOrderList[count1] = $scope.dummy[count1];
                                         $scope.SubOrderList[count1].SrNo = count1 + 1;
                                         $scope.SubOrderList[count1].ship_to = $scope.dummy[count1].ship_to;
-                                        debugger
+                                        //debugger
                                         ++count1;
                                     }
                                 })
@@ -305,11 +346,11 @@ define(['angular', './module'], function(angular, controllers) {
                                 }, 100);
                             }
                             $scope.colorShipment = function() {
-                                debugger
+                                //debugger
                                 angular.forEach(response.data[1].sub_orders, function(value, key) {
                                     if (value.shipments) {
                                         for (var i = 0; i < value.shipments.length; i++) {
-                                            console.log(value.shipments[i].shipment_id);
+                                            //console.log(value.shipments[i].shipment_id);
                                             $('#Shipment' + value.shipments[i].shipment_id).css("background-color", "#85e085");
                                             //$('#Shipment' + value.shipments[i].shipment_id).css("font-weight", "bold");
                                         }
@@ -456,7 +497,7 @@ define(['angular', './module'], function(angular, controllers) {
                 'to': $scope.crData.to,
                 'cc': $scope.crData.cc,
                 'subject': $scope.crData.subject,
-                'description' : $cope.crData.description,
+                'description' : $scope.crData.description,
                 'ge_order_number': $scope.crData.ge_order_number,
                 'cust_po_number': $scope.crData.cust_po_number,
                 'sub_order_id': $scope.crData.sub_order_id,
