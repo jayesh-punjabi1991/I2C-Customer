@@ -9,7 +9,7 @@ define(['angular', './module'], function(angular, controllers) {
             angular.forEach(response.data[0].orders, function(value, key) {
                 //var date = new Date(parseInt(value.order_date));
                 $scope.OrderList.push({
-                    "order#": value.order_process_status == 'accepted' ? "<a href='/orderDetails/Accepted/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : value.order_process_status == 'generated' ? "<a href='/orderDetails/Accepted/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : value.order_process_status == 'change requested' ? "<a href='/orderDetails/CR/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : "<a href='/orderDetails/Rejected/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>",
+                    "order#": value.order_process_status == 'accepted' ? "<a href='/orderDetails/Accepted/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : value.order_process_status == 'generated' ? "<a href='/orderDetails/Accepted/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : value.order_process_status == 'change_requested' ? "<a href='/orderDetails/CR/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : "<a href='/orderDetails/Rejected/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>",
                     "PO#": value.cust_po_number,
                     "createdDate": value.order_date ? $filter('date')(new Date(parseInt(value.order_date) * 1000), 'MMM dd, yyyy') : '',
                     "value": $filter('currency')(value.contract_amount, 'USD ', 2),

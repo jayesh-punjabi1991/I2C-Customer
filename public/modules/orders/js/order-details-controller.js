@@ -30,6 +30,7 @@ define(['angular', './module'], function(angular, controllers) {
             $scope.customerNumber = response.data.customer_number;
             $scope.customerName = response.data.customer_name;
             $scope.contractAmount = response.data.contract_amount;
+            $scope.order_terms = response.data.order_terms;
             $scope.shipTo_1 = ($scope.response.data.sub_orders[0].shipments[0].ship_to.address1 ? $scope.response.data.sub_orders[0].shipments[0].ship_to.address1 : '');
             $scope.shipTo_2 = ($scope.response.data.sub_orders[0].shipments[0].ship_to.address2 ? $scope.response.data.sub_orders[0].shipments[0].ship_to.address2 : '');
             $scope.shipTo_3 = ($scope.response.data.sub_orders[0].shipments[0].ship_to.city ? $scope.response.data.sub_orders[0].shipments[0].ship_to.city : '')  + " " + ($scope.response.data.sub_orders[0].shipments[0].ship_to.country ? $scope.response.data.sub_orders[0].shipments[0].ship_to.country : '');

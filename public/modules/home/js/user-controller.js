@@ -24,6 +24,7 @@ define(['angular', './module'], function (angular, controllers) {
                   $window.sessionStorage.setItem('userPermission', response.userPermission);
                   $rootScope.userRole = response.userRole.userRoleName;
                   $rootScope.custName = response.customerID;
+                  
                   $state.go('dashboards');
                 });
             }else{

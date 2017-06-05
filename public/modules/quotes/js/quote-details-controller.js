@@ -33,6 +33,7 @@ define(['angular', './module'], function (angular, controllers) {
         $scope.CustomerAccountNumber = response.data.customer_acc_number;
         $scope.POAmount = response.data.purchase_order_amount;
         $scope.paymentTerms = response.data.payment_terms;
+        $scope.quote_terms = response.data.quote_terms;
         $scope.currency1 = response.data.currency;
         $scope.partNumber = response.data.quoteLines[0].partNumber;
         $scope.partDesc = response.data.quoteLines[0].lineItemDescription;

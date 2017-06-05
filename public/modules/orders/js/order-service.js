@@ -23,13 +23,13 @@ define(['angular', './module', 'constants'], function(angular, module) {
                  });
              },
              getDLforCR : function(){
-               return $http.get(urls.base_url + urls.get_DL_for_CR,{
+               return $http.get(urls.base_url + urls.get_DL_for_CR +"/"+ $window.sessionStorage.getItem('customerId') + "?eventName=CR.Initiate",{
                  headers: {
                    'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
                    'x-access-token': $window.sessionStorage.getItem('userToken')
                  }
                })
-             }, 
+             },
               initiateCR : function (oNum, data) {
                 return $http.post(urls.base_url + urls.initiate_cr + '/' + $window.sessionStorage.getItem('customerId') + '/' + oNum, data, {
                   headers: {
