@@ -152,8 +152,8 @@ define(['angular', './module'], function (angular, controllers) {
 
         var rejectData = $scope.quoteData;
         var rd = new FormData();
-        rejectData.comment = $scope.comments;
-        rd.append('quoteInputVO', JSON.stringify(rejectData));
+        rejectData.comments = $scope.comments;
+        rd.append('quoteInputVO', angular.toJson(rejectData));
 
         angular.forEach($scope.files, function(file){
            rd.append('file', file);
