@@ -112,6 +112,11 @@ define(['angular', 'angular-ui-router'], function(angular) {
                 url: '/changeRequest/Pending/:id',
                 templateUrl: 'modules/changeRequest/views/change-request-details.html',
                 controller: 'CRDetailsCtrl'
+            }).state('fulfillment', {
+                parent: 'secure',
+                url: '/fulfillment',
+                templateUrl: 'modules/fulfillment/views/fulfillment.html',
+                controller: 'FFCtrl'
             });
 
 

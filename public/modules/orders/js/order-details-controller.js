@@ -77,8 +77,10 @@ define(['angular', './module'], function(angular, controllers) {
                 $scope.OrderList[count].billToaddress = $scope.bill_to;
                 $scope.OrderList[count].shipToaddress = $scope.shipTo_1 + ' ' + $scope.shipTo_2 + ' ' + $scope.shipTo_3 + ' ' + $scope.shipTo_4;
                 $scope.OrderList[count].link = "<a id='Detail" + value.sub_order_id + "' class=" + value.sub_order_id + " href='javascript:void(0)'>Details</a>";
+
                 $scope.OrderList[count].ros_date = $filter('date')(new Date(value.ros_date * 1000), 'MMM dd, yyyy');
-                $scope.OrderList[count].sch_date = $filter('date')(new Date(value.ros_date * 1000), 'MMM dd, yyyy');
+
+                $scope.OrderList[count].sch_date = $filter('date')(new Date(value.sch_date * 1000), 'MMM dd, yyyy');
                 $scope.OrderList[count].ship_date = $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy');
                 $scope.OrderList[count].delivery_date = $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy');
                 $scope.OrderList[count].billing_amount = $filter('currency')(value.billing_amount, 'USD ', 2);
@@ -86,18 +88,27 @@ define(['angular', './module'], function(angular, controllers) {
             })
             console.log($scope.subOrders);
             $scope.LengthOfOrders=$scope.OrderList.length;
+            $scope.saveSubOrder = function(val) {
+                $scope.selectedSubOrder = val;
+                $scope.CreateSubOrderJson();
+            };
+            $scope.saveShipment = function(val) {
+                $scope.selectedShipment = val;
+                $scope.CreateShipmentJson();
+            };
             //For Shipment Table
-            $timeout(function() {
-                for (var i = 0; i < $scope.response.data.sub_orders.length; i++) {
-                    document.getElementById('Detail' + $scope.response.data.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
+            $scope.CreateSubOrderJson=function() {
+            //$timeout(function() {
+                //for (var i = 0; i < $scope.response.data.sub_orders.length; i++) {
+                    //document.getElementById('Detail' + $scope.response.data.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
                         $scope.dummy=[];
                         var count1 = 0;
                         $scope.SubOrderList = [];
                         $scope.ShipmentList = [];
                         $scope.Shipment = false;
                         $scope.tempShip = '';
-                        $scope.$apply();
-                        $scope.selectedSubOrder = event.target.className;
+                        //$scope.$apply();
+                        //$scope.selectedSubOrder = event.target.className;
                         for (var i = 0; i < $scope.response.data.sub_orders.length; i++) {
                             angular.forEach($scope.response.data.sub_orders[i].shipments, function(value, key) {
                                 if (value.sub_order_id == $scope.selectedSubOrder) {
@@ -125,24 +136,25 @@ define(['angular', './module'], function(angular, controllers) {
                             })
                         }
                         $scope.LengthOfSubOrders=$scope.SubOrderList.length;
-                        $scope.CreateShipmentJson();
+                        //$scope.CreateShipmentJson();
                         if ($scope.SubOrderList.length > 0) {
                             $scope.Suborder = true;
-                            $scope.$apply();
+                            //$scope.$apply();
                         } else {
                             $scope.Suborder = false;
-                            $scope.$apply();
+                            //$scope.$apply();
                         }
-                    }, false);
-                }
-
-            }, 1000);
+                        }
+            //         }, false);
+            //     }
+            //
+            // }, 1000);
             //For Shipment Table
             $scope.CreateShipmentJson = function() {
-                $timeout(function() {
-                    for (var i = 0; i < $scope.SubOrderList.length; i++) {
-                      document.getElementById('Details' + $scope.SubOrderList[i].shipment_id).addEventListener('click', function(event) {
-                          $scope.selectedShipment = event.target.className;
+                // $timeout(function() {
+                //     for (var i = 0; i < $scope.SubOrderList.length; i++) {
+                //       document.getElementById('Details' + $scope.SubOrderList[i].shipment_id).addEventListener('click', function(event) {
+                //          $scope.selectedShipment = event.target.className;
                           var count2 = 0;
                           $scope.ShipmentList = [];
                           angular.forEach($scope.response.data.order_lines, function(value, key) {
@@ -158,17 +170,17 @@ define(['angular', './module'], function(angular, controllers) {
                           $scope.LengthOfShipment = $scope.ShipmentList.length;
                           if ($scope.ShipmentList.length > 0) {
                               $scope.Shipment = true;
-                              $scope.$apply();
+                              //$scope.$apply();
                           } else {
                               $scope.Shipment = false;
-                              $scope.$apply();
+                              //$scope.$apply();
                           }
+                        }
 
-                      }, false);
-
-                    }
-                }, 3000);
-            }
+                //       }, false);
+                //
+                //     }
+                // }, 3000);
         })
 
         $scope.editIconClicked = function() {
@@ -236,6 +248,54 @@ define(['angular', './module'], function(angular, controllers) {
                window.open(objectUrl);
           });
         }
+        $timeout(function() {
+            jQuery(document).ready(function() {
+                function close_accordion_section() {
+                    jQuery('.accordion .accordion-section-title').removeClass('active');
+                    jQuery('.accordion .accordion-section-content1').slideUp(300).removeClass('open');
+                }
 
+                jQuery('.accordion-section-title').click(function(e) {
+                  debugger
+                    // Grab current anchor value
+                    var currentAttrValue = jQuery(this).attr('href');
+
+                    if (this.classList.contains("active")) {
+                        close_accordion_section();
+                    } else {
+                        close_accordion_section();
+
+                        // Add active class to section title
+                        jQuery(this).addClass('active');
+                        // Open up the hidden content panel
+                        jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open');
+                    }
+
+                    e.preventDefault();
+                });
+            });
+        }, 5000);
+
+        $(document).on('click','.accordion-section-title1', function(e){
+          function close_accordion_section1() {
+              jQuery('.accordion .accordion-section-title1').removeClass('active');
+              jQuery('.accordion .accordion-section-content2').slideUp(300).removeClass('open');
+          }
+
+              // Grab current anchor value
+              var currentAttrValue = jQuery(this).attr('id');
+
+              if (this.classList.contains("active")) {
+                  close_accordion_section1();
+              } else {
+                  close_accordion_section1();
+                  // Add active class to section title
+                  jQuery(this).addClass('active');
+                  // Open up the hidden content panel
+                  jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open');
+              }
+
+              e.preventDefault();
+        })
     }]);
 });

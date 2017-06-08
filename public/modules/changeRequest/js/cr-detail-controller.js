@@ -71,12 +71,13 @@ define(['angular', './module'], function(angular, controllers) {
             })
             $scope.lengthofSubOrders = $scope.OrderList.length;
             //For Shipment Table
-            $timeout(function() {
+            $scope.CreateSubOrderJson1=function(){
+            //$timeout(function() {
                 // console.log($scope.response.data);
-                for (var i = 0; i < $scope.response_o.data.order.sub_orders.length; i++) {
+                //for (var i = 0; i < $scope.response_o.data.order.sub_orders.length; i++) {
                     //debugger
                     //console.log($scope.response_o.data.order.sub_orders[i].sub_order_id);
-                    document.getElementById('Detail' + $scope.response_o.data.order.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
+                    //document.getElementById('Detail' + $scope.response_o.data.order.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
 
                         var count1 = 0;
                         $scope.dummy = [];
@@ -84,7 +85,7 @@ define(['angular', './module'], function(angular, controllers) {
                         $scope.ShipmentList = [];
                         $scope.Shipment = false;
                         $scope.tempShip = '';
-                        $scope.$apply();
+                        //$scope.$apply();
                         for (var i = 0; i < $scope.response_o.data.order.sub_orders.length; i++) {
                             angular.forEach($scope.response_o.data.order.sub_orders[i].shipments, function(value, key) {
                                 if (value.sub_order_id == $scope.selectedSubOrder) {
@@ -113,17 +114,17 @@ define(['angular', './module'], function(angular, controllers) {
                             })
                         }
                         $scope.lengthofShipments = $scope.SubOrderList.length;
-                        $scope.CreateShipmentJson1();
+                        //$scope.CreateShipmentJson1();
                         if ($scope.SubOrderList.length > 0) {
                             $scope.Suborder = true;
-                            $scope.$apply();
+                            //$scope.$apply();
                         } else {
                             $scope.Suborder = false;
                         }
-                    }, false);
-                }
-            }, 2000);
-
+            //         }, false);
+            //     }
+            // }, 2000);
+          }
             // Call Comparision api when order is change_requested and CR is pending
             //or when order is in accepted and CR is accepted
             // Call Comparision api when order is change_requested and CR is pending
@@ -148,14 +149,16 @@ define(['angular', './module'], function(angular, controllers) {
         }
         $scope.saveSubOrder = function(val) {
             $scope.selectedSubOrder = val;
+            $scope.CreateSubOrderJson1();
         };
         $scope.saveShipment = function(val) {
             $scope.selectedShipment = val;
+            $scope.CreateShipmentJson1();
         };
         $scope.CreateShipmentJson1 = function() {
-            $timeout(function() {
-                for (var i = 0; i < $scope.SubOrderList.length; i++) {
-                    document.getElementById('Details' + $scope.SubOrderList[i].shipment_id).addEventListener('click', function(event) {
+            // $timeout(function() {
+            //     for (var i = 0; i < $scope.SubOrderList.length; i++) {
+            //         document.getElementById('Details' + $scope.SubOrderList[i].shipment_id).addEventListener('click', function(event) {
                         $scope.dummy1 = [];
                         //$scope.selectedShipment = event.target.className;
                         var count2 = 0;
@@ -188,21 +191,22 @@ define(['angular', './module'], function(angular, controllers) {
                         $scope.LengthOfShipment = $scope.ShipmentList.length;
                         if ($scope.ShipmentList.length > 0) {
                             $scope.Shipment = true;
-                            $scope.$apply();
+                            //$scope.$apply();
                         } else {
                             $scope.Shipment = false;
-                            $scope.$apply();
+                            //$scope.$apply();
                         }
 
-                    }, false);
-
-                }
-            }, 1000);
+            //         }, false);
+            //
+            //     }
+            // }, 1000);
         }
 
         //Show Differences code
         function diffCode(oNo) {
             CrService.getCrDiffDetails(oNo).then(function success(response) {
+              debugger
                 console.log(response);
                 $scope.Loading = false;
                 //$scope.response = response.data[0];
@@ -251,7 +255,6 @@ define(['angular', './module'], function(angular, controllers) {
                 //For Sub-Order Table
                 $scope.OrderList = [];
                 count = 0;
-                debugger
                 angular.forEach($scope.response.sub_orders, function(value, key) {
                     $scope.OrderList[count] = value;
                     $scope.OrderList[count].SrNo = count + 1;
@@ -301,12 +304,13 @@ define(['angular', './module'], function(angular, controllers) {
 
                 $scope.saveSubOrder = function(val) {
                     $scope.selectedSubOrder = val;
+                    $scope.CreateSubOrderJson();
                 };
-
-                $timeout(function() {
-                    for (var i = 0; i < $scope.response.sub_orders.length; i++) {
-                        document.getElementById('Detail' + $scope.response.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
-                            var count1 = 0;
+                $scope.CreateSubOrderJson=function(){
+                // $timeout(function() {
+                //     for (var i = 0; i < $scope.response.sub_orders.length; i++) {
+                //         document.getElementById('Detail' + $scope.response.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
+                //             var count1 = 0;
                             $scope.dummy = [];
                             $scope.SubOrderList = [];
                             $scope.ShipmentList = [];
@@ -374,26 +378,28 @@ define(['angular', './module'], function(angular, controllers) {
                                 }
                             }
                             $scope.lengthofShipments = $scope.SubOrderList.length;
-                            $scope.CreateShipmentJson();
+                            //$scope.CreateShipmentJson();
                             if ($scope.SubOrderList.length > 0) {
                                 $scope.Suborder = true;
-                                $scope.$apply();
+                                //$scope.$apply();
                             } else {
                                 $scope.Suborder = false;
                             }
-                        }, false);
-                    }
-                }, 1000);
+                          }
+                //         }, false);
+                //     }
+                // }, 1000);
 
                 //For Order Lines
                 $scope.saveShipment = function(val) {
                     $scope.selectedShipment = val;
+                    $scope.CreateShipmentJson();
                 };
                 //For OrderLines Table
                 $scope.CreateShipmentJson = function() {
-                    $timeout(function() {
-                        for (var i = 0; i < $scope.SubOrderList.length; i++) {
-                            document.getElementById('Details' + $scope.SubOrderList[i].shipment_id).addEventListener('click', function(event) {
+                    // $timeout(function() {
+                    //     for (var i = 0; i < $scope.SubOrderList.length; i++) {
+                    //         document.getElementById('Details' + $scope.SubOrderList[i].shipment_id).addEventListener('click', function(event) {
                                 $scope.dummy1 = [];
                                 //$scope.selectedShipment = event.target.className;
                                 var count2 = 0;
@@ -437,16 +443,16 @@ define(['angular', './module'], function(angular, controllers) {
                                 $scope.LengthOfShipment = $scope.ShipmentList.length;
                                 if ($scope.ShipmentList.length > 0) {
                                     $scope.Shipment = true;
-                                    $scope.$apply();
+                                    //$scope.$apply();
                                 } else {
                                     $scope.Shipment = false;
-                                    $scope.$apply();
+                                    //$scope.$apply();
                                 }
 
-                            }, false);
-
-                        }
-                    }, 1000);
+                    //         }, false);
+                    //
+                    //     }
+                    // }, 1000);
                 }
 
             })
@@ -538,6 +544,54 @@ define(['angular', './module'], function(angular, controllers) {
             $scope.colorShipment();
             $scope.colorLineItem();
         }
+        
+        $timeout(function() {
+                    jQuery(document).ready(function() {
+                        function close_accordion_section() {
+                            jQuery('.accordion .accordion-section-title').removeClass('active');
+                            jQuery('.accordion .accordion-section-content1').slideUp(300).removeClass('open');
+                        }
 
+                        jQuery('.accordion-section-title').click(function(e) {
+                            // Grab current anchor value
+                            var currentAttrValue = jQuery(this).attr('href');
+
+                            if (this.classList.contains("active")) {
+                                close_accordion_section();
+                            } else {
+                                close_accordion_section();
+
+                                // Add active class to section title
+                                jQuery(this).addClass('active');
+                                // Open up the hidden content panel
+                                jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open');
+                            }
+
+                            e.preventDefault();
+                        });
+                    });
+                }, 5000);
+
+                $(document).on('click','.accordion-section-title1', function(e){
+                  function close_accordion_section1() {
+                      jQuery('.accordion .accordion-section-title1').removeClass('active');
+                      jQuery('.accordion .accordion-section-content2').slideUp(300).removeClass('open');
+                  }
+
+                      // Grab current anchor value
+                      var currentAttrValue = jQuery(this).attr('id');
+
+                      if (this.classList.contains("active")) {
+                          close_accordion_section1();
+                      } else {
+                          close_accordion_section1();
+                          // Add active class to section title
+                          jQuery(this).addClass('active');
+                          // Open up the hidden content panel
+                          jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open');
+                      }
+
+                      e.preventDefault();
+                })
     }]);
 });
