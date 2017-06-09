@@ -221,8 +221,8 @@
             </div>
             <div>
                 <table>
-                    <tr ng-show="docFlag" ng-repeat="document in supporting_documents">
-                        <td>{{$index+1}}. &nbsp;&nbsp;<a target="_blank" href="" ng-click="displayFile(document.url)">{{document.description}}</a></td>
+                    <tr ng-show="docFlag" ng-repeat = "document in supporting_documents">
+                      <td>{{$index+1}}. &nbsp;&nbsp;<a ng-if="document.document_type != 'link'" target="_blank" href="" ng-click="displayFile(document.url)">{{document.description}}</a><a ng-if="document.document_type == 'link'" target="_blank" href="{{document.url}}" >{{document.description}}</a></td>
                     </tr>
                     <tr ng-show="!docFlag">
                         <td>No documents related to this Order</td>

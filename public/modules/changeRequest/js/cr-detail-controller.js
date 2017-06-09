@@ -2,7 +2,7 @@ define(['angular', './module'], function(angular, controllers) {
     'use strict';
 
     // Controller definition
-    controllers.controller('CRDetailsCtrl', ['$scope', '$log', '$timeout', 'CrService', '$http', 'PredixUserService', '$window', '$state', '$stateParams', '$filter', function($scope, $log, $timeout, CrService, $http, PredixUserService, $window, $state, $stateParams, $filter) {
+    controllers.controller('CRDetailsCtrl', ['$scope', '$log', '$timeout', 'CrService', '$http', 'PredixUserService', '$window', '$state', '$stateParams', '$filter','QuotesService', function($scope, $log, $timeout, CrService, $http, PredixUserService, $window, $state, $stateParams, $filter, QuotesService) {
         $scope.ChangeRequestList = [];
         $scope.OrderList = [];
         $scope.SubOrderList = [];
@@ -544,7 +544,34 @@ define(['angular', './module'], function(angular, controllers) {
             $scope.colorShipment();
             $scope.colorLineItem();
         }
-        
+
+        $scope.displayFile = function (fileName) {
+          QuotesService.viewDocument(fileName).success(function(response){
+               var sliceSize = sliceSize || 512;
+
+               var byteCharacters = atob(response);
+               var byteArrays = [];
+
+               for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                  byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                var byteArray = new Uint8Array(byteNumbers);
+
+                byteArrays.push(byteArray);
+               }
+               var blob = new Blob(byteArrays, { type: 'application/pdf' });
+               var objectUrl = URL.createObjectURL(blob);
+               //console.log(objectUrl);
+               //var fURL = $sce.trustAsResourceUrl(objectUrl);
+               window.open(objectUrl);
+          });
+        }
+
         $timeout(function() {
                     jQuery(document).ready(function() {
                         function close_accordion_section() {

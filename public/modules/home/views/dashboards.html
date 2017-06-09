@@ -20,9 +20,8 @@
             <td ng-if="value.eventType == 'CR.Initiate'"><span style="display:inline-block; background-color:orange; color:white; padding: 5px;">{{value.eventType}}</span></td>
             <td ng-if="value.eventType == 'Order.Sigupdate'"><span style="display:inline-block; background-color:blue; color:white; padding: 5px;">{{value.eventType}}</span></td>
             <td>{{value.message}}</td>
-            <td ng-if="value.eventType == 'CR.Accept' || value.eventType == 'CR.Initiate' || value.eventType == 'Order.Sigupdate' || value.eventType == 'Order.Approve'"><a href="{{'/orderDetails/Accepted/'+ value.order_id}}">View Order</a></td>
-            <td ng-if="value.eventType == 'Quote.Import'"><a href="{{'/quoteDetails/AR/'+ value.quote_id}}">View Quote</a></td>
-            <!-- <td><a href="#" id="times" class="close">&times;</a></td> -->
+            <td ng-if="value.eventType == 'CR.Accept' || value.eventType == 'CR.Initiate' || value.eventType == 'Order.Sigupdate' || value.eventType == 'Order.Approve'"><a ng-click="processNotification(value)" style="pointer:cursor;">View Order</a></td>
+            <td ng-if="value.eventType == 'Quote.Import'"><a ng-click="processNotification(value)" style="pointer:cursor;">View Quote</a></td>
           </tr>
         </tbody>
       </table>

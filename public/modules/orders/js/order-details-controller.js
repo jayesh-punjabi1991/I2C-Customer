@@ -2,7 +2,7 @@ define(['angular', './module'], function(angular, controllers) {
     'use strict';
 
     // Controller definition
-    controllers.controller('OrderDetailsCtrl', ['$scope', '$log', 'PredixAssetService', 'PredixViewService', '$timeout', 'OrdersService', '$http', '$state', '$stateParams','$window','$filter', function($scope, $log, PredixAssetService, PredixViewService, $timeout, OrdersService, $http, $state, $stateParams, $window, $filter) {
+    controllers.controller('OrderDetailsCtrl', ['$scope', '$log', 'PredixAssetService', 'PredixViewService', '$timeout', 'OrdersService', '$http', '$state', '$stateParams','$window','$filter','QuotesService', function($scope, $log, PredixAssetService, PredixViewService, $timeout, OrdersService, $http, $state, $stateParams, $window, $filter, QuotesService) {
 
         $scope.OrderList = [];
         $scope.SubOrderList = [];

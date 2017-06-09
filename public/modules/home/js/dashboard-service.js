@@ -14,6 +14,14 @@ define(['angular', './module', 'constants'], function(angular, module) {
                    'x-access-token': $window.sessionStorage.getItem('userToken')
                  }
                });
+            },
+            processNotification: function (notId) {
+              return $http.get(urls.base_url + urls.process_notification + '/'+ notId, {
+                 headers: {
+                   'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                   'x-access-token': $window.sessionStorage.getItem('userToken')
+                 }
+               });
             }
         };
     }]);

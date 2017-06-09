@@ -12,6 +12,7 @@ define(['angular'], function(angular) {
                     ,get_quotes_list:'/tcaapigateway/getQuotes'
                     ,get_quote_details: '/tcaapigateway/getQuoteDetails'
                     ,get_mypending_actions: '/tcaapigateway/getNotification'
+                    ,process_notification: '/tcaapigateway/processedNotification'
                     ,accept_quote: '/tcaapigateway/acceptQuote'
                     ,reject_quote: '/tcaapigateway/rejectQuote'
                     ,file_upload: '/tcaapigateway/blob/upload'
