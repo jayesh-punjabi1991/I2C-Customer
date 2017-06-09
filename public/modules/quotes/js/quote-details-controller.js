@@ -143,7 +143,17 @@ define(['angular', './module'], function (angular, controllers) {
            window.open(objectUrl);
         });
       }
+      $(document).ready(function() {
+          $("#AcceptButton").click(function() {
+              $("#AcceptDiv").slideToggle("slow");
+          });
+      });
 
+      $(document).ready(function() {
+          $("#RejectButton").click(function() {
+              $("#RejectDiv").slideToggle("slow");
+          });
+      });
       $scope.rejectClicked = function () {
         var d = document.getElementById("AcceptButton");
         var d1 = document.getElementById("RejectButton");

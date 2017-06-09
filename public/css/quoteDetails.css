@@ -8,6 +8,13 @@ px-card{
 .rt{
 	float: right;
 }
+#scrollBodyTableContainer > div:nth-child(1){
+  background-color: #2b5ea2 !important;
+  color: white;
+}
+.px-pagination-0 .btn--pagination--number.px-pagination{
+  background-color: #2b5ea2 !important;
+}
 .px-data-table-cell{
   max-width: 150px !important;
   word-wrap: break-word;
