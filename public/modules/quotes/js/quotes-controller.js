@@ -84,7 +84,7 @@ define(['angular', './module'], function(angular, controllers) {
                 QuotesService.getQuotesListByDate().then(function success(response) {
                     console.log(response.data);
                     $scope.Loading = false;
-                    $scope.GetOrders(response);
+                    $scope.GetQuotes(response);
                 });
 
             });
