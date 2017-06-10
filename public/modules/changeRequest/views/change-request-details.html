@@ -41,9 +41,9 @@
                 <h3 class="head-text">Request Email</h3>
             </div>
             <div class="desk-50 rt clearfix cr_btns">
-                <a ng-if="CRStatus== 'pending' && orderStatus == 'change_requested' && crData.to == 'cust-cpa'" title="Accept" id="acceptButton1" class="btn btn-primary rt" ng-click="acceptClicked()">Accept</a>
+                <a ng-if="(CRStatus== 'pending' && orderStatus == 'change_requested' && crData.to == 'cust-cpa') || (CRStatus== 'pending' && orderStatus == 'change_requested' && crData.from == 'system')" title="Accept" id="acceptButton1" class="btn btn-primary rt" ng-click="acceptClicked()">Accept</a>
                 <a ng-if="CRStatus== 'accepted' && orderStatus == 'change_requested' && crData.to == 'ge-oms'" title="Accept" id="rejectButton" class="btn btn-primary rt" ng-click="approveClicked()">Approve</a>
-                <a ng-if="(CRStatus== 'pending' && orderStatus == 'accepted' && crData.to == 'cust-cpa') || (CRStatus== 'accepted' && orderStatus == 'change_requested' && crData.to == 'ge-oms')" title="Reject" id="rejectButton" class="btn btn-reject rt" class="btn" ng-click="rejectClicked()">Reject</a>
+                <a ng-if="(CRStatus== 'pending' && orderStatus == 'accepted' && crData.to == 'cust-cpa') || (CRStatus== 'accepted' && orderStatus == 'change_requested' && crData.to == 'ge-oms') || (CRStatus== 'pending' && orderStatus == 'change_requested' && crData.from == 'system')" title="Reject" id="rejectButton" class="btn btn-reject rt" class="btn" ng-click="rejectClicked()">Reject</a>
             </div>
         </div>
         <div class="email_body">

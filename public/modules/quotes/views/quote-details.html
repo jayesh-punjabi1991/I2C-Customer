@@ -9,11 +9,9 @@
 </style>
 <div class="cr-wrapper">
 	<px-card class="card-head">
-			<h2 class="cr-heading" style="display: -webkit-inline-box"><span class="cr">Quote Number# :</span>&nbsp;<span class="cr_id">{{QuoteNumber}}</span></h2>
-			<div class="desk-50 rt clearfix cr_btns">
-				<a title="Accept" id="AcceptButton" class="btn disabled" ng-show="acceptbutton" ng-click="acceptClicked()" style="float:right">Accept</a>
-				<a title="Reject" id="RejectButton" style="background-color:#f15854;color:white;float:right;margin-right:2%" class="btn" ng-disabled="acceptDetails" ng-click="successMessage=false;rejectDetails = true;">Reject</a>
-				<a title="Details" id="CompleteDetails" class="btn" style="background-color:#60bd68;color:white;float:right" ng-click="completedetails = true;acceptbutton = true" ng-hide="acceptbutton" ng-disabled="rejectDetails">Complete the Details</a>
+			<div class="clearfix">
+				<h2 class="desk-50 lt cr-heading" style="display: -webkit-inline-box"><span class="cr">Quote Number# :</span>&nbsp;<span class="cr_id">{{QuoteNumber}}</span></h2>
+				<h2 class="desk-20 rt cr-heading" style="display: -webkit-inline-box"><span class="cr">Value :</span>&nbsp;<span class="cr_id">{{totalSP | currency : currency1+'&nbsp;' : 2}}</span></h2>
 			</div>
 			<div class="imp_details clearfix">
 					<div class="desk-20 small-50 lt details_div">
@@ -62,8 +60,13 @@
   	</div>
 	</px-card>
 	<px-card>
-			<div>
-					<h3 class="cr-heading label-color">Quote Details</h3>
+			<div class="clearfix">
+					<h3 class="desk-50 lt cr-heading label-color">Quote Details</h3>
+					<div ng-if="QuoteStatus == 'confirmed'" class="desk-50 rt clearfix cr_btns">
+						<a title="Accept" id="AcceptButton" class="btn disabled" ng-show="acceptbutton" ng-click="acceptClicked()" style="float:right">Accept</a>
+						<a title="Reject" id="RejectButton" style="background-color:#f15854;color:white;float:right;margin-right:2%" class="btn" ng-disabled="acceptDetails" ng-click="successMessage=false;rejectDetails = true;">Reject</a>
+						<a title="Details" id="CompleteDetails" class="btn" style="background-color:#60bd68;color:white;float:right" ng-click="completedetails = true;acceptbutton = true" ng-hide="acceptbutton" ng-disabled="rejectDetails">Complete the Details</a>
+					</div>
 			</div>
 			<div class="adr_div clearfix">
 					<div class="desk-20 small-50 lt details_div">
