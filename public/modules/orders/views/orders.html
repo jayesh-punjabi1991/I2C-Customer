@@ -5,7 +5,8 @@
   <px-card style="background-color:white;border-radius:4px;margin-top:1%;">
     <div class="flex filters">
       <div id="calenderdiv">
-          <px-datetime-range-field id="rangePicker" hide-time="true" show-buttons="true" date-format="YYYY/MM/DD" time-format="HH:mm:ss" time-zone="UTC" show-time-zone="abbreviatedText" range='{"from":"2015-07-01T01:00:00.000Z","to":"2016-07-08T14:00:00.000Z"}'></px-datetime-range-field>
+          <!-- <px-datetime-range-field id="rangePicker" hide-time="true" show-buttons="true" date-format="YYYY/MM/DD" time-format="HH:mm:ss" time-zone="UTC" show-time-zone="abbreviatedText" range='{"from":"2015-07-01T01:00:00.000Z","to":"2016-07-08T14:00:00.000Z"}'></px-datetime-range-field> -->
+          <px-rangepicker id="rangePicker" hide-time="true" show-buttons="true" date-format="YYYY/MM/DD" time-format="HH:mm:ss" time-zone="UTC" show-time-zone="abbreviatedText" range='{"from":"2015-07-01T01:00:00.000Z","to":"2016-07-08T14:00:00.000Z"}'></px-rangepicker>
       </div>
     </div>
     <div id="Loader" ng-show="Loading==true" ng-hide="Loading==false">

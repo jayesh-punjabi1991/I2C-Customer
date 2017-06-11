@@ -3,11 +3,12 @@
   <h3 style="float:left;width:18%;">List Of Change Requests</h3>
 </px-card>
 <px-card style="background-color:white;border-radius:4px;margin-top:1%; padding-top:50px;">
-  <!-- <div class="flex filters">
+  <div class="flex filters">
     <div id="calenderdiv">
-        <px-datetime-range-field id="rangePicker" hide-time="true" show-buttons="true" date-format="YYYY/MM/DD" time-format="HH:mm:ss" time-zone="UTC" show-time-zone="abbreviatedText" range='{"from":"2015-07-01T01:00:00.000Z","to":"2016-07-08T14:00:00.000Z"}'></px-datetime-range-field>
+        <!-- <px-datetime-range-field id="rangePicker" hide-time="true" show-buttons="true" date-format="YYYY/MM/DD" time-format="HH:mm:ss" time-zone="UTC" show-time-zone="abbreviatedText" range='{"from":"2015-07-01T01:00:00.000Z","to":"2016-07-08T14:00:00.000Z"}'></px-datetime-range-field> -->
+        <px-rangepicker id="rangePicker" hide-time="true" show-buttons="true" date-format="YYYY/MM/DD" time-format="HH:mm:ss" time-zone="UTC" show-time-zone="abbreviatedText" range='{"from":"2015-07-01T01:00:00.000Z","to":"2016-07-08T14:00:00.000Z"}'></px-rangepicker>
     </div>
-  </div> -->
+  </div>
   <px-data-table table-data='{{ChangeRequestList}}' language="en" striped="true" sortable="true" show-column-chooser="true" table-rows="true" include-all-columns="true" filterable="true">
     <px-data-table-column name="cr#" Label="CR. Number" type="html" sortable filterable></px-data-table-column>
     <px-data-table-column name="PO#" label="PO Number" sortable filterable></px-data-table-column>
