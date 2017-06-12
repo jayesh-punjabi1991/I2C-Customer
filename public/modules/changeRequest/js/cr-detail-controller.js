@@ -96,6 +96,11 @@ define(['angular', './module'], function(angular, controllers) {
                                         $scope.tempShip = $scope.tempShip + ' ' + elm;
                                       }
                                     })
+                                    $scope.getLink=function(carrier,number){
+                                      if(carrier){
+                                        return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" : "javascript:void(0)"
+                                      }
+                                    }
                                     $scope.dummy.push({
                                         'ge_order_number': value.ge_order_number,
                                         'ship_to': $scope.tempShip,
@@ -103,7 +108,9 @@ define(['angular', './module'], function(angular, controllers) {
                                         'sub_order_id': value.sub_order_id,
                                         'ship_date': $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy'),
                                         'delivery_date': $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy'),
-                                        'shipment_ff_state': value.shipment_ff_state
+                                        'shipment_ff_state': value.shipment_ff_state,
+                                        'pod':value.tracking_number,
+                                        'trackingLink':$scope.getLink(value.carrier,value.tracking_number)
                                     });
                                     $scope.tempShip = '';
                                     $scope.SubOrderList[count1] = $scope.dummy[count1];
@@ -125,6 +132,9 @@ define(['angular', './module'], function(angular, controllers) {
             //     }
             // }, 2000);
           }
+          $scope.Redirect=function(url){
+              window.open(url, '_blank');
+            }
             // Call Comparision api when order is change_requested and CR is pending
             //or when order is in accepted and CR is accepted
             // Call Comparision api when order is change_requested and CR is pending
@@ -325,6 +335,11 @@ define(['angular', './module'], function(angular, controllers) {
                                             $scope.tempShip = $scope.tempShip + " " + elm;
                                           }
                                         })
+                                        $scope.getLink=function(carrier,number){
+                                          if(carrier){
+                                            return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" : "javascript:void(0)"
+                                          }
+                                        }
                                         $scope.dummy.push({
                                             'ge_order_number': value.ge_order_number,
                                             'ship_to': $scope.tempShip,
@@ -332,7 +347,9 @@ define(['angular', './module'], function(angular, controllers) {
                                             'sub_order_id': value.sub_order_id,
                                             'shipment_ff_state': value.shipment_ff_state,
                                             'ship_date': $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy'),
-                                            'delivery_date': $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy')
+                                            'delivery_date': $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy'),
+                                            'pod':value.tracking_number,
+                                            'trackingLink':$scope.getLink(value.carrier,value.tracking_number)
                                         });
                                         $scope.tempShip = '';
                                         $scope.SubOrderList[count1] = $scope.dummy[count1];

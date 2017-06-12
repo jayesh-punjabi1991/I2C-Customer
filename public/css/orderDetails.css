@@ -99,3 +99,9 @@
   width: 99%;
   height: 50px;
 }
+.trackingLink{
+  color: blue;
+}
+.trackingLink:hover{
+  color: white;
+}

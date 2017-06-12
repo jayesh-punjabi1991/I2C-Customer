@@ -171,7 +171,7 @@
                                   <th id="{{'delivery_date'+y.shipment_id}}">{{y.delivery_date}}</th>
                                   <th id="{{'shipment_ff_state'+y.shipment_id}}">{{y.shipment_ff_state}}</th>
                                   <th id="{{'ship_amt'+y.shipment_id}}">{{y.ship_amt}}</th>
-                                  <th id="{{'pod'+y.shipment_id}}">{{y.pod}}</th>
+                                  <th class="trackingLink" id="{{'pod'+y.shipment_id}}" ng-click="Redirect(y.trackingLink)" style="text-decoration: underline;cursor: pointer;">{{y.pod}}</th>
                                   </tr>
                               </table>
                             </button>

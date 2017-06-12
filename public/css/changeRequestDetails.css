@@ -366,3 +366,9 @@ table.sortable tr {
 	padding:15px;
 	display:none;
 }
+.trackingLink{
+  color: blue;
+}
+.trackingLink:hover{
+  color: white;
+}
