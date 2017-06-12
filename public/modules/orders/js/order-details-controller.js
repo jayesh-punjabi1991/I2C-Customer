@@ -119,7 +119,7 @@ define(['angular', './module'], function(angular, controllers) {
                                     })
                                     $scope.getLink=function(carrier,number){
                                       if(carrier){
-                                        return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" :  carrier.includes("PILOT") ? "http://www.pilotdelivers.com/tracking/" : "javascript.void(0)"
+                                        return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" :  carrier.includes("PILOT") ? "http://www.pilotdelivers.com/quicktrack.aspx?Pro=" + number : "javascript.void(0)"
                                       }
                                     }
                                     $scope.dummy.push({
