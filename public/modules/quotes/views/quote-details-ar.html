@@ -100,13 +100,15 @@
 					</div>
 					<div class="desk-50 lt">
 							<p class="small_label">Bill To</p>
-							<textarea ng-show="completedetails" id="billTo" ng-change="enableAccept()" style="width:440px;height:100px" ng-model="BillTo" required></textarea>
+							<textarea ng-if="QuoteStatus == 'confirmed'" ng-show="completedetails" id="billTo" ng-change="enableAccept()" style="width:440px;height:100px" ng-model="BillTo" required></textarea>
+							<p ng-if="QuoteStatus != 'confirmed'" class="big_label bottom-margin"><i class="fa fa-map-marker small_label"></i>&nbsp;&nbsp;{{ShipToAddress1}}</p>
 					</div>
 			</div>
 			<div class="adr_div clearfix">
 					<div class="desk-20 small-50 lt details_div">
 							<p class="small_label">PO Number</p>
-							<input ng-show="completedetails" style="width:140px" ng-change="enableAccept()" class="form-field--inline text-input input--tiny form-control" ng-model="PONumber" id="poNum" type="text" placeholder="" required>
+							<input ng-if="QuoteStatus == 'confirmed'" ng-show="completedetails" style="width:140px" ng-change="enableAccept()" class="form-field--inline text-input input--tiny form-control" ng-model="PONumber" id="poNum" type="text" placeholder="" required>
+							<p ng-if="QuoteStatus != 'confirmed'" class="big_label">{{poNumber}}</p>
 					</div>
 					<div class="desk-30 small-50 lt details_div">
 							<p ng-show="completedetails" class="small_label">PO</p>

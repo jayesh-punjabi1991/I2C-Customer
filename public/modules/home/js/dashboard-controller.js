@@ -28,5 +28,11 @@ define(['angular', './module'], function (angular, controllers) {
           })
         }
 
+        $scope.markAsRead = function (notif) {
+          DashboardService.processNotification(notif.id).success(function (response) {
+            $state.reload();
+          })
+        }
+
     }]);
 });

@@ -185,12 +185,9 @@ define(['angular', './module'], function(angular, controllers) {
 
         $scope.editIconClicked = function() {
             $scope.changeRequest = true;
+            $("#changeRequestDiv").slideToggle("slow");
+            $(".change_req").slideToggle("slow");
         };
-        $(document).ready(function() {
-            $("#CR").click(function() {
-                $("#changeRequestDiv").slideToggle("slow");
-            });
-        });
 
         OrdersService.getDLforCR().then(function success(response) {
           $scope.to=response.data.to;

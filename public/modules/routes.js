@@ -68,25 +68,25 @@ define(['angular', 'angular-ui-router'], function(angular) {
             })
             .state('ordersDetailsA', {
                 url: '/orderDetails/Accepted/:id',
-                templateUrl: 'modules/orders/views/order-details-Accepted.html',
+                templateUrl: 'modules/orders/views/order-details.html',
                 controller: 'OrderDetailsCtrl'
             })
             .state('ordersDetailsR', {
                 parent: 'secure',
                 url: '/orderDetails/Rejected/:id',
-                templateUrl: 'modules/orders/views/order-details-Rejected.html',
+                templateUrl: 'modules/orders/views/order-details.html',
                 controller: 'OrderDetailsCtrl'
             })
             .state('ordersDetailsG', {
                 parent: 'secure',
                 url: '/orderDetails/Generated/:id',
-                templateUrl: 'modules/orders/views/order-details-Generated.html',
+                templateUrl: 'modules/orders/views/order-details.html',
                 controller: 'OrderDetailsCtrl'
             })
             .state('ordersDetailsCR', {
                 parent: 'secure',
                 url: '/orderDetails/CR/:id',
-                templateUrl: 'modules/orders/views/order-details-CR.html',
+                templateUrl: 'modules/orders/views/order-details.html',
                 controller: 'OrderDetailsCtrl'
             })
             .state('changeRequest', {
