@@ -80,6 +80,10 @@ define(['angular', './module'], function (angular, controllers) {
         });
       });
       $scope.acceptDetails1=true;
+      $scope.completeDetails = function () {
+        $scope.completedetails = true;
+        $scope.acceptbutton = false;
+      }
       $scope.enableAccept=function(){
         var d = document.getElementById("AcceptButton");
         d.className += " btn btn-primary";
@@ -97,7 +101,7 @@ define(['angular', './module'], function (angular, controllers) {
         angular.forEach($scope.files, function(file){
            fd.append('file', file);
         });
-
+        //console.log($scope.BillTo);
         acceptData.bill_to = {
           'address1':  $scope.BillTo,
           'address2': '',
@@ -106,6 +110,7 @@ define(['angular', './module'], function (angular, controllers) {
         };
         //acceptData.bill_to = $scope.BillTo;
         acceptData.po_number = $scope.PONumber;
+        console.log(acceptData);
         fd.append('quoteInputVO', JSON.stringify(acceptData));
         // for (var pair of fd.entries()) {
         //     console.log(pair[0]+ ', ' + pair[1]);

@@ -98,7 +98,7 @@ define(['angular', './module'], function(angular, controllers) {
                                     })
                                     $scope.getLink=function(carrier,number){
                                       if(carrier){
-                                        return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" : "javascript:void(0)"
+                                        return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" :  carrier.includes("PILOT") ? "http://www.pilotdelivers.com/tracking/" : "javascript.void(0)"
                                       }
                                     }
                                     $scope.dummy.push({
@@ -139,7 +139,8 @@ define(['angular', './module'], function(angular, controllers) {
             //or when order is in accepted and CR is accepted
             // Call Comparision api when order is change_requested and CR is pending
             //or when order is in accepted and CR is accepted
-            if(($scope.orderStatus == 'change_requested' && $scope.CRStatus == 'accepted') || ($scope.orderStatus == 'accepted' && $scope.CRStatus == 'accepted') || ($scope.orderStatus == 'change_requested' && $scope.CRStatus == 'accepted')){
+            if(($scope.orderStatus == 'change_requested' && $scope.CRStatus == 'accepted') || ($scope.orderStatus == 'accepted' && $scope.CRStatus == 'accepted')){
+              document.getElementById('ToggleVersion').style.display = 'block';
               diffCode($scope.orderNumber);
             }
 
@@ -337,7 +338,7 @@ define(['angular', './module'], function(angular, controllers) {
                                         })
                                         $scope.getLink=function(carrier,number){
                                           if(carrier){
-                                            return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" : "javascript:void(0)"
+                                            return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" :  carrier.includes("PILOT") ? "http://www.pilotdelivers.com/tracking/" : "javascript.void(0)"
                                           }
                                         }
                                         $scope.dummy.push({

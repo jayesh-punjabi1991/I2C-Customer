@@ -1,5 +1,4 @@
 <link rel="stylesheet" type="text/css" href="css/changeRequestDetails.css">
-<link rel="stylesheet" type="text/css" href="css/orderDetails.css">
 <link rel="stylesheet" type="text/css" href="css/common-lg.css">
 <link href='https://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
@@ -118,101 +117,101 @@
         </px-card>
         <px-card class="suborder_card" >
           <h4 style="margin-top:0px !important">Sub Orders ({{lengthofSubOrders}})</h4>
-            <table style="margin-bottom:1rem">
-                <tr style="background-color: #2b5ea2;color: white;">
-                    <th style="width:4% !important">Sr</th>
-                    <th>Bill To Address</th>
-                    <th>Billing Terms</th>
-                    <th>SOSD</th>
-                    <th>ROSD</th>
-                    <th>ASDD</th>
-                    <th>ASOD</th>
-                    <th>FF State</th>
-                    <th>Bill Amt</th>
-                </tr>
-            </table>
-            <div class="accordion">
-                <div class="accordion-section" ng-repeat="x in OrderList">
-                    <a class="accordion-section-title" ng-click="saveSubOrder(x.sub_order_id)" href="#accordion-{{x.sub_order_id}}">
-                        <table class="sub-order-table" style="margin-bottom:0rem !important">
-                            <tr id="{{'Sub_Order'+x.sub_order_id}}">
-                                <th>{{x.SrNo}}</td>
-                                <th id="{{'bill_to'+x.sub_order_id}}">{{x.billToaddress}}</th>
-                                <th id="{{'billing_terms'+x.sub_order_id}}">{{x.billing_terms}}</th>
-                                <th id="{{'sch_os_date'+x.sub_order_id}}">{{x.sch_os_date}}</th>
-                                <th id="{{'ros_date'+x.sub_order_id}}">{{x.ros_date*1000 | date : 'mediumDate'}}</th>
-                                <th id="{{'ship_date'+x.sub_order_id}}">{{x.ship_date*1000 | date : 'mediumDate'}}</th>
-                                <th id="{{'delivery_date'+x.sub_order_id}}">{{x.delivery_date*1000 | date : 'mediumDate'}}</th>
-                                <th id="{{'sub_order_ff_state'+x.sub_order_id}}">{{x.sub_order_ff_state}}</th>
-                                <th id="{{'bill_amt'+x.sub_order_id}}">{{x.billing_amount | currency : 'USD ': 2}}</th>
-                            </tr>
-                        </table>
-                    </a>
-                    <div id="accordion-{{x.sub_order_id}}" class="accordion-section-content1">
-                        <h4>Shipments ({{lengthofShipments}})</h4>
-                        <table>
-                            <tr style="background-color: #2b5ea2;color: white;">
-                                <th>Sr.No</th>
-                                <th>Ship To</th>
-                                <th>ASDD</th>
-                                <th>AOSD</th>
-                                <th>FF State</th>
-                                <th>Ship Amount</th>
-                                <th>POD</th>
-                            </tr>
-                        </table>
-                        <div class="accordion-section" ng-repeat="y in SubOrderList">
-                            <button class="accordion-section-title1" ng-click="saveShipment(y.shipment_id)" id="#accordion1-{{y.shipment_id}}">
-                              <table class="sub-order-table" style="margin-bottom:0rem !important">
-                                  <tr id="{{'Shipment'+y.shipment_id}}">
-                                  <th>{{y.SrNo}}</th>
-                                  <th id="{{'ship_to'+y.shipment_id}}">{{y.ship_to}}</th>
-                                  <th id="{{'ship_date'+y.shipment_id}}">{{y.ship_date}}</th>
-                                  <th id="{{'delivery_date'+y.shipment_id}}">{{y.delivery_date}}</th>
-                                  <th id="{{'shipment_ff_state'+y.shipment_id}}">{{y.shipment_ff_state}}</th>
-                                  <th id="{{'ship_amt'+y.shipment_id}}">{{y.ship_amt}}</th>
-                                  <th class="trackingLink" id="{{'pod'+y.shipment_id}}" ng-click="Redirect(y.trackingLink)" style="text-decoration: underline;cursor: pointer;">{{y.pod}}</th>
+          <table style="margin-bottom:0rem !important">
+              <tr style="background-color: #898b8d;color: white;">
+                  <th style="width:4% !important">Sr</th>
+                  <th style="width: 15% !important;">Bill To Address</th>
+                  <th style="width: 15% !important;">Billing Terms</th>
+                  <th style="width: 12% !important;">SOSD</th>
+                  <th style="width: 11% !important;">ROSD</th>
+                  <th style="width: 11% !important;">ASDD</th>
+                  <th style="width: 10% !important;">ASOD</th>
+                  <th>FF State</th>
+                  <th>Bill Amt</th>
+              </tr>
+          </table>
+          <div class="accordion">
+              <div class="accordion-section" ng-repeat="x in OrderList">
+                  <a class="accordion-section-title" ng-click="saveSubOrder(x.sub_order_id)" href="#accordion-{{x.sub_order_id}}">
+                      <table class="sub-order-table" style="margin-bottom:0rem !important">
+                          <tr id="{{'Sub_Order'+x.sub_order_id}}">
+                              <th style="width:4% !important">{{x.SrNo}}</td>
+                              <th style="width: 15% !important;" id="{{'bill_to'+x.sub_order_id}}">{{x.billToaddress}}</th>
+                              <th style="width: 15% !important;" id="{{'billing_terms'+x.sub_order_id}}">{{x.billing_terms}}</th>
+                              <th style="width: 10% !important;" id="{{'sch_os_date'+x.sub_order_id}}">{{x.sch_os_date}}</th>
+                              <th style="width: 10% !important;" id="{{'ros_date'+x.sub_order_id}}">{{x.ros_date | date : 'mediumDate'}}</th>
+                              <th style="width: 10% !important;" id="{{'ship_date'+x.sub_order_id}}">{{x.ship_date | date : 'mediumDate'}}</th>
+                              <th style="width: 10% !important;" id="{{'delivery_date'+x.sub_order_id}}">{{x.delivery_date | date : 'mediumDate'}}</th>
+                              <th style="width: 10% !important;" id="{{'sub_order_ff_state'+x.sub_order_id}}">{{x.sub_order_ff_state}}</th>
+                              <th style="width: 11% !important;" id="{{'bill_amt'+x.sub_order_id}}">{{x.billing_amount | currency : 'USD ': 2}}</th>
+                          </tr>
+                      </table>
+                  </a>
+                  <div id="accordion-{{x.sub_order_id}}" class="accordion-section-content1">
+                      <h4>Shipments ({{lengthofShipments}})</h4>
+                      <table style="margin-bottom:0rem !important">
+                          <tr style="background-color: #898b8d;color: white;">
+                              <th style="width: 5% !important;">Sr.No</th>
+                              <th style="width: 20% !important;">Ship To</th>
+                              <th style="width: 13% !important;">ASDD</th>
+                              <th style="width: 14% !important;">AOSD</th>
+                              <th>FF State</th>
+                              <th>Ship Amount</th>
+                              <th>POD</th>
+                          </tr>
+                      </table>
+                      <div class="accordion-section" ng-repeat="y in SubOrderList">
+                          <button class="accordion-section-title1" ng-click="saveShipment(y.shipment_id)" id="#accordion1-{{y.shipment_id}}">
+                            <table class="sub-order-table" style="margin-bottom:0rem !important">
+                                <tr id="{{'Shipment'+y.shipment_id}}">
+                                <th style="width: 3% !important;">{{y.SrNo}}</td>
+                                <th style="width: 12% !important;" id="{{'ship_to'+y.shipment_id}}">{{y.ship_to}}</th>
+                                <th style="width: 8% !important;" id="{{'ship_date'+y.shipment_id}}">{{y.ship_date}}</th>
+                                <th style="width: 8% !important;" id="{{'delivery_date'+y.shipment_id}}">{{y.delivery_date}}</th>
+                                <th style="width: 10% !important;" id="{{'shipment_ff_state'+y.shipment_id}}">{{y.shipment_ff_state}}</th>
+                                <th style="width: 10% !important;" id="{{'ship_amt'+y.shipment_id}}">{{y.ship_amt}}</th>
+                                <th style="width: 1% !important;" class="trackingLink" id="{{'pod'+y.shipment_id}}" ng-click="Redirect(y.trackingLink)" style="text-decoration: underline;cursor: pointer;">{{y.pod}}</th>
+                                </tr>
+                            </table>
+                          </button>
+                          <div id="accordion1-{{y.shipment_id}}" class="accordion-section-content2">
+                              <h4>Part Details ({{LengthOfShipment}})</h4>
+                              <table style="margin-bottom:0rem !important">
+                                  <tr style="background-color: #898b8d;color: white;">
+                                      <th style="width:5% !important">Sr.No</th>
+                                      <th>Model Type</th>
+                                      <th>Item Number</th>
+                                      <th>Line Description</th>
+                                      <th>Quantity</th>
+                                      <th>List Price</th>
+                                      <th>Discount Price</th>
+                                      <th>Selling Price</th>
+                                  </tr>
+                                  <tr class="item_tr" id="{{'LineItem'+z.line_number}}" dir-paginate="z in ShipmentList |itemsPerPage:10" pagination-id="LineItem">
+                                      <td style="width:5% !important">{{z.SrNo}}</td>
+                                      <td>{{z.model_type}}</td>
+                                      <td>{{z.item_number}}</td>
+                                      <td>{{z.line_item_description}}</td>
+                                      <td>{{z.quantity}}</td>
+                                      <td>{{z.list_price}}</td>
+                                      <td>{{z.discount_perc}}</td>
+                                      <td>{{z.sellingPrice}}</td>
                                   </tr>
                               </table>
-                            </button>
-                            <div id="accordion1-{{y.shipment_id}}" class="accordion-section-content2">
-                                <h4>Part Details ({{LengthOfShipment}})</h4>
-                                <table>
-                                    <tr style="background-color: #2b5ea2;color: white;">
-                                        <th>Sr.No</th>
-                                        <th>Model Type</th>
-                                        <th>Item Number</th>
-                                        <th>Line Description</th>
-                                        <th>Quantity</th>
-                                        <th>List Price</th>
-                                        <th>Discount Price</th>
-                                        <th>Selling Price</th>
-                                    </tr>
-                                    <tr id="{{'LineItem'+z.line_number}}" dir-paginate="z in ShipmentList |itemsPerPage:10" pagination-id="LineItem">
-                                        <td>{{z.SrNo}}</td>
-                                        <td>{{z.model_type}}</td>
-                                        <td>{{z.item_number}}</td>
-                                        <td>{{z.line_item_description}}</td>
-                                        <td>{{z.quantity}}</td>
-                                        <td>{{z.list_price}}</td>
-                                        <td>{{z.discount_perc}}</td>
-                                        <td>{{z.selling_price}}</td>
-                                    </tr>
-                                </table>
-                                <div>
-                                    <dir-pagination-controls ng-click="applyCss()" pagination-id="LineItem" max-size="5" direction-links="true" boundary-links="true">
-                                    </dir-pagination-controls>
-                                </div>
-                            </div>
-                            <!--end .accordion-section-content-->
-                        </div>
-                        <!--end .accordion-section-->
-                    </div>
-                    <!--end .accordion-section-content-->
-                </div>
-                <!--end .accordion-section-->
+                              <div>
+                                  <dir-pagination-controls ng-click="applyCss()" pagination-id="LineItem" max-size="5" direction-links="true" boundary-links="true">
+                                  </dir-pagination-controls>
+                              </div>
+                          </div>
+                          <!--end .accordion-section-content-->
+                      </div>
+                      <!--end .accordion-section-->
+                  </div>
+                  <!--end .accordion-section-content-->
+              </div>
+              <!--end .accordion-section-->
 
-            </div>
+          </div>
             <!--end .accordion-->
         </px-card>
         <px-card>

@@ -6,8 +6,8 @@ define(['angular'], function(angular) {
     'use strict';
     return angular.module('app.constants', [])
                   .constant('urls',{
-                    //base_url: 'https://apigatewaystage.run.aws-usw02-pr.ice.predix.io' // stage url
-                    base_url: 'https://tcaapigateway.run.aws-usw02-pr.ice.predix.io' // dev url
+                    base_url: 'https://apigatewaystage.run.aws-usw02-pr.ice.predix.io' // stage url
+                    //base_url: 'https://tcaapigateway.run.aws-usw02-pr.ice.predix.io' // dev url
                     ,fetch_token: '/fetchToken'
                     ,get_user_details: '/tcaapigateway/getUser'
                     ,get_quotes_list:'/tcaapigateway/getQuotes'
