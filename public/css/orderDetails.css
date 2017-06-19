@@ -1,4 +1,4 @@
-.odr-header, .odr_addr, .odr_other, .sub_order, .change_req{
+.odr-header, .odr_addr, .odr_other, .sub_order, .change_req, .odr_docs{
   padding: 0 !important;
 }
 .odr-heading{
@@ -31,7 +31,7 @@
     padding: 10px 20px;
 }
 
-.odr_addr .label-color, .odr_other .label-color, .sub_order .label-color, .change_req .label-color{
+.odr_addr .label-color, .odr_other .label-color, .sub_order .label-color, .change_req .label-color, .odr_docs .label-color{
   color: #0c71b8;
 }
 .odr_addr .cr-heading{

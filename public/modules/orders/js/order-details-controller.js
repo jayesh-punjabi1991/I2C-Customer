@@ -78,11 +78,12 @@ define(['angular', './module'], function(angular, controllers) {
                 $scope.OrderList[count].shipToaddress = $scope.shipTo_1 + ' ' + $scope.shipTo_2 + ' ' + $scope.shipTo_3 + ' ' + $scope.shipTo_4;
                 $scope.OrderList[count].link = "<a id='Detail" + value.sub_order_id + "' class=" + value.sub_order_id + " href='javascript:void(0)'>Details</a>";
 
-                $scope.OrderList[count].ros_date = $filter('date')(new Date(value.ros_date * 1000), 'MMM dd, yyyy');
+                $scope.OrderList[count].ros_date = value.ros_date ? $filter('date')(new Date(value.ros_date * 1000), 'MMM dd, yyyy') : '';
 
-                $scope.OrderList[count].sch_date = $filter('date')(new Date(value.sch_date * 1000), 'MMM dd, yyyy');
-                $scope.OrderList[count].ship_date = $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy');
-                $scope.OrderList[count].delivery_date = $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy');
+                $scope.OrderList[count].sch_date = value.sch_date ? $filter('date')(new Date(value.sch_date * 1000), 'MMM dd, yyyy') : '';
+                $scope.OrderList[count].ship_date = value.ship_date ? $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy') : '';
+                console.log(value.delivery_date);
+                $scope.OrderList[count].delivery_date = value.delivery_date ? $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy') : '';
                 $scope.OrderList[count].billing_amount = $filter('currency')(value.billing_amount, 'USD ', 2);
                 count++;
             })
@@ -127,8 +128,8 @@ define(['angular', './module'], function(angular, controllers) {
                                         'ship_to': $scope.tempShip,
                                         'shipment_id': value.shipment_id,
                                         'sub_order_id': value.sub_order_id,
-                                        'ship_date': $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy'),
-                                        'delivery_date': $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy'),
+                                        'ship_date': value.ship_date ? $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy') : '',
+                                        'delivery_date': value.delivery_date ? $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy') : '',
                                         'shipment_ff_state': value.shipment_ff_state,
                                         'pod':value.tracking_number,
                                         'trackingLink':$scope.getLink(value.carrier,value.tracking_number)
@@ -142,7 +143,8 @@ define(['angular', './module'], function(angular, controllers) {
                                 }
                             })
                         }
-                        $scope.LengthOfSubOrders=$scope.SubOrderList.length;
+                        $scope.lengthofShipments=$scope.SubOrderList.length;
+
                         //$scope.CreateShipmentJson();
                         if ($scope.SubOrderList.length > 0) {
                             $scope.Suborder = true;
@@ -283,11 +285,12 @@ define(['angular', './module'], function(angular, controllers) {
             });
         }, 5000);
 
-        $(document).on('click','.accordion-section-title1', function(e){
-          function close_accordion_section1() {
-              jQuery('.accordion .accordion-section-title1').removeClass('active');
-              jQuery('.accordion .accordion-section-content2').slideUp(300).removeClass('open');
-          }
+        function close_accordion_section1() {
+            jQuery('.accordion .accordion-section-title1').removeClass('active');
+            jQuery('.accordion .accordion-section-content2').slideUp(300).removeClass('open');
+        }
+
+        $(document).unbind('click').on('click','.accordion-section-title1', function(e){
 
               // Grab current anchor value
               var currentAttrValue = jQuery(this).attr('id');

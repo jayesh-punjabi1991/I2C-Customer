@@ -299,22 +299,22 @@ table.sortable tr {
     -webkit-transform: rotateY(20deg);
     transform: rotateY(20deg);
 }
-.accordion, .accordion * {
+.accordion, .accordion *, .cr-accordion, .cr-accordion * {
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	box-sizing:border-box;
 }
 
-.accordion {
+.accordion, .cr-accordion {
   overflow: hidden;
   margin: 0 2px;
 }
-.accordion-section-content1 .accordion-section{
+.accordion-section-content1 .accordion-section, .cr-accordion-section-content1 .cr-accordion-section{
   margin: 0 4px 0 0;
 }
 
 /*----- Section Titles -----*/
-.accordion-section-title, .accordion-section-title1  {
+.accordion-section-title, .accordion-section-title1, .cr-accordion-section-title, .cr-accordion-section-title1  {
 	width:100%;
 	display:inline-block;
 	transition:all linear 0.15s;
@@ -326,7 +326,7 @@ table.sortable tr {
   font-weight: normal;
   background-color: white;
 }
-.accordion-section-title1{
+.accordion-section-title1, .cr-accordion-section-title1{
   margin: 0 2px;
   border-top: 0 !important;
   border-bottom: 1px solid black;
@@ -334,26 +334,26 @@ table.sortable tr {
   border-right: 0 !important;
 }
 
-.accordion-section-title.active {
+.accordion-section-title.active, .cr-accordion-section-title.active {
 	background:#3c8dc6 !important;
   color:white !important;
 	/* Type */
 	text-decoration:none;
   border-bottom:2px solid black;
 }
-.accordion-section-title:hover{
+.accordion-section-title:hover, .cr-accordion-section-title:hover{
   background:#479aff !important;
   color:white !important;
 	/* Type */
 	text-decoration:none;
 }
-.accordion-section-title1:hover{
+.accordion-section-title1:hover, .cr-accordion-section-title1:hover{
   background:#479aff !important;
   color:white !important;
 	/* Type */
 	text-decoration:none;
 }
-.accordion-section-title1.active {
+.accordion-section-title1.active, .cr-accordion-section-title1.active {
   background:#3c8dc6 !important;
   color:white !important;
   /* Type */
@@ -361,26 +361,26 @@ table.sortable tr {
   border:2px solid black;
 }
 
-.accordion-section:last-child .accordion-section-title {
+.accordion-section:last-child .accordion-section-title, .cr-accordion-section:last-child .cr-accordion-section-title {
 	border-bottom:none;
 }
-.accordion-section:last-child .accordion-section-title1 {
+.accordion-section:last-child .accordion-section-title1, .cr-accordion-section:last-child .cr-accordion-section-title1 {
 	border-bottom:1px dashed black;
 }
 
 /*----- Section Content -----*/
-.accordion-section-content {
+.accordion-section-content, .cr-accordion-section-content {
 	padding:15px;
 	display:none;
 }
-.accordion-section-content1 h4{
+.accordion-section-content1 h4, .cr-accordion-section-content1 h4{
   margin: 0px 0px 5px 0 !important;
 }
-.accordion-section-content1 {
+.accordion-section-content1, .cr-accordion-section-content1 {
 	padding:15px;
 	display:none;
 }
-.accordion-section-content2 {
+.accordion-section-content2, .cr-accordion-section-content2 {
 	padding:15px;
 	display:none;
 }
@@ -390,7 +390,7 @@ table.sortable tr {
 .item_tr td{
   padding: 5px;
 }
-.accordion-section-title{
+.accordion-section-title, .cr-accordion-section-title{
   color: black !important;
   font-size: 14px;
   background-color: white  !important;

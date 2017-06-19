@@ -38,33 +38,12 @@
       <p style="color:#d9534f">The Quote# {{QuoteNumber}} has been rejected successfully.</p>
     </div>
 	</px-card>
-	<px-card id="RejectDiv" ng-show="rejectDetails">
-	<div class="layout" ng-show="rejectDetails" style="margin-top:2% !important;margin-left:0 !important">
-  		<div class="layout__item reject_form">
-  			<table>
-  				<tr>
-  					<td class="label_td"><label for="cmnt">Comments:</td>
-  					<td><textarea id="cmnt" ng-model="comments"></textarea></td>
-  				</tr>
-  				<tr>
-  					<td class="label_td">Supporting Documents:</td>
-  					<td>
-  						<input type="file" name="" file-input="files"/>
-  					</td>
-  				</tr>
-  			</table>
-  			<div class="clearfix">
-  				<button type="submit" class="form-field--inline btn btn-reject rt" ng-click="rejectClicked()">Reject Quote</button>
-  			</div>
-  		</div>
-  	</div>
-	</px-card>
 	<px-card>
 			<div class="clearfix">
 					<h3 class="desk-50 lt cr-heading label-color">Quote Details</h3>
-					<div ng-if="QuoteStatus == 'confirmed'" class="desk-50 rt clearfix cr_btns">
+					<div ng-show="QuoteStatus == 'confirmed'" class="desk-50 rt clearfix cr_btns">
 						<a title="Accept" id="AcceptButton" class="btn disabled" ng-show="acceptbutton" ng-click="acceptClicked()" style="float:right">Accept</a>
-						<a title="Reject" id="RejectButton" style="background-color:#f15854;color:white;float:right;margin-right:2%" class="btn" ng-disabled="acceptDetails" ng-click="successMessage=false;rejectDetails = true;">Reject</a>
+						<a title="Reject" id="RejectButton" style="background-color:#f15854;color:white;float:right;margin-right:2%" class="btn" ng-disabled="acceptDetails" ng-click="rejectBtnClicked()">Reject</a>
 						<a title="Details" id="CompleteDetails" class="btn" style="background-color:#60bd68;color:white;float:right" ng-click="completedetails = true;acceptbutton = true" ng-hide="acceptbutton" ng-disabled="rejectDetails">Complete the Details</a>
 					</div>
 			</div>
@@ -123,6 +102,27 @@
 							</form>
 					</div>
 			</div>
+	</px-card>
+	<px-card id="RejectDiv" ng-show="rejectDetails">
+		<div class="layout" ng-show="rejectDetails" style="margin-top:2% !important;margin-left:0 !important">
+  		<div class="layout__item reject_form">
+  			<table>
+  				<tr>
+  					<td class="label_td"><label for="cmnt">Comments:</td>
+  					<td><textarea id="cmnt" ng-model="comments"></textarea></td>
+  				</tr>
+  				<tr>
+  					<td class="label_td">Supporting Documents:</td>
+  					<td>
+  						<input type="file" name="" file-input="files"/>
+  					</td>
+  				</tr>
+  			</table>
+  			<div class="clearfix">
+  				<button type="submit" class="form-field--inline btn btn-reject rt" ng-click="rejectClicked()">Reject Quote</button>
+  			</div>
+  		</div>
+  	</div>
 	</px-card>
 	<px-card>
 			<div>

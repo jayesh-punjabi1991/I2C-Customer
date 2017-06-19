@@ -150,7 +150,7 @@ body > div > div > main > section > px-card > px-data-table > div{
 	height: 80px;
 }
 .reject_form{
-	border: 2px solid #d9534f;
+	/*border: 2px solid #d9534f;*/
 	padding: 20px;
 }
 .disabled {

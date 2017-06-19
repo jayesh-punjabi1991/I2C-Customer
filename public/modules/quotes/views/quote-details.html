@@ -39,6 +39,7 @@
     </div>
 	</px-card>
 	<px-card id="RejectDiv" ng-show="rejectDetails">
+	<h3 class="cr-heading" style="color:#d9534f; margin-bottom:0px !important">Reject Quote</h3>
 	<div class="layout" ng-show="rejectDetails" style="margin-top:2% !important;margin-left:0 !important">
   		<div class="layout__item reject_form">
   			<table>
@@ -64,7 +65,7 @@
 					<h3 class="desk-50 lt cr-heading label-color">Quote Details</h3>
 					<div ng-if="QuoteStatus == 'confirmed'" class="desk-50 rt clearfix cr_btns">
 						<a title="Accept" id="AcceptButton" class="btn disabled" ng-show="acceptbutton" ng-click="acceptClicked()" style="float:right">Accept</a>
-						<a title="Reject" id="RejectButton" style="background-color:#f15854;color:white;float:right;margin-right:2%" class="btn" ng-disabled="acceptDetails" ng-click="successMessage=false;rejectDetails = true;">Reject</a>
+						<a title="Reject" id="RejectButton" style="background-color:#f15854;color:white;float:right;margin-right:2%" class="btn" ng-disabled="acceptDetails" ng-click="rejectBtnClicked()">Reject</a>
 						<a title="Details" id="CompleteDetails" class="btn" style="background-color:#60bd68;color:white;float:right" ng-click="acceptbutton = true; completeDetails()" ng-hide="acceptbutton" ng-disabled="rejectDetails">Complete the Details</a>
 					</div>
 			</div>

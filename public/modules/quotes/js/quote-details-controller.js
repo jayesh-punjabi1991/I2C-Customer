@@ -153,12 +153,11 @@ define(['angular', './module'], function (angular, controllers) {
               $("#AcceptDiv").slideToggle("slow");
           });
       });
-
-      $(document).ready(function() {
-          $("#RejectButton").click(function() {
-              $("#RejectDiv").slideToggle("slow");
-          });
-      });
+      $scope.rejectBtnClicked = function () {
+        $scope.successMessage=false;
+        $scope.rejectDetails = true;
+        $("#RejectDiv").slideToggle("slow");
+      }
       $scope.rejectClicked = function () {
         var d = document.getElementById("AcceptButton");
         var d1 = document.getElementById("RejectButton");

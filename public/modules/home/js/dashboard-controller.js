@@ -18,14 +18,14 @@ define(['angular', './module'], function (angular, controllers) {
         });
 
         $scope.processNotification = function (notif) {
-          console.log('in process');
-          DashboardService.processNotification(notif.id).success(function (response) {
-            if(notif.eventType == 'CR.Accept' || notif.eventType == 'CR.Initiate' || notif.eventType == 'Order.Sigupdate' || notif.eventType == 'Order.Approve'){
-              $state.go('ordersDetailsA',{id:notif.order_id})
-            }else if(notif.eventType == 'Quote.Import'){
-              $state.go('quoteDetailsAR',{id:notif.quote_id})
-            }
-          })
+          if(notif.eventType == 'CR.Accept' || notif.eventType == 'CR.Initiate' || notif.eventType == 'Order.Sigupdate' || notif.eventType == 'Order.Approve'){
+            $state.go('ordersDetailsA',{id:notif.order_id})
+          }else if(notif.eventType == 'Quote.Import'){
+            $state.go('quoteDetailsAR',{id:notif.quote_id})
+          }
+          // DashboardService.processNotification(notif.id).success(function (response) {
+          //
+          // })
         }
 
         $scope.markAsRead = function (notif) {
