@@ -14,6 +14,14 @@ define(['angular', './module', 'constants'], function(angular, module) {
                  }
                });
              },
+             getQuotesListByDate: function(){
+               return $http.get(urls.base_url + urls.get_quotes_list_date +'/'+$window.sessionStorage.getItem('fromDate')+'/'+$window.sessionStorage.getItem('toDate')+'/QUOTE'+'?custId=' + $window.sessionStorage.getItem('customerId'), {
+                  headers: {
+                    'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                    'x-access-token': $window.sessionStorage.getItem('userToken')
+                  }
+                });
+              },
             getQuoteDetails: function(val){
                 return $http.get(urls.base_url + urls.get_quote_details+'/'+val+'?customerId='+$window.sessionStorage.getItem('customerId'), {
                    headers: {

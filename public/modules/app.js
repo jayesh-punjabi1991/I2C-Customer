@@ -50,6 +50,7 @@ define([
                 {icon: 'fa-file-text-o fa-2x', state: 'quotes', label: 'Quotes'},
                 {icon: 'fa-truck fa-2x', state: 'orders', label: 'Orders'},
                 {icon: 'fa-pencil-square-o fa-2x', state: 'changeRequest', label: 'Change Request'}
+                // {icon: 'fa-thumbs-o-up fa-2x', state: 'fulfillment', label: 'Fullfillment'}
                 // {icon: 'fa-gavel fa-2x', state: '', label: 'Disputes'}
             ]
         };

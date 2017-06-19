@@ -13,8 +13,10 @@ module.exports = function(grunt) {
         var object = {};
         var key;
 
-        glob.sync('*', {cwd: path}).forEach(function(option) {
-           key = option.replace(/\.js$/, '');
+        glob.sync('*', {
+            cwd: path
+        }).forEach(function(option) {
+            key = option.replace(/\.js$/, '');
             object[key] = require(path + option);
         });
 
@@ -23,7 +25,73 @@ module.exports = function(grunt) {
 
     // Initial config
     var config = {
-        pkg: grunt.file.readJSON('package.json')
+        pkg: grunt.file.readJSON('package.json'),
+        cachebreaker: {
+            dev: {
+                options: {
+                    match: [
+                        'bootstrapper.js',
+                        'app.css'
+                    ],
+                    position: 'filename',
+                    replacement: function (){
+                      var p = grunt.file.readJSON('package.json');
+                      return p.version
+                    },
+                },
+                files: {
+                    src: ['temp/www/index.html']
+                }
+            },
+            routedev: {
+                options: {
+                    match: [
+                        'quotes.html','quotes-details.html','quotes-details-ar.html','orders.html','order-details-Accepted.html','order-details-CR.html','order-details-Generated.html','order-details-Rejected.html','order-details.html','dashboards.html','home.html','changeRequest.html','change-request-details.html','CRdetailsAccepted.html','CRdetailsPending.html','CRdetailsRejected.html'
+                    ],
+                    position: 'filename',
+                    replacement: function (){
+                      var p = grunt.file.readJSON('package.json');
+                      return p.version
+                    },
+                },
+                files: {
+                    src: ['temp/www/scripts/bootstrapper.js']
+                }
+            }
+        },
+        filerev: {
+          options: {
+               encoding: 'utf8',
+               algorithm: 'md5',
+               length: 8
+           },
+           source: {
+               files: [{
+                 src: [
+                     'dist/www/modules/**/*.js',
+                     'dist/www/css/**/*.css',
+                     'dist/www/modules/**/*.html'
+                 ]
+               }]
+           }
+        },
+        useminPrepare: {
+          html: {
+            src:['dist/www/index.html','dist/www/modules/**/*.html']
+          },
+          options: {
+            root: "./",
+            dest: 'dist/www/'
+          }
+        },
+        usemin: {
+          html: ['dist/www/**/*.html'],
+          css: ['dist/www/css/{,*/}*.css'],
+          js: ['dist/www/modules/{,*/}*.js'],
+          options: {
+            assetsDirs: ['dist/www', 'dist/www/css', 'dist/www/modules'],
+          }
+        }
     };
 
     // Load tasks from tasks folder

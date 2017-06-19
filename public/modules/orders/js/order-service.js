@@ -14,6 +14,14 @@ define(['angular', './module', 'constants'], function(angular, module) {
                  }
                });
              },
+             getOrdersListByDate: function(){
+               return $http.get(urls.base_url + urls.get_orders_list_date +'/'+$window.sessionStorage.getItem('fromDate')+'/'+$window.sessionStorage.getItem('toDate')+'/ORDER'+'?custId=' + $window.sessionStorage.getItem('customerId'), {
+                  headers: {
+                    'Authorization': 'Bearer ' + $window.sessionStorage.getItem('auth_token'),
+                    'x-access-token': $window.sessionStorage.getItem('userToken')
+                  }
+                });
+              },
             getOrderDetails: function(val){
                 return $http.get(urls.base_url + urls.get_order_details+'/'+val+'?customerId=' + $window.sessionStorage.getItem('customerId'), {
                    headers: {

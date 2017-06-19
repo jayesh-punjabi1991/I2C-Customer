@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="css/changeRequestDetails.css">
+<link rel="stylesheet" type="text/css" href="css/orderDetails.css">
 <link rel="stylesheet" type="text/css" href="css/quoteDetails.css">
 <link rel="stylesheet" type="text/css" href="css/common-lg.css">
 <style>
@@ -5,26 +7,104 @@
 		background-color: white !important;
 	}
 </style>
-	<px-card style="padding:1rem 1rem 2rem !important;">
-		<div class="layout">
-			<div class="layout__item pull--right">
-				<div class="lt">
-					<a href="/quotes" title="Back" class="btn btn-primary">Back</a>
-				</div>
-				<!-- <div class="rt">
-					<a title="Details" id="CompleteDetails" class="btn" style="background-color:#60bd68;color:white" ng-click="completedetails = true;acceptbutton = true" ng-hide="acceptbutton" ng-disabled="rejectDetails">Complete the Details</a>
-					<a title="Accept" id="AcceptButton" class="btn disabled" ng-show="acceptbutton" ng-click="acceptClicked()">Accept</a>
-					<a title="Reject" id="RejectButton" style="background-color:#f15854;color:white" class="btn" ng-disabled="acceptDetails" ng-click="successMessage=false;rejectDetails = true;">Reject</a>
-				</div> -->
-			</div>
+<div class="cr-wrapper">
+	<px-card class="card-head">
+		<div class="clearfix">
+			<h2 class="desk-50 lt cr-heading" style="display: -webkit-inline-box"><span class="cr">Quote Number# :</span>&nbsp;<span class="cr_id">{{QuoteNumber}}</span></h2>
+			<h3 class="desk-20 rt cr-heading" style="display: -webkit-inline-box"><span class="cr">Value :</span>&nbsp;<span class="cr_id">{{totalSP | currency : currency1+'&nbsp;' : 2}}</span></h3>
 		</div>
-    <div class="sucess_msg" ng-show="successMessage" style="margin-top:2% !important">
+			<div class="imp_details clearfix">
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label">Created Date</p>
+							<p class="big_label"><i class="fa fa-calendar small_label"></i>&nbsp;&nbsp;{{QuoteDate | date : 'mediumDate'}}</p>
+					</div>
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label">Quote Status</p>
+							<p class="big_label"><span ng-if="QuoteStatus == 'confirmed'" class="status_pending"></span><span ng-if="QuoteStatus == 'accepted'" class="status_accept"></span><span ng-if="QuoteStatus == 'rejected'" class="status_reject"></span>&nbsp;&nbsp;{{QuoteStatus}}</p>
+					</div>
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label">Version</p>
+							<p class="big_label">{{QuoteVersion}}</p>
+					</div>
+			</div>
+	</px-card>
+	<px-card id="AcceptDiv" ng-show="successMessage" >
+		<div class="sucess_msg" style="margin-top:2% !important">
       <p>The Quote# {{QuoteNumber}} has been accepted successfully.</p>
     </div>
-    <div class="reject_form" ng-show="AcknowledgeReject" style="margin-top:2% !important;margin-left:0 !important">
+	</px-card>
+	<px-card id="RejectDiv2" ng-show="AcknowledgeReject">
+	<div class="reject_form" style="margin-top:2% !important;margin-left:0 !important">
       <p style="color:#d9534f">The Quote# {{QuoteNumber}} has been rejected successfully.</p>
     </div>
-  	<div class="layout" ng-show="rejectDetails" style="margin-top:2% !important;margin-left:0 !important">
+	</px-card>
+	<px-card>
+			<div class="clearfix">
+					<h3 class="desk-50 lt cr-heading label-color">Quote Details</h3>
+					<div ng-show="QuoteStatus == 'confirmed'" class="desk-50 rt clearfix cr_btns">
+						<a title="Accept" id="AcceptButton" class="btn disabled" ng-show="acceptbutton" ng-click="acceptClicked()" style="float:right">Accept</a>
+						<a title="Reject" id="RejectButton" style="background-color:#f15854;color:white;float:right;margin-right:2%" class="btn" ng-disabled="acceptDetails" ng-click="rejectBtnClicked()">Reject</a>
+						<a title="Details" id="CompleteDetails" class="btn" style="background-color:#60bd68;color:white;float:right" ng-click="completedetails = true;acceptbutton = true" ng-hide="acceptbutton" ng-disabled="rejectDetails">Complete the Details</a>
+					</div>
+			</div>
+			<div class="adr_div clearfix">
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label">Government Agreement</p>
+							<p class="big_label" id="customer_number">{{custName}}</p>
+					</div>
+					<div class="desk-30 small-50 lt details_div">
+							<p class="small_label">Terms of Delivery</p>
+							<p class="big_label" id="customer_number">{{DeliveryTerms}}</p>
+					</div>
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label">Billing Terms</p>
+							<p class="big_label" id="order_ff_status">{{BillingTerms}}</p>
+					</div>
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label">Payment Terms</p>
+							<p class="big_label" id="taxable_status">{{paymentTerms}}</p>
+					</div>
+			</div>
+			<div class="adr_div clearfix">
+					<div class="desk-50 lt">
+							<p class="small_label">Ship To</p>
+							<p class="big_label bottom-margin"><i class="fa fa-map-marker small_label"></i>&nbsp;&nbsp;{{ShipToAddress1}}</p>
+							<p class="big_label side-margin bottom-margin">{{ShipToAddress2}}</p>
+							<p class="big_label side-margin bottom-margin">{{ShipToAddress3}}</p>
+							<p class="big_label side-margin">{{ShipToCity}}</p>
+							<p class="big_label side-margin">{{ShipToCountry}}</p>
+							<p class="big_label side-margin">{{ShipToPostalCode}}</p>
+							<p class="big_label side-margin">{{ShipToProvince}}</p>
+							<p class="big_label side-margin">{{ShipToState}}</p>
+					</div>
+					<div ng-if="QuoteStatus == 'confirmed'" class="desk-50 lt">
+							<p class="small_label">Bill To</p>
+							<textarea ng-show="completedetails" id="billTo" ng-change="enableAccept()" style="width:440px;height:100px" ng-model="BillTo" required></textarea>
+					</div>
+					<div ng-if="QuoteStatus != 'confirmed'" class="desk-50 lt">
+							<p class="small_label">Bill To</p>
+							<p class="big_label bottom-margin"><i class="fa fa-map-marker small_label"></i>&nbsp;&nbsp;{{ShipToAddress1}}</p>
+					</div>
+			</div>
+			<div class="adr_div clearfix">
+					<div ng-if="QuoteStatus == 'confirmed'" class="desk-20 small-50 lt details_div">
+							<p class="small_label">PO Number</p>
+							<input  ng-show="completedetails" style="width:140px" ng-change="enableAccept()" class="form-field--inline text-input input--tiny form-control" ng-model="PONumber" id="poNum" type="text" placeholder="" required>
+					</div>
+					<div ng-if="QuoteStatus != 'confirmed'" class="desk-20 small-50 lt details_div">
+							<p class="small_label">PO Number</p>
+							<p class="big_label">{{poNumber}}</p>
+					</div>
+					<div class="desk-30 small-50 lt details_div">
+							<p ng-show="completedetails" class="small_label">PO</p>
+							<form name="uploadDoc">
+								<input ng-show="completedetails" type="file" id="uploadDoc" file-input="files"/>
+							</form>
+					</div>
+			</div>
+	</px-card>
+	<px-card id="RejectDiv" ng-show="rejectDetails">
+		<div class="layout" ng-show="rejectDetails" style="margin-top:2% !important;margin-left:0 !important">
   		<div class="layout__item reject_form">
   			<table>
   				<tr>
@@ -34,7 +114,7 @@
   				<tr>
   					<td class="label_td">Supporting Documents:</td>
   					<td>
-  						<input type="file" name=""/>
+  						<input type="file" name="" file-input="files"/>
   					</td>
   				</tr>
   			</table>
@@ -43,133 +123,33 @@
   			</div>
   		</div>
   	</div>
-
-		<h1 class="Quoteheading">QUOTE#&nbsp;:&nbsp;{{QuoteNumber}}</h1>
-		<div class="layout">
-			<div class="layout__item pull--right">
-				<div class="lt">
-					<table class="summaryTable" style="line-height:0.5">
-						<tr>
-							<th style="background-color:#b6c3cc">Version</th>
-							<th style="font-weight:normal">{{QuoteVersion}}</th>
-						</tr>
-						<tr>
-							<td style="background-color:#b6c3cc;font-weight:bold">Date</td>
-							<td>{{QuoteDate | date : 'mediumDate'}}</td>
-						</tr>
-						<tr>
-							<td style="background-color:#b6c3cc;font-weight:bold">Status</td>
-							<td>{{QuoteStatus}}</td>
-						</tr>
-					</table>
-				</div>
-				<div class="rt">
-					<p style="border-bottom:2px red solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Quote Net Selling Price: &nbsp;&nbsp;&nbsp;&nbsp;
-						<strong style="font-size:2rem">{{totalSP | currency : currency1+'&nbsp;' : 2}}</strong>
-					</p>
-				</div>
+	</px-card>
+	<px-card>
+			<div>
+					<h3 class="cr-heading label-color">Quote Summary</h3>
 			</div>
-		</div>
-    <div class="layout" style="border-top:1px solid #8f9ca4;border-bottom:1px solid #8f9ca4">
-  		<!-- <div class="layout__item desk-25 small-100 cust_det clearfix" style="border-right:1px solid #8f9ca4;">
-  			<div class="lt">
-  				<h4>Customer</h4>
-  				<p>Memorial Hospital of Lampa LP</p>
-  				<p>2901 Swan Lake</p>
-  				<p>Tampa FL 29380-92388</p>
-  			</div>
-  		</div> -->
-  		<div class="layout__item desk-50 small-100 cust_det clearfix" style="border-right:1px solid #8f9ca4;">
-        <div class="lt">
-  				<h4>Ship To</h4>
-  				<p>{{ShipToAddress1}} , {{ShipToAddress2}}</p>
-          <p>{{ShipToAddress3}}</p>
-  				<p>{{ShipToCity}} , {{ShipToCountry}} , {{ShipToPostalCode}} {{ShipToProvince}} {{ShipToState}}</p>
-  			</div>
-  		</div>
-      <div class="layout__item desk-50 small-100 cust_det clearfix">
-        <div class="lt">
-  				<h4>Bill To</h4>
-					<p>{{BillToAddress1}}</p>
-  			</div>
-  		</div>
-  	</div>
-
-    <div class="layout" style="border-bottom:1px solid #8f9ca4">
-      <div class="layout__item desk-50 small-100 cust_det clearfix">
-      <div class="lt">
-        <h4>Terms</h4>
-        <table>
-          <tr>
-            <td><h4>Governing Agreement</h4></td>
-            <td><b>:</b>&nbsp;&nbsp;{{custName}}</td>
-          </tr>
-          <tr>
-            <td><h4>Terms of Delivery</h4></td>
-            <td><b>:</b>&nbsp;&nbsp;{{DeliveryTerms}}</td>
-          </tr>
-          <tr>
-            <td><h4>Billing Terms</h4></td>
-            <td><b>:</b>&nbsp;&nbsp;{{BillingTerms}}</td>
-          </tr>
-          <tr>
-            <td><h4>Payment Terms</h4></td>
-            <td><b>:</b>&nbsp;&nbsp;{{paymentTerms}}</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="layout__item desk-50 small-100 cust_det clearfix">
-      <div class="">
-        <h4></h4>
-        <table>
-          <tr>
-            <td class="label_td"><label for="poNum"><b>PO Number</b></label></td>
-            <td><b>:</b>&nbsp;&nbsp;{{poNumber}}</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-  <h4>Summary</h4>
-  <!-- <px-data-table table-data='{{partsList}}' language="en" table-rows="true" include-all-columns="true" hide-pagination-control="true" class="items">
-    <px-data-table-column name="srno" Label="#"></px-data-table-column>
-    <px-data-table-column name="qty" label="Qty" class="items"></px-data-table-column>
-    <px-data-table-column name="desc" label="Description" class="items"></px-data-table-column>
-    <px-data-table-column name="cPrice" label="Ext Contract Price" class="items"></px-data-table-column>
-    <px-data-table-column name="disc" label="Discount" class="items"></px-data-table-column>
-    <px-data-table-column name="sPrice" label="Ext Sell Price" class="items"></px-data-table-column>
-  </px-data-table> -->
-
-  <div class="layout block">
-    <div class="layout__item">
-      <table class="QuoteSummaryTable">
-        <tr>
-          <td style="padding-bottom:10px !important;padding-top:10px !important;font-weight:bold">Quote Summary</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><p>1. &nbsp;&nbsp;<strong>Total Contract List Price</strong></p></td>
-          <td><b>:</b>&nbsp;&nbsp;{{totalLP  | currency : currency1+'&nbsp;' : 2}}</td>
-        </tr>
-        <tr>
-          <td><p>2. &nbsp;&nbsp;<strong>Total Quote Discount </strong></p></td>
-          <td><b>:</b>&nbsp;&nbsp;{{totalDisc | currency : currency1+'&nbsp;' : 2}}</td>
-        </tr>
-        <tr>
-          <td><p>3. &nbsp;&nbsp;<strong>Total Extended Selling Price</strong></p></td>
-          <td><b>:</b>&nbsp;&nbsp;{{totalSP | currency : currency1+'&nbsp;' : 2}}</td>
-        </tr>
-        <tr>
-          <td><p>4. &nbsp;&nbsp;<strong>Total Quote Net Selling Price</strong></p></td>
-          <td><b>:</b>&nbsp;&nbsp;{{totalSP | currency : currency1+'&nbsp;' : 2}}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <h4>Item Details</h4>
-  <px-data-table table-data='{{itemDetails}}' language="en" table-rows="true" include-all-columns="true" hide-pagination-control="true">
+			<div class="adr_div clearfix">
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label">Total Contract List Price</p>
+							<p class="big_label" id="customer_number">{{totalLP | currency : currency1+'&nbsp;' : 2}}</p>
+					</div>
+					<div class="desk-30 small-50 lt details_div">
+							<p class="small_label">Total Quote Discount</p>
+							<p class="big_label" id="customer_number">{{totalDisc | currency : currency1+'&nbsp;' : 2}}</p>
+					</div>
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label"> Total Extended Selling Price</p>
+							<p class="big_label" id="order_ff_status">{{totalSP | currency : currency1+'&nbsp;' : 2}}</p>
+					</div>
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label">Total Quote Net Selling Price</p>
+							<p class="big_label" id="taxable_status">{{totalSP | currency : currency1+'&nbsp;' : 2}}</p>
+					</div>
+			</div>
+	</px-card>
+	<px-card>
+		<h4>Item Details</h4>
+  <px-data-table table-data='{{itemDetails}}' language="en" table-rows="true" include-all-columns="true">
     <px-data-table-column name="srno" Label="#" class="items"></px-data-table-column>
     <px-data-table-column name="qty" label="Qty" class="items"></px-data-table-column>
     <px-data-table-column name="itemNo" label="Item#" class="items"></px-data-table-column>
@@ -178,26 +158,25 @@
     <px-data-table-column name="disc" label="Discount(%)" class="items"></px-data-table-column>
     <px-data-table-column name="sPrice" label="Ext Sell Price" class="items"></px-data-table-column>
   </px-data-table>
-
-  <div class="layout block">
-    <div class="layout__item">
-      <table>
-        <tr>
-          <td style="padding-bottom:10px !important;padding-top:10px !important;font-weight:bold">Support Documents</td>
-        </tr>
-				<tr ng-show="docFlag" ng-repeat = "document in supporting_documents">
+	</px-card>
+	<px-card>
+		<div>
+				<h3 class="cr-heading label-color">Supporting Documents</h3>
+		</div>
+		<table>
+			<tr ng-show="docFlag" ng-repeat = "document in supporting_documents">
 					<td>{{$index+1}}. &nbsp;&nbsp;<a target="_blank" href="" ng-click="displayFile(document.url)">{{document.description}}</a></td>
 				</tr>
 				<tr ng-show="!docFlag">
 					<td>No documents related to this Quote</td>
 				</tr>
-      </table>
-    </div>
-  </div>
-	<div class="layout block">
-			<div class="layout__item">
-					<h4>Terms and Conditions</h4>
-					<table>
+		</table>
+	</px-card>
+	<px-card>
+		<div>
+				<h3 class="cr-heading label-color">Terms and Conditions</h3>
+		</div>
+		<table>
 							<tr>
 									<td style="width:15px; font-weight:bold">1</td>
 									<td>Equipment warranty period; from acceptance</td>
@@ -259,6 +238,5 @@
 									<td style="padding-left:10px;">{{quote_terms.late_paymt}}</td>
 							</tr>
 					</table>
-			</div>
-	</div>
 	</px-card>
+</div>

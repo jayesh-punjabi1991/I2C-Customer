@@ -151,3 +151,8 @@ border-radius: 3px !important;
   padding-left: 45px;
   font-size: 0.95rem;
 }
+#Loader{
+  margin-top: 5%;
+  margin-left: 45%;
+  margin-bottom: 5%;
+}

@@ -2,7 +2,7 @@ define(['angular', './module'], function(angular, controllers) {
     'use strict';
 
     // Controller definition
-    controllers.controller('OrderDetailsCtrl', ['$scope', '$log', 'PredixAssetService', 'PredixViewService', '$timeout', 'OrdersService', '$http', '$state', '$stateParams','$window','$filter', function($scope, $log, PredixAssetService, PredixViewService, $timeout, OrdersService, $http, $state, $stateParams, $window, $filter) {
+    controllers.controller('OrderDetailsCtrl', ['$scope', '$log', 'PredixAssetService', 'PredixViewService', '$timeout', 'OrdersService', '$http', '$state', '$stateParams','$window','$filter','QuotesService', function($scope, $log, PredixAssetService, PredixViewService, $timeout, OrdersService, $http, $state, $stateParams, $window, $filter, QuotesService) {
 
         $scope.OrderList = [];
         $scope.SubOrderList = [];
@@ -77,27 +77,39 @@ define(['angular', './module'], function(angular, controllers) {
                 $scope.OrderList[count].billToaddress = $scope.bill_to;
                 $scope.OrderList[count].shipToaddress = $scope.shipTo_1 + ' ' + $scope.shipTo_2 + ' ' + $scope.shipTo_3 + ' ' + $scope.shipTo_4;
                 $scope.OrderList[count].link = "<a id='Detail" + value.sub_order_id + "' class=" + value.sub_order_id + " href='javascript:void(0)'>Details</a>";
-                $scope.OrderList[count].ros_date = $filter('date')(new Date(value.ros_date * 1000), 'MMM dd, yyyy');
-                $scope.OrderList[count].sch_date = $filter('date')(new Date(value.ros_date * 1000), 'MMM dd, yyyy');
-                $scope.OrderList[count].ship_date = $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy');
-                $scope.OrderList[count].delivery_date = $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy');
+
+                $scope.OrderList[count].ros_date = value.ros_date ? $filter('date')(new Date(value.ros_date * 1000), 'MMM dd, yyyy') : '';
+
+                $scope.OrderList[count].sch_date = value.sch_date ? $filter('date')(new Date(value.sch_date * 1000), 'MMM dd, yyyy') : '';
+                $scope.OrderList[count].ship_date = value.ship_date ? $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy') : '';
+                console.log(value.delivery_date);
+                $scope.OrderList[count].delivery_date = value.delivery_date ? $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy') : '';
                 $scope.OrderList[count].billing_amount = $filter('currency')(value.billing_amount, 'USD ', 2);
                 count++;
             })
             console.log($scope.subOrders);
             $scope.LengthOfOrders=$scope.OrderList.length;
+            $scope.saveSubOrder = function(val) {
+                $scope.selectedSubOrder = val;
+                $scope.CreateSubOrderJson();
+            };
+            $scope.saveShipment = function(val) {
+                $scope.selectedShipment = val;
+                $scope.CreateShipmentJson();
+            };
             //For Shipment Table
-            $timeout(function() {
-                for (var i = 0; i < $scope.response.data.sub_orders.length; i++) {
-                    document.getElementById('Detail' + $scope.response.data.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
+            $scope.CreateSubOrderJson=function() {
+            //$timeout(function() {
+                //for (var i = 0; i < $scope.response.data.sub_orders.length; i++) {
+                    //document.getElementById('Detail' + $scope.response.data.sub_orders[i].sub_order_id).addEventListener('click', function(event) {
                         $scope.dummy=[];
                         var count1 = 0;
                         $scope.SubOrderList = [];
                         $scope.ShipmentList = [];
                         $scope.Shipment = false;
                         $scope.tempShip = '';
-                        $scope.$apply();
-                        $scope.selectedSubOrder = event.target.className;
+                        //$scope.$apply();
+                        //$scope.selectedSubOrder = event.target.className;
                         for (var i = 0; i < $scope.response.data.sub_orders.length; i++) {
                             angular.forEach($scope.response.data.sub_orders[i].shipments, function(value, key) {
                                 if (value.sub_order_id == $scope.selectedSubOrder) {
@@ -106,14 +118,21 @@ define(['angular', './module'], function(angular, controllers) {
                                             $scope.tempShip = $scope.tempShip + ' ' + elm;
                                         }
                                     })
+                                    $scope.getLink=function(carrier,number){
+                                      if(carrier){
+                                        return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" :  carrier.includes("PILOT") ? "http://www.pilotdelivers.com/quicktrack.aspx?Pro=" + number : "javascript.void(0)"
+                                      }
+                                    }
                                     $scope.dummy.push({
                                         'ge_order_number': value.ge_order_number,
                                         'ship_to': $scope.tempShip,
                                         'shipment_id': value.shipment_id,
                                         'sub_order_id': value.sub_order_id,
-                                        'ship_date': $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy'),
-                                        'delivery_date': $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy'),
-                                        'shipment_ff_state': value.shipment_ff_state
+                                        'ship_date': value.ship_date ? $filter('date')(new Date(value.ship_date * 1000), 'MMM dd, yyyy') : '',
+                                        'delivery_date': value.delivery_date ? $filter('date')(new Date(value.delivery_date * 1000), 'MMM dd, yyyy') : '',
+                                        'shipment_ff_state': value.shipment_ff_state,
+                                        'pod':value.tracking_number,
+                                        'trackingLink':$scope.getLink(value.carrier,value.tracking_number)
                                     });
                                     $scope.tempShip = '';
                                     $scope.SubOrderList[count1] = $scope.dummy[count1];
@@ -124,25 +143,30 @@ define(['angular', './module'], function(angular, controllers) {
                                 }
                             })
                         }
-                        $scope.LengthOfSubOrders=$scope.SubOrderList.length;
-                        $scope.CreateShipmentJson();
+                        $scope.lengthofShipments=$scope.SubOrderList.length;
+
+                        //$scope.CreateShipmentJson();
                         if ($scope.SubOrderList.length > 0) {
                             $scope.Suborder = true;
-                            $scope.$apply();
+                            //$scope.$apply();
                         } else {
                             $scope.Suborder = false;
-                            $scope.$apply();
+                            //$scope.$apply();
                         }
-                    }, false);
-                }
-
-            }, 1000);
+                        }
+            //         }, false);
+            //     }
+            //
+            // }, 1000);
+            $scope.Redirect=function(url){
+              window.open(url, '_blank');
+            }
             //For Shipment Table
             $scope.CreateShipmentJson = function() {
-                $timeout(function() {
-                    for (var i = 0; i < $scope.SubOrderList.length; i++) {
-                      document.getElementById('Details' + $scope.SubOrderList[i].shipment_id).addEventListener('click', function(event) {
-                          $scope.selectedShipment = event.target.className;
+                // $timeout(function() {
+                //     for (var i = 0; i < $scope.SubOrderList.length; i++) {
+                //       document.getElementById('Details' + $scope.SubOrderList[i].shipment_id).addEventListener('click', function(event) {
+                //          $scope.selectedShipment = event.target.className;
                           var count2 = 0;
                           $scope.ShipmentList = [];
                           angular.forEach($scope.response.data.order_lines, function(value, key) {
@@ -158,27 +182,24 @@ define(['angular', './module'], function(angular, controllers) {
                           $scope.LengthOfShipment = $scope.ShipmentList.length;
                           if ($scope.ShipmentList.length > 0) {
                               $scope.Shipment = true;
-                              $scope.$apply();
+                              //$scope.$apply();
                           } else {
                               $scope.Shipment = false;
-                              $scope.$apply();
+                              //$scope.$apply();
                           }
+                        }
 
-                      }, false);
-
-                    }
-                }, 3000);
-            }
+                //       }, false);
+                //
+                //     }
+                // }, 3000);
         })
 
         $scope.editIconClicked = function() {
             $scope.changeRequest = true;
+            $("#changeRequestDiv").slideToggle("slow");
+            $(".change_req").slideToggle("slow");
         };
-        $(document).ready(function() {
-            $("#CR").click(function() {
-                $("#changeRequestDiv").slideToggle("slow");
-            });
-        });
 
         OrdersService.getDLforCR().then(function success(response) {
           $scope.to=response.data.to;
@@ -236,6 +257,55 @@ define(['angular', './module'], function(angular, controllers) {
                window.open(objectUrl);
           });
         }
+        $timeout(function() {
+            jQuery(document).ready(function() {
+                function close_accordion_section() {
+                    jQuery('.accordion .accordion-section-title').removeClass('active');
+                    jQuery('.accordion .accordion-section-content1').slideUp(300).removeClass('open');
+                }
 
+                jQuery('.accordion-section-title').click(function(e) {
+                  debugger
+                    // Grab current anchor value
+                    var currentAttrValue = jQuery(this).attr('href');
+
+                    if (this.classList.contains("active")) {
+                        close_accordion_section();
+                    } else {
+                        close_accordion_section();
+
+                        // Add active class to section title
+                        jQuery(this).addClass('active');
+                        // Open up the hidden content panel
+                        jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open');
+                    }
+
+                    e.preventDefault();
+                });
+            });
+        }, 5000);
+
+        function close_accordion_section1() {
+            jQuery('.accordion .accordion-section-title1').removeClass('active');
+            jQuery('.accordion .accordion-section-content2').slideUp(300).removeClass('open');
+        }
+
+        $(document).unbind('click').on('click','.accordion-section-title1', function(e){
+
+              // Grab current anchor value
+              var currentAttrValue = jQuery(this).attr('id');
+
+              if (this.classList.contains("active")) {
+                  close_accordion_section1();
+              } else {
+                  close_accordion_section1();
+                  // Add active class to section title
+                  jQuery(this).addClass('active');
+                  // Open up the hidden content panel
+                  jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open');
+              }
+
+              e.preventDefault();
+        })
     }]);
 });

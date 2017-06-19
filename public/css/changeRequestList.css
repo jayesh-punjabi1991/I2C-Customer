@@ -130,3 +130,8 @@ border-radius: 3px !important;
 /*#scrollBodyTableContainer > div:nth-child(1) > span.th.aha-cr\23 -th.u-p0.sortable.style-scope.aha-table > div > span > iron-icon > svg{
   width:70% !important;
 }*/
+#Loader{
+  margin-top: 5%;
+  margin-left: 45%;
+  margin-bottom: 5%;
+}
