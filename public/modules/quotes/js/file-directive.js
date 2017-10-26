@@ -8,12 +8,12 @@ define(['angular', './module'], function(angular, module) {
         return {
           restrict:'A',
           link: function(scope,elm,attrs) {
-            console.log('in directive');
             elm.bind('change',function(){
               $parse(attrs.fileInput)
               .assign(scope, elm[0].files)
               scope.$apply();
             })
+
           }
         }
     }]);

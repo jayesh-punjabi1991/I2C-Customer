@@ -1,0 +1,91 @@
+#tabs ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+.pagination{
+  padding-left: 0px !important;
+}
+/*    #tabs ul:nth-child(1) li{
+float: left;
+      } */
+px-data-table-cell{
+  max-width:135px !important;
+  width:135px !important;
+}
+.px-data-table-cell{
+  white-space: normal;
+  max-height: initial !important;
+  text-align: center;
+}
+.Custom{
+  width: 130px !important;
+  font-size: 13px !important;
+}
+#tabs ul li{
+    float: left;
+}
+#tabs ul:nth-child(1) li{
+	float: left;
+	padding-left:30px;
+	padding-right:30px;
+}
+
+#tab-ul li{
+   cursor: pointer;
+}
+#content{
+   clear: both;
+   padding: 1em 1em;
+}
+.div-visible{
+   display: block;
+}
+.div-invisible{
+   display: none;
+}
+
+.selected-tab{
+   padding-bottom: 15px !important;
+   border-bottom: 2px solid #2b5ea2 !important;
+}
+.btn_div{
+  margin-bottom: 10px;
+}
+.green-bg{
+  background-color: green;
+  color: white;
+}
+.red-bg{
+  background-color: red;
+  color: white;
+}
+.yellow-bg{
+  background-color: yellow;
+  color: white;
+}
+.table_pay{
+  padding:5px;
+  margin-top: 20px !important;
+  margin-bottom: 0 !important;
+  width: 100%;
+}
+.table_pay td:first-child{
+  text-align: left;
+  width: 20%;
+  padding: 5px;
+}
+.table_pay td{
+  text-align: left;
+  padding: 5px;
+}
+body{
+  overflow-x: initial !important;
+}
+body{
+  font-size: 14px !important;
+}
+p{
+  margin: 1% 5% 0 0 !important;
+  line-height: 1.3333333333 !important;
+}

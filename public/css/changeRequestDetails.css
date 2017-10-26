@@ -5,19 +5,34 @@
 .lt {
     float: left;
 }
-
+.none{
+  display:none;
+}
 .clearfix:after {
     content: "";
     display: table;
     clear: both;
 }
+.suborder_card{
+  padding: 1rem 0.8rem 2rem !important;
+}
 .summaryTable td, th {
-width:300px !important;
+width:123px !important;
+min-width: 123px !important;
+max-width: 123px !important;
+word-wrap: break-word;
 /*border: 1px solid #71838f !important;*/
 text-align: left !important;
 padding: 10px !important;
 font-weight: normal;
 /*padding-left: 20px !important;*/
+}
+.shipmentdatacell{
+  width:150px !important;
+  min-width: 150px !important;
+  max-width: 150px !important;
+  word-wrap: break-word;
+
 }
 .cr-wrapper {
     margin: 3px !important;
@@ -107,6 +122,17 @@ font-weight: normal;
     color: #fff !important;
     background-color: #337ab7 !important;
     border-color: #2e6da4 !important;
+}
+.btn-message:hover {
+    color: white !important;
+    background-color: #f15854 !important;
+    border-color: #560907 !important;
+}
+
+.btn-message {
+    color: white !important;
+    background-color: #f15854 !important;
+    border-color: #560907 !important;
 }
 
 .btn-tertiary:hover {
@@ -267,13 +293,13 @@ table.sortable tr {
 
 .tgl-flip+.tgl-btn:after {
     content: attr(data-tg-on);
-    background: #f15854;
+    background: #60bd68;
     -webkit-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
 }
 
 .tgl-flip+.tgl-btn:before {
-    background: #60bd68;
+    background: #f15854;
     content: attr(data-tg-off);
 }
 
@@ -291,7 +317,7 @@ table.sortable tr {
     -webkit-transform: rotateY(0);
     transform: rotateY(0);
     left: 0;
-    background: #f15854;
+    background: #60bd68;
     border-color: #ac2925 !important;
 }
 
@@ -391,9 +417,9 @@ table.sortable tr {
   padding: 5px;
 }
 .accordion-section-title, .cr-accordion-section-title{
-  color: black !important;
+  color: black;
   font-size: 14px;
-  background-color: white  !important;
+  background-color: white;
   box-shadow: 0px !important;
 }
 .trackingLink{
@@ -401,4 +427,9 @@ table.sortable tr {
 }
 .trackingLink:hover{
   color: white;
+}
+#Loader1{
+  margin-top: 20%;
+  margin-left: 45%;
+  margin-bottom: 5%;
 }

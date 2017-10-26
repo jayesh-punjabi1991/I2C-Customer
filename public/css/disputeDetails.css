@@ -1,0 +1,13 @@
+.small_label_1 {
+    color: #7c7c84;
+    font-size: 14px;
+    margin-bottom: 5px !important;
+}
+.padding_box{
+  padding:10px 20px !important;
+}
+#Loader{
+  margin-top: 20%;
+  margin-left: 45%;
+  margin-bottom: 5%;
+}

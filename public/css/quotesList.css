@@ -8,6 +8,9 @@ aha-table{
 #dtBtns {
   margin-left: 1rem !important;
 }
+.pagination{
+  padding-left: 0px !important;
+}
 #scrollBodyTableContainer > div:nth-child(1){
   background-color: #2b5ea2;
   color: white;

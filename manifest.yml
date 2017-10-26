@@ -2,10 +2,10 @@ applications:
   - name: tradeconnect-customer-app
     buildpack: predix_openresty_buildpack
     path: dist
-    memory: 64M
+    memory: 128M
     stack: cflinuxfs2
     services:
           - tca-redis-service-insta1
 env:
-    UAA_SERVER_URL: https://tradeconnect.predix-uaa.run.aws-usw02-pr.ice.predix.io
+    UAA_SERVER_URL: https://tca-stg.predix-uaa.run.aws-usw02-pr.ice.predix.io
     REDIS:  redis-13

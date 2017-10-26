@@ -8,13 +8,6 @@ px-card{
 .rt{
 	float: right;
 }
-#scrollBodyTableContainer > div:nth-child(1){
-  background-color: #2b5ea2 !important;
-  color: white;
-}
-.px-pagination-0 .btn--pagination--number.px-pagination{
-  background-color: #2b5ea2 !important;
-}
 .px-data-table-cell{
   max-width: 150px !important;
   word-wrap: break-word;
@@ -150,7 +143,7 @@ body > div > div > main > section > px-card > px-data-table > div{
 	height: 80px;
 }
 .reject_form{
-	/*border: 2px solid #d9534f;*/
+	border: 2px solid #d9534f;
 	padding: 20px;
 }
 .disabled {
@@ -178,77 +171,8 @@ width:166px !important;
 padding-left: 10px !important;
 }
 }
-
-.accordion, .accordion * {
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	box-sizing:border-box;
-}
-
-.accordion {
-	overflow:hidden;
-	box-shadow:0px 1px 3px rgba(0,0,0,0.25);
-	border-radius:3px;
-	background:#f7f7f7;
-}
-
-/*----- Section Titles -----*/
-.accordion-section-title, .accordion-section-title1  {
-	width:100%;
-	display:inline-block;
-	border-bottom:1px solid #1a1a1a;
-	transition:all linear 0.15s;
-  color: #3e87e8;
-	/* Type */
-  text-decoration: none;
-	font-size:1.200em;
-  cursor: pointer;
-}
-
-.accordion-section-title.active {
-	background:#1a2a40 !important;
-  color:white !important;
-	/* Type */
-	text-decoration:none;
-  border-bottom:2px solid black;
-}
-.accordion-section-title:hover{
-  background:#2b5ea2 !important;
-  color:white !important;
-	/* Type */
-	text-decoration:none;
-}
-.accordion-section-title1:hover{
-  background:#2b5ea2 !important;
-  color:white !important;
-	/* Type */
-	text-decoration:none;
-}
-.accordion-section-title1.active {
-  background:#1a2a40 !important;
-  color:white !important;
-  /* Type */
-	text-decoration:none;
-  border-bottom:2px solid black;
-}
-
-.accordion-section:last-child .accordion-section-title {
-	border-bottom:none;
-}
-.accordion-section:last-child .accordion-section-title1 {
-	border-bottom:1px dashed black;
-}
-
-/*----- Section Content -----*/
-.accordion-section-content {
-	padding:15px;
-	display:none;
-}
-.accordion-section-content1 {
-	padding:15px;
-	display:none;
-}
-.accordion-section-content2 {
-	padding:15px;
-	display:none;
+#Loader{
+  margin-top: 20%;
+  margin-left: 45%;
+  margin-bottom: 5%;
 }

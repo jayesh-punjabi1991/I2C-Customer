@@ -9,12 +9,20 @@ var config = {
    * Please update the following uaa configuration for your solution
    * You'll need to update clientId, serverUrl, and base64ClientCredential.
    */
-   uaa: {
-     clientId: 'tradeConnectClient1',
-     serverUrl: 'https://tradeconnect.predix-uaa.run.aws-usw02-pr.ice.predix.io',
-     defaultClientRoute: '/dashboards',
-     base64ClientCredential: 'dHJhZGVDb25uZWN0Q2xpZW50MTp0cmFkZWNvbm5lY3Q='
-   },
+  // Dev Server Settings
+ //  uaa: {
+ //    clientId: 'tradeConnectClient1',
+ //    serverUrl: 'https://tradeconnect.predix-uaa.run.aws-usw02-pr.ice.predix.io',
+ //    defaultClientRoute: '/dashboards',
+ //    base64ClientCredential: 'dHJhZGVDb25uZWN0Q2xpZW50MTp0cmFkZWNvbm5lY3Q='
+ // },
+// Stage Server Settings
+ uaa: {
+   clientId: 'tradeconnect_stg',
+   serverUrl: 'https://tca-stg.predix-uaa.run.aws-usw02-pr.ice.predix.io',
+   defaultClientRoute: '/dashboards',
+   base64ClientCredential: 'dHJhZGVjb25uZWN0X3N0Zzp0cmFkZWNvbm5lY3Rfc3Rn'
+ },
   /**
    * --------- ADD YOUR SECURE ROUTES HERE ------------
    *

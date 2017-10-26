@@ -1,15 +1,23 @@
-.odr-header, .odr_addr, .odr_other, .sub_order, .change_req, .odr_docs{
+.odr-header, .odr_addr, .odr_other, .sub_order, .change_req, .odr_docs, .validate_msg{
   padding: 0 !important;
+}
+.none{
+  display:none;
 }
 .odr-heading{
   background-color: #0c71b8;
   border-radius: 4px 4px 0 0;
   color: white;
+  padding-bottom: 10px;
 }
 .odr-heading h4{
   margin: 0 !important;
   padding-left: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
+}
+.validate_msg h4{
+  margin: 0 !important;
+  padding: 10px;
 }
 .odr-heading h2{
   margin: 16px !important;
@@ -42,7 +50,7 @@
   margin-top: 0px;
 }
 .sub_order_div{
-  padding: 10px 20px;
+  padding: 10px 12px;
 }
 .btn_div{
   margin-bottom: 10px;
@@ -84,24 +92,29 @@
 	margin: 20px;
 }
 
-#changeRequestDiv .send_form .mailSub input[type="text"]{
+#changeRequestDiv .send_form .mailSub input[type="text"], #disputeTextDiv .send_form .mailSub input[type="text"]{
 	padding: 5px;
   margin-left: 15px;
   width: 93%
 }
-#changeRequestDiv .send_form .mailTo input[type="text"], #changeRequestDiv .send_form .mailCc input[type="text"]{
+#changeRequestDiv .send_form .mailTo input[type="text"], #changeRequestDiv .send_form .mailCc input[type="text"], #disputeTextDiv .send_form .mailTo input[type="text"]{
 	padding: 5px;
   margin-left: 15px;
   width: 96%
 }
-#changeRequestDiv .send_form textarea{
+#changeRequestDiv .send_form textarea, #disputeTextDiv .send_form textarea{
 	padding: 5px;
   width: 99%;
-  height: 50px;
+  height: 200px;
 }
 .trackingLink{
   color: blue;
 }
 .trackingLink:hover{
   color: white;
+}
+#Loader{
+  margin-top: 20%;
+  margin-left: 45%;
+  margin-bottom: 5%;
 }

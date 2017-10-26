@@ -66,26 +66,38 @@ define(['angular', 'angular-ui-router'], function(angular) {
                 templateUrl: 'modules/orders/views/orders.html',
                 controller: 'OrderCtrl'
             })
+            .state('disputes', {
+                parent: 'secure',
+                url: '/disputes',
+                templateUrl: 'modules/disputes/views/disputes.html',
+                controller: 'DisputeCtrl'
+            })
+            .state('disputeDetails', {
+                parent: 'secure',
+                url: '/disputeDetails/:id',
+                templateUrl: 'modules/disputes/views/disputeDetails.html',
+                controller: 'DisputeDetailsCtrl'
+            })
             .state('ordersDetailsA', {
-                url: '/orderDetails/Accepted/:id',
+                url: '/orderDetails/:id',
                 templateUrl: 'modules/orders/views/order-details.html',
                 controller: 'OrderDetailsCtrl'
             })
-            .state('ordersDetailsR', {
+            .state('ordersDetailsV', {
                 parent: 'secure',
-                url: '/orderDetails/Rejected/:id',
-                templateUrl: 'modules/orders/views/order-details.html',
-                controller: 'OrderDetailsCtrl'
+                url: '/version/orderDetails',
+                templateUrl: 'modules/orders/views/order-details-version.html',
+                controller: 'OrderDetailsVersionCtrl'
             })
             .state('ordersDetailsG', {
                 parent: 'secure',
-                url: '/orderDetails/Generated/:id',
+                url: '/orderDetails/:id',
                 templateUrl: 'modules/orders/views/order-details.html',
                 controller: 'OrderDetailsCtrl'
             })
             .state('ordersDetailsCR', {
                 parent: 'secure',
-                url: '/orderDetails/CR/:id',
+                url: '/orderDetails/:id',
                 templateUrl: 'modules/orders/views/order-details.html',
                 controller: 'OrderDetailsCtrl'
             })
@@ -117,6 +129,35 @@ define(['angular', 'angular-ui-router'], function(angular) {
                 url: '/fulfillment',
                 templateUrl: 'modules/fulfillment/views/fulfillment.html',
                 controller: 'FFCtrl'
+            }).state('invoiceDetails', {
+                parent: 'secure',
+                url: '/invoiceDetails/:invNo',
+                templateUrl: 'modules/invoices/views/invoice.html',
+                controller: 'InvoiceCtrl'
+            })
+            .state('invoiceDetailsP', {
+                parent: 'secure',
+                url: '/payment/invoiceDetails/:invNo',
+                templateUrl: 'modules/invoices/views/invoiceP.html',
+                controller: 'InvoiceCtrl'
+            })
+            .state('payments', {
+                parent: 'secure',
+                url: '/payments',
+                templateUrl: 'modules/payments/views/payments.html',
+                controller: 'PaymentCtrl'
+            })
+            .state('paymentDetails', {
+                parent: 'secure',
+                url: '/paymentDetails/:no',
+                templateUrl: 'modules/payments/views/payment-details.html',
+                controller: 'PaymentDetailsCtrl'
+            })
+            .state('audit', {
+                parent: 'secure',
+                url: '/order/auditTrail/:id',
+                templateUrl: 'modules/orders/views/audit-trail.html',
+                controller: 'AuditCtrl'
             });
 
 

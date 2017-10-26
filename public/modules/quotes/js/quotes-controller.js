@@ -12,6 +12,21 @@ define(['angular', './module'], function(angular, controllers) {
             });
         }
 
+        window.sortbydate= function(a, b) {
+          if(this.descending) {
+            if(new Date(a.value) < new Date(b.value)) {
+              return 1;
+            }
+            return -1;
+          }
+          else {
+            if(new Date(a.value) > new Date(b.value)) {
+              return 1;
+            }
+            return -1;
+          }
+        }
+
         $(document).ready(function() {
             $("#AcceptButton").click(function() {
                 $("#AcceptDiv").slideToggle("slow");
@@ -31,13 +46,15 @@ define(['angular', './module'], function(angular, controllers) {
               angular.forEach(valuedata.data[0].quotes, function(value, key) {
                   $scope.QuotesList.push({
                       "quote#": value.status != 'confirmed' ? "<a id='quote' href='/quoteDetails/AR/" + value.quote_number + "'>" + value.quote_number + "</a>" : "<a href='/quoteDetails/" + value.quote_number + "'>" + value.quote_number + "</a>",
-                      "quoteVer": value.quote_version,
+                      "quoteVer": parseInt(value.quote_version),
                       "createdDate": value.quote_date ? $filter('date')(new Date(parseInt(value.quote_date) * 1000), 'MMM dd, yyyy') : '',
                       "status": value.status === "accepted" ? "<div class='status_accept'></div>" + value.status : value.status === "rejected" ? "<div class='status_reject'></div>" + value.status: "<div class='status_pending'></div>" + value.status,
-                      "action": value.status == 'confirmed' ? "<a title='Accept Quote' style='color:Green !important' href='/quoteDetails/" + value.quote_number + "'><i class='fa fa-check' aria-hidden='true'></i></a>" : ""
+                      "action": value.status == 'confirmed' ? "<a title='Accept Quote' style='color:Green !important' href='/quoteDetails/" + value.quote_number + "'><i class='fa fa-check' aria-hidden='true'></i></a>" : "",
+                      "quote_date":value.quote_date
                   });
               });
               $scope.Length = $scope.QuotesList.length;
+              $scope.QuotesList=$filter("orderBy")($scope.QuotesList,"quote_date",true);
           }
         }
 

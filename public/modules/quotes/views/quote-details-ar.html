@@ -1,12 +1,16 @@
-<link rel="stylesheet" type="text/css" href="css/changeRequestDetails.css">
-<link rel="stylesheet" type="text/css" href="css/orderDetails.css">
-<link rel="stylesheet" type="text/css" href="css/quoteDetails.css">
-<link rel="stylesheet" type="text/css" href="css/common-lg.css">
+<link rel="stylesheet" href="css/changeRequestDetails.css">
+<link rel="stylesheet" href="css/orderDetails.css">
+<link rel="stylesheet" href="css/quoteDetails.css">
+<link rel="stylesheet" href="css/common-lg.css">
 <style>
 	.items{
 		background-color: white !important;
 	}
 </style>
+<div id="Loader" ng-show="Loading==true" ng-hide="Loading==false">
+		<px-spinner size="100"></px-spinner>
+</div>
+<div ng-show="Loading==false" ng-hide="Loading==true">
 <div class="cr-wrapper">
 	<px-card class="card-head">
 		<div class="clearfix">
@@ -22,9 +26,17 @@
 							<p class="small_label">Quote Status</p>
 							<p class="big_label"><span ng-if="QuoteStatus == 'confirmed'" class="status_pending"></span><span ng-if="QuoteStatus == 'accepted'" class="status_accept"></span><span ng-if="QuoteStatus == 'rejected'" class="status_reject"></span>&nbsp;&nbsp;{{QuoteStatus}}</p>
 					</div>
-					<div class="desk-20 small-50 lt details_div">
+					<div class="desk-10 small-50 lt details_div">
 							<p class="small_label">Version</p>
 							<p class="big_label">{{QuoteVersion}}</p>
+					</div>
+					<div class="desk-30 small-50 lt details_div">
+							<p class="small_label">Customer Name</p>
+							<p class="big_label"><i class="fa fa-user small_label"></i>&nbsp;&nbsp; {{customerName}}</p>
+					</div>
+					<div class="desk-20 small-50 lt details_div">
+							<p class="small_label">Customer Number</p>
+							<p class="big_label"><i class="fa fa-file small_label"></i>&nbsp;&nbsp;{{customerNumber}}</p>
 					</div>
 			</div>
 	</px-card>
@@ -49,7 +61,7 @@
 			</div>
 			<div class="adr_div clearfix">
 					<div class="desk-20 small-50 lt details_div">
-							<p class="small_label">Government Agreement</p>
+							<p class="small_label">Governing Agreement</p>
 							<p class="big_label" id="customer_number">{{custName}}</p>
 					</div>
 					<div class="desk-30 small-50 lt details_div">
@@ -83,7 +95,14 @@
 					</div>
 					<div ng-if="QuoteStatus != 'confirmed'" class="desk-50 lt">
 							<p class="small_label">Bill To</p>
-							<p class="big_label bottom-margin"><i class="fa fa-map-marker small_label"></i>&nbsp;&nbsp;{{ShipToAddress1}}</p>
+							<p class="big_label bottom-margin"><i class="fa fa-map-marker small_label"></i>&nbsp;&nbsp;{{BillToAddress1}}</p>
+							<p class="big_label side-margin bottom-margin">{{BillToAddress2}}</p>
+							<p class="big_label side-margin bottom-margin">{{BillToAddress3}}</p>
+							<p class="big_label side-margin">{{BillToCity}}</p>
+							<p class="big_label side-margin">{{BillToCountry}}</p>
+							<p class="big_label side-margin">{{BillToPostalCode}}</p>
+							<p class="big_label side-margin">{{BillToProvince}}</p>
+							<p class="big_label side-margin">{{BillToState}}</p>
 					</div>
 			</div>
 			<div class="adr_div clearfix">
@@ -151,12 +170,12 @@
 		<h4>Item Details</h4>
   <px-data-table table-data='{{itemDetails}}' language="en" table-rows="true" include-all-columns="true">
     <px-data-table-column name="srno" Label="#" class="items"></px-data-table-column>
-    <px-data-table-column name="qty" label="Qty" class="items"></px-data-table-column>
+    <px-data-table-column name="qty" label="Quantity" class="items"></px-data-table-column>
     <px-data-table-column name="itemNo" label="Item#" class="items"></px-data-table-column>
     <px-data-table-column name="desc" label="Description" class="items"></px-data-table-column>
-    <px-data-table-column name="cPrice" label="Ext Contract Price" class="items"></px-data-table-column>
-    <px-data-table-column name="disc" label="Discount(%)" class="items"></px-data-table-column>
-    <px-data-table-column name="sPrice" label="Ext Sell Price" class="items"></px-data-table-column>
+    <px-data-table-column name="cPrice" label="Extended Contract Price" class="items"></px-data-table-column>
+    <px-data-table-column name="disc" label="Discount Percentage" class="items"></px-data-table-column>
+    <px-data-table-column name="sPrice" label="Extended Sell Price" class="items"></px-data-table-column>
   </px-data-table>
 	</px-card>
 	<px-card>
@@ -176,67 +195,78 @@
 		<div>
 				<h3 class="cr-heading label-color">Terms and Conditions</h3>
 		</div>
-		<table>
-							<tr>
-									<td style="width:15px; font-weight:bold">1</td>
-									<td>Equipment warranty period; from acceptance</td>
-									<td style="padding-left:10px;">{{quote_terms.equip_wrnty_prd}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">2</td>
-									<td>Software warranty period; from acceptance</td>
-									<td style="padding-left:10px;">{{quote_terms.soft_wrnty_prd}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">4.1</td>
-									<td>Cancellation charges </td>
-									<td style="padding-left:10px;">{{quote_terms.canc_charge}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">4.3</td>
-									<td>Transportation, Transfer and Risk of Loss</td>
-									<td style="padding-left:10px;">{{quote_terms.ship_terms}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">4.5</td>
-									<td>Information Technology Professional Services (ITPS)</td>
-									<td style="padding-left:10px;">{{quote_terms.itps}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">4.6.1</td>
-									<td>Equipment acceptance not exceed; time from shipment in days</td>
-									<td style="padding-left:10px;">{{quote_terms.equip_accpt_time}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">4.6.1</td>
-									<td>Equipment meets spec</td>
-									<td style="padding-left:10px;">{{quote_terms.equip_meets_spec}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">4.6.2</td>
-									<td>Software acceptance not to exceed; time from implementation</td>
-									<td style="padding-left:10px;">{{quote_terms.soft_accpt}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">4.6.3</td>
-									<td>Third party product acceptance timing</td>
-									<td style="padding-left:10px;">{{quote_terms.tprty_accpt_time}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">4.9</td>
-									<td>GE audit costs; payment due duration</td>
-									<td style="padding-left:10px;">{{quote_terms.ge_audit_cost}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">5.2</td>
-									<td>Disable or remove products for failure to pay</td>
-									<td style="padding-left:10px;">{{quote_terms.dable_rmv_pdt_pay_fail}}</td>
-							</tr>
-							<tr>
-									<td style="width:15px; font-weight:bold">5.3</td>
-									<td>Late payment</td>
-									<td style="padding-left:10px;">{{quote_terms.late_paymt}}</td>
-							</tr>
-					</table>
+		<table class="inv-table">
+			<tr>
+				<th colspan="1" style="width:15px !important; font-weight:bold; text-align: right !important;">Paragraph</th>
+				<th style="font-weight:bold;">Description</th>
+				<th style="padding-left:10px;font-weight:bold;">Value</th>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold; text-align: right !important;">1</td>
+					<td>Equipment warranty period; from acceptance</td>
+					<td style="padding-left:10px;">{{quote_terms.equip_wrnty_prd}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">2</td>
+					<td>Software warranty period; from acceptance</td>
+					<td style="padding-left:10px;">{{quote_terms.soft_wrnty_prd}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">4.1</td>
+					<td>Cancellation charges </td>
+					<td style="padding-left:10px;">{{quote_terms.canc_charge}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">4.3</td>
+					<td>Transportation, Transfer and Risk of Loss</td>
+					<td style="padding-left:10px;">{{quote_terms.ship_terms}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">4.5</td>
+					<td>Information Technology Professional Services (ITPS)</td>
+					<td style="padding-left:10px;">{{quote_terms.itps}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">4.6.1</td>
+					<td>Equipment acceptance not exceed; time from shipment in days</td>
+					<td style="padding-left:10px;">{{quote_terms.equip_accpt_time}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">4.6.1</td>
+					<td>Equipment meets spec</td>
+					<td style="padding-left:10px;">{{quote_terms.equip_meets_spec}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">4.6.2</td>
+					<td>Software acceptance not to exceed; time from implementation</td>
+					<td style="padding-left:10px;">{{quote_terms.soft_accpt}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">4.6.3</td>
+					<td>Third party product acceptance timing</td>
+					<td style="padding-left:10px;">{{quote_terms.tprty_accpt_time}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">4.9</td>
+					<td>GE audit costs; payment due duration</td>
+					<td style="padding-left:10px;">{{quote_terms.ge_audit_cost}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">5.2</td>
+					<td>Disable or remove products for failure to pay</td>
+					<td style="padding-left:10px;">{{quote_terms.dable_rmv_pdt_pay_fail}}</td>
+			</tr>
+			<tr>
+					<td style="width:15px; font-weight:bold;text-align: right !important;">5.3</td>
+					<td>Late payment</td>
+					<td style="padding-left:10px;">{{quote_terms.late_paymt}}</td>
+			</tr>
+		</table>
+		<div class="terms_assume" style="font-size: 11px !important;">
+			<p class="big_label">Assumptions :</p>
+			<p class="big_label">1.&nbsp;T&C as mentioned above are governing rules for a contract and cannot be changed through the duration of contract. Any change in above will result in a new contract.</p>
+			<p class="big_label">2.&nbsp;These T&C's cannot be changed through change request, issue and dispute process. </p>
+		</div>
 	</px-card>
+</div>
 </div>

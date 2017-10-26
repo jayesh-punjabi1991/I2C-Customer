@@ -2,19 +2,25 @@ define(['angular', './module'], function(angular, controllers) {
     'use strict';
 
     // Controller definition
-    controllers.controller('OrderDetailsCtrl', ['$scope', '$log', 'PredixAssetService', 'PredixViewService', '$timeout', 'OrdersService', '$http', '$state', '$stateParams','$window','$filter','QuotesService', function($scope, $log, PredixAssetService, PredixViewService, $timeout, OrdersService, $http, $state, $stateParams, $window, $filter, QuotesService) {
+    controllers.controller('OrderDetailsCtrl', ['$scope', '$log', '$timeout','$interval', 'OrdersService', '$http', '$state', '$stateParams','$window','$filter','QuotesService','InvoiceService', function($scope, $log, $timeout,$interval, OrdersService, $http, $state, $stateParams, $window, $filter, QuotesService, InvoiceService) {
 
+        $scope.Loading=true;
         $scope.OrderList = [];
         $scope.SubOrderList = [];
         $scope.ShipmentList = [];
+        $scope.Validation=false;
+        $scope.Validation1=false;
         $scope.dummy=[];
         $scope.Suborder = false;
         $scope.Shipment = false;
         var count = 0;
         var count1 = 0;
+        $scope.roleName=$window.sessionStorage.getItem('roleName');
+        console.log($scope.roleName);
 
         //Service Call
         OrdersService.getOrderDetails($stateParams.id).then(function success(response) {
+            $scope.Loading=false;
             console.log(response);
             $scope.response = response;
             $scope.orderData = response.data;
@@ -47,11 +53,12 @@ define(['angular', './module'], function(angular, controllers) {
             $scope.billTo_6 = ($scope.response.data.sub_orders[0].bill_to.postalcode) ? " " + $scope.response.data.sub_orders[0].bill_to.postalcode : '';
             $scope.billTo_7 = ($scope.response.data.sub_orders[0].bill_to.province) ? " " + $scope.response.data.sub_orders[0].bill_to.province : '';
             $scope.billTo_8 = ($scope.response.data.sub_orders[0].bill_to.state) ? " " + $scope.response.data.sub_orders[0].bill_to.state : '';
-            $scope.bill_to = $scope.billTo_1 + $scope.billTo_2 + $scope.billTo_3 + $scope.billTo_4 + $scope.billTo_5 + $scope.billTo_6 + $scope.billTo_7 + $scope.billTo_8;
+            $scope.bill_to = $scope.billTo_1 + $scope.billTo_2 + $scope.billTo_3 + $scope.billTo_4 + $scope.billTo_7 + $scope.billTo_8 + $scope.billTo_5 + $scope.billTo_6;
             $scope.shipTo = $scope.response.data.sub_orders[0].shipments[0].ship_to;
             $scope.billingTimeline = response.data.sub_orders[0].billing_terms;
             $scope.currency = $scope.currency;
             $scope.order_ff_state = response.data.order_ff_state;
+            $scope.crPendingStatus = response.data.crPendingStatus;
             if (response.data.supporting_documents != null && response.data.supporting_documents.length != 0) {
                 $scope.docFlag = true;
                 $scope.supporting_documents = response.data.supporting_documents;
@@ -60,20 +67,22 @@ define(['angular', './module'], function(angular, controllers) {
             }
             $scope.subject = "Request for change on Order " + $scope.orderNumber;
             $scope.subOrders = [];
+            $scope.invoices = {};
             //For Sub-Order Table
             angular.forEach(response.data.sub_orders, function(value, key) {
                 $scope.subOrders[key] = value.sub_order_id;
                 $scope.OrderList[count] = value;
+
                 $scope.OrderList[count].SrNo = count + 1;
-                $scope.billTo_9 = $scope.response.data.sub_orders[0].bill_to.address1 ? " " + $scope.response.data.sub_orders[0].bill_to.address1 : '';
-                $scope.billTo_10 = $scope.response.data.sub_orders[0].bill_to.address2 ? " " + $scope.response.data.sub_orders[0].bill_to.address2 : '';
-                $scope.billTo_11 = $scope.response.data.sub_orders[0].bill_to.address3 ? " " + $scope.response.data.sub_orders[0].bill_to.address3 : '';
-                $scope.billTo_12 = ($scope.response.data.sub_orders[0].bill_to.city) ? " " + $scope.response.data.sub_orders[0].bill_to.city : '';
-                $scope.billTo_13 = ($scope.response.data.sub_orders[0].bill_to.country) ? " " + $scope.response.data.sub_orders[0].bill_to.country : '';
-                $scope.billTo_14 = ($scope.response.data.sub_orders[0].bill_to.postalcode) ? " " + $scope.response.data.sub_orders[0].bill_to.postalcode : '';
-                $scope.billTo_15 = ($scope.response.data.sub_orders[0].bill_to.province) ? " " + $scope.response.data.sub_orders[0].bill_to.province : '';
-                $scope.billTo_16 = ($scope.response.data.sub_orders[0].bill_to.state) ? " " + $scope.response.data.sub_orders[0].bill_to.state : '';
-                $scope.bill_to = $scope.billTo_9 + $scope.billTo_10 + $scope.billTo_11 + $scope.billTo_12 + $scope.billTo_13 + $scope.billTo_14 + $scope.billTo_15 + $scope.billTo_16;
+                $scope.billTo_9 = value.bill_to.address1 ? " " + value.bill_to.address1 : '';
+                $scope.billTo_10 = value.bill_to.address2 ? " " + value.bill_to.address2 : '';
+                $scope.billTo_11 = value.bill_to.address3 ? " " + value.bill_to.address3 : '';
+                $scope.billTo_12 = (value.bill_to.city) ? " " + value.bill_to.city : '';
+                $scope.billTo_13 = (value.bill_to.country) ? " " + value.bill_to.country : '';
+                $scope.billTo_14 = (value.bill_to.postalcode) ? " " + value.bill_to.postalcode : '';
+                $scope.billTo_15 = (value.bill_to.province) ? " " + value.bill_to.province : '';
+                $scope.billTo_16 = (value.bill_to.state) ? " " + value.bill_to.state : '';
+                $scope.bill_to = $scope.billTo_9 + $scope.billTo_10 + $scope.billTo_11 + $scope.billTo_12 + $scope.billTo_15 + $scope.billTo_16 + $scope.billTo_13 + $scope.billTo_14 ;
                 $scope.OrderList[count].billToaddress = $scope.bill_to;
                 $scope.OrderList[count].shipToaddress = $scope.shipTo_1 + ' ' + $scope.shipTo_2 + ' ' + $scope.shipTo_3 + ' ' + $scope.shipTo_4;
                 $scope.OrderList[count].link = "<a id='Detail" + value.sub_order_id + "' class=" + value.sub_order_id + " href='javascript:void(0)'>Details</a>";
@@ -90,10 +99,32 @@ define(['angular', './module'], function(angular, controllers) {
             console.log($scope.subOrders);
             $scope.LengthOfOrders=$scope.OrderList.length;
             $scope.saveSubOrder = function(val) {
+              $("#accordion-"+val).slideToggle("slow");
+              $(".acc-"+val).css("backgroundColor","#3c8dc6");
+              $(".acc-"+val).css("color","white");
+              if($scope.temp && $scope.temp!=val){
+              if ($("#accordion-"+$scope.temp).is(':visible')){
+                $("#accordion-"+$scope.temp).slideUp("slow");
+                $(".acc-"+$scope.temp).css("backgroundColor","white");
+                $(".acc-"+$scope.temp).css("color","black");
+              }
+              }
+              $scope.temp=val;
                 $scope.selectedSubOrder = val;
                 $scope.CreateSubOrderJson();
             };
             $scope.saveShipment = function(val) {
+                $(".accordion1-"+val).slideToggle('slow');
+                $(".acc1-"+val).css("backgroundColor","#3c8dc6");
+                $(".acc1-"+val).css("color","white");
+                 if($scope.temp1 && $scope.temp1!=val){
+                 if ($(".accordion1-"+$scope.temp1).is(':visible')){
+                   $(".accordion1-"+$scope.temp1).slideUp('slow');
+                   $(".acc1-"+$scope.temp).css("backgroundColor","white");
+                   $(".acc1-"+$scope.temp).css("color","black");
+                 }
+                 }
+                 $scope.temp1=val;
                 $scope.selectedShipment = val;
                 $scope.CreateShipmentJson();
             };
@@ -119,7 +150,7 @@ define(['angular', './module'], function(angular, controllers) {
                                         }
                                     })
                                     $scope.getLink=function(carrier,number){
-                                      if(carrier){
+                                      if(carrier && number != 'null'){
                                         return carrier.includes("DHL") ? "http://www.dhl.com/en/express/tracking.shtml?AWB="+number+"&brand=DHL" :carrier.includes("FEDEX") ?  "https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber="+number+"&cntry_code=us" :  carrier.includes("PILOT") ? "http://www.pilotdelivers.com/quicktrack.aspx?Pro=" + number : "javascript.void(0)"
                                       }
                                     }
@@ -167,18 +198,48 @@ define(['angular', './module'], function(angular, controllers) {
                 //     for (var i = 0; i < $scope.SubOrderList.length; i++) {
                 //       document.getElementById('Details' + $scope.SubOrderList[i].shipment_id).addEventListener('click', function(event) {
                 //          $scope.selectedShipment = event.target.className;
+                          // var count2 = 0;
+                          // $scope.ShipmentList = [];
+                          // angular.forEach($scope.response.data.order_lines, function(value, key) {
+                          //     if (value.shipment_id == $scope.selectedShipment) {
+                          //         $scope.ShipmentList[count2] = value;
+                          //         $scope.ShipmentList[count2].SrNo = count2 + 1;
+                          //         $scope.ShipmentList[count2].sellingPrice = $filter('currency')($scope.ShipmentList[count2].list_price - ($scope.ShipmentList[count2].list_price * ($scope.ShipmentList[count2].discount_perc / 100)), 'USD ', 2);
+                          //         $scope.ShipmentList[count2].list_price = $filter('currency')($scope.ShipmentList[count2].list_price, 'USD ', 2);
+                          //         $scope.ShipmentList[count2].discount_perc = $filter('number')($scope.ShipmentList[count2].discount_perc, 0);
+                          //         count2++;
+                          //     }
+                          // })
+                          $scope.dummy1 = [];
                           var count2 = 0;
                           $scope.ShipmentList = [];
                           angular.forEach($scope.response.data.order_lines, function(value, key) {
                               if (value.shipment_id == $scope.selectedShipment) {
-                                  $scope.ShipmentList[count2] = value;
+                                  $scope.dummy1.push({
+                                      'line_number': value.line_number,
+                                      'item_number': value.item_number,
+                                      'line_item_description': value.line_item_description,
+                                      'quantity': value.quantity,
+                                      'sub_order_id': value.sub_order_id,
+                                      'shipment_id': value.shipment_id,
+                                      'list_price': value.list_price,
+                                      'discount_perc': value.discount_perc,
+                                      'selling_price': value.price,
+                                      'model_type': value.model_type
+                                  });
+                                  $scope.ShipmentList[count2] = $scope.dummy1[count2];
                                   $scope.ShipmentList[count2].SrNo = count2 + 1;
-                                  $scope.ShipmentList[count2].sellingPrice = $filter('currency')($scope.ShipmentList[count2].list_price - ($scope.ShipmentList[count2].list_price * ($scope.ShipmentList[count2].discount_perc / 100)), 'USD ', 2);
-                                  $scope.ShipmentList[count2].list_price = $filter('currency')($scope.ShipmentList[count2].list_price, 'USD ', 2);
-                                  $scope.ShipmentList[count2].discount_perc = $filter('number')($scope.ShipmentList[count2].discount_perc, 0);
+                                  $scope.ShipmentList[count2].model_type = $scope.dummy1[count2].model_type;
+                                  $scope.ShipmentList[count2].sellingPrice = $filter('currency')($scope.dummy1[count2].selling_price, 'USD ', 2);
+                                  $scope.ShipmentList[count2].list_price = $filter('currency')($scope.dummy1[count2].list_price, 'USD ', 2);
+                                  $scope.ShipmentList[count2].discount_perc = $filter('number')($scope.dummy1[count2].discount_perc, 0);
                                   count2++;
                               }
                           })
+
+                          $timeout(function(){
+                            console.log($scope.ShipmentList);
+                          },1000);
                           $scope.LengthOfShipment = $scope.ShipmentList.length;
                           if ($scope.ShipmentList.length > 0) {
                               $scope.Shipment = true;
@@ -196,16 +257,50 @@ define(['angular', './module'], function(angular, controllers) {
         })
 
         $scope.editIconClicked = function() {
+          $("input[class^='MandatoryFields']").on('change keyup paste mouseup',function(e){
+                var alltxt=$("input[class^='MandatoryFields']").length;
+                $scope.Validation=true;
+                $("input[class^='MandatoryFields']").each(function(i){
+                    if($(this).val().trim() =='')
+                    {
+                        $scope.Validation=true;
+                        $scope.Validation1=false;
+                        $scope.DisableSend();
+                        return false;
+                    }
+                    else
+                    {
+                        $scope.Validation=false;
+                        $scope.Validation1=false;
+                        $scope.DisableSend();
+                    }
+                  });
+                  if(!$scope.Validation){
+                    $scope.enableSend();
+                    $scope.Validation=true;
+                    $scope.Validation1=true;
+                    }
+              });
             $scope.changeRequest = true;
             $("#changeRequestDiv").slideToggle("slow");
             $(".change_req").slideToggle("slow");
         };
-
+        $scope.DisableSend=function(){
+          var d = document.getElementById("SendButton");
+          d.className += " disabled";
+          d.classList.remove("btn-primary");
+        }
+        $scope.enableSend=function(){
+          var d = document.getElementById("SendButton");
+          d.className += " btn btn-primary";
+          d.classList.remove("disabled");
+        }
         OrdersService.getDLforCR().then(function success(response) {
           $scope.to=response.data.to;
         });
 
         $scope.sendCRMail = function () {
+          $scope.Loading=true;
           var mail = {
             'from' : $window.sessionStorage.getItem('userEmail')
             ,'to' : $scope.to
@@ -228,6 +323,7 @@ define(['angular', './module'], function(angular, controllers) {
           OrdersService.initiateCR($scope.orderNumber, fd).success(function (response) {
             alert('Change Request has been created');
             $state.reload();
+            $scope.Loading=false;
           })
         }
 
@@ -257,55 +353,17 @@ define(['angular', './module'], function(angular, controllers) {
                window.open(objectUrl);
           });
         }
-        $timeout(function() {
-            jQuery(document).ready(function() {
-                function close_accordion_section() {
-                    jQuery('.accordion .accordion-section-title').removeClass('active');
-                    jQuery('.accordion .accordion-section-content1').slideUp(300).removeClass('open');
-                }
 
-                jQuery('.accordion-section-title').click(function(e) {
-                  debugger
-                    // Grab current anchor value
-                    var currentAttrValue = jQuery(this).attr('href');
-
-                    if (this.classList.contains("active")) {
-                        close_accordion_section();
-                    } else {
-                        close_accordion_section();
-
-                        // Add active class to section title
-                        jQuery(this).addClass('active');
-                        // Open up the hidden content panel
-                        jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open');
-                    }
-
-                    e.preventDefault();
-                });
+        $scope.getInvoicebySO = function (value) {
+          if(value.sub_order_ff_state == 'completed'){
+            InvoiceService.getInvoiceListBySubOrder($scope.orderNumber, value.sub_order_id).success(function(response) {
+              console.log(response);
+              $scope.invoices[value.sub_order_id] = response[0].invoices;
+              console.log($scope.invoices);
             });
-        }, 5000);
-
-        function close_accordion_section1() {
-            jQuery('.accordion .accordion-section-title1').removeClass('active');
-            jQuery('.accordion .accordion-section-content2').slideUp(300).removeClass('open');
+          }
         }
 
-        $(document).unbind('click').on('click','.accordion-section-title1', function(e){
 
-              // Grab current anchor value
-              var currentAttrValue = jQuery(this).attr('id');
-
-              if (this.classList.contains("active")) {
-                  close_accordion_section1();
-              } else {
-                  close_accordion_section1();
-                  // Add active class to section title
-                  jQuery(this).addClass('active');
-                  // Open up the hidden content panel
-                  jQuery('.accordion ' + currentAttrValue).slideDown(300).addClass('open');
-              }
-
-              e.preventDefault();
-        })
     }]);
 });

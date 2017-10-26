@@ -13,8 +13,7 @@
 
     <!-- Just needed for IE -->
     <script src="bower_components/es6-promise/es6-promise.min.js"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
@@ -30,7 +29,8 @@
           TradeConnect ({{custName}})
         </h1>
         <div>
-          <a style="cursor:pointer;float:right;margin-top:1.5%;color:white !important;margin-right: 1%" title="Signout"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
+          <px-login class="sticky CustomSignOut"></px-login>
+          <!-- <a style="cursor:pointer;float:right;margin-top:1.5%;color:white !important;margin-right: 1%" title="Signout"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a> -->
         </div>
         <p class="Welcome">{{userName}}<br>{{userRole}}</p>
         <div class="rpic">
@@ -41,14 +41,15 @@
     <div class="viewport">
         <div class="content-wrapper">
             <px-app-nav class="navbar" nav-items="{{App.tabs}}" path-prefix="/" path-key="state" nav-expanded=true>
-            	<px-login class="sticky" style="display:none"></px-login>
             </px-app-nav>
             <main class="u-pt-- u-pr-- u-pl-- main" role="main" style="overflow:auto !important">
                 <section role="region" ui-view></section>
             </main>
         </div>
     </div>
-    <!-- <google-analytics code="UA-72329845-1"></google-analytics> -->
+    <footer>
+      Powered By Predix
+    </footer>
 </body>
 <script>
     // IE11 workaround: We can't rely on IE's load order for scripts that are loaded outside of require.js (might
@@ -60,6 +61,12 @@
         elScript.setAttribute('data-main', 'modules/bootstrapper.js');
         document.getElementsByTagName('body')[0].appendChild(elScript);
     });
+
+    // var SignOut = $('#logincontainer > ul > li:nth-child(3)').clone();
+    // $('#logincontainer > template:nth-child(5)').after($("#logincontainer > ul > li:nth-child(3)"));
+    // $("#logincontainer > li").css({"cursor":"pointer","float":"right","margin-top":"1.5%","color":"white !important","margin-right":"1%"});
+    // $("#logincontainer > li > a").html("<i class='fa fa-sign-out fa-2x' aria-hidden='true'></i>");
+
 </script>
 
 </html>

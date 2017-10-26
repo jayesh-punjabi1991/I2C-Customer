@@ -4,12 +4,30 @@ define(['angular', './module'], function(angular, controllers) {
     // Controller definition
     controllers.controller('OrderCtrl', ['$scope', '$log', '$timeout', 'OrdersService', '$http', 'PredixUserService', '$window', '$filter', function($scope, $log, $timeout, OrdersService, $http, PredixUserService, $window, $filter) {
       $scope.OrderList = [];
+      $scope.OrderRequestListAccepted = [];
+      $scope.OrderRequestListNotAccepted = [];
       $scope.Loading=true;
       if ($window.sessionStorage.getItem('auth_token')) {
           OrdersService.getOrdersList().then(function success(response) {
+            console.log(response);
             $scope.GetOrders(response);
             $scope.Loading=false;
           });
+      }
+
+      window.sortbydate= function(a, b) {
+      if(this.descending) {
+      if(new Date(a.value) < new Date(b.value)) {
+        return 1;
+      }
+      return -1;
+      }
+      else {
+      if(new Date(a.value) > new Date(b.value)) {
+        return 1;
+      }
+      return -1;
+      }
       }
 
       $scope.GetOrders=function(valuedata){
@@ -17,17 +35,47 @@ define(['angular', './module'], function(angular, controllers) {
         angular.forEach(valuedata.data, function(val, ind) {
             angular.forEach(val.orders, function(value, key) {
               $scope.OrderList.push({
-                  "order#": value.order_process_status == 'accepted' ? "<a href='/orderDetails/Accepted/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : value.order_process_status == 'generated' ? "<a href='/orderDetails/Accepted/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : value.order_process_status == 'change_requested' ? "<a href='/orderDetails/CR/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : "<a href='/orderDetails/Rejected/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>",
+                  "order#": value.order_process_status == 'accepted' ? "<a href='/orderDetails/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : value.order_process_status == 'generated' ? "<a href='/orderDetails/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : value.order_process_status == 'change_requested' ? "<a href='/orderDetails/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>" : "<a href='/orderDetails/" + value.ge_order_number + "'>" + value.ge_order_number + "</a>",
                   "PO#": value.cust_po_number,
                   "createdDate": value.order_date ? $filter('date')(new Date(parseInt(value.order_date) * 1000), 'MMM dd, yyyy') : '',
-                  "value": $filter('currency')(value.contract_amount, 'USD ', 2),
+                  "value": parseFloat($filter('currency')(value.contract_amount,'', 2).replace(/[^\d\.]/g,'')),
                   "status": value.order_process_status === "accepted" ? "<div class='status_accept'></div>" + value.order_process_status : value.order_process_status === "rejected" ? "<div class='status_reject'></div>" + value.order_process_status : "<div class='status_pending'></div>" + value.order_process_status,
-                  "action": value.order_process_status == 'accepted' ? "<a title='Raise a change Request' style='color:#2b5ea2 !important' href='/orderDetails/Accepted/" + value.ge_order_number + "'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" : ""
+                  "action": value.order_process_status == 'accepted' ? "<a title='Raise a change Request' style='color:#2b5ea2 !important' href='/orderDetails/Accepted/" + value.ge_order_number + "'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" : "",
+                  "order_date":value.order_date,
+                  "actualstatus":value.order_process_status
               });
             })
         });
-
+        $scope.SortData();
       }
+
+      $scope.SortData=function(){
+          //Active CR's sorted by date
+          angular.forEach($scope.OrderList,function(v,k){
+            if(v.actualstatus=="accepted"){
+              $scope.OrderRequestListAccepted.push(v);
+            }
+          })
+          $scope.OrderRequestListAccepted=$filter("orderBy")($scope.OrderRequestListAccepted,"order_date");
+
+          //Non Active CR's sorted by date
+          angular.forEach($scope.OrderList,function(v,k){
+            if(v.actualstatus!="accepted"){
+              $scope.OrderRequestListNotAccepted.push(v);
+            }
+          })
+          $scope.OrderRequestListNotAccepted=$filter("orderBy")($scope.OrderRequestListNotAccepted,"order_date");
+
+          //Pushing Active and Non Active CR's in sorted order together
+          $scope.OrderList=[];
+          angular.forEach($scope.OrderRequestListAccepted,function(value,key){
+            $scope.OrderList.push(value);
+          })
+          angular.forEach($scope.OrderRequestListNotAccepted,function(value,key){
+            $scope.OrderList.push(value);
+          })
+          $scope.Length = $scope.OrderList.length;
+        }
 
               $timeout(function() {
                   document.getElementById('Cancel').addEventListener("click", ResetData);
